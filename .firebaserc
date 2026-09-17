@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "proseinet-2026"
+  },
+  "targets": {
+    "primer-proyecto-7b2f4": {
+      "hosting": {
+        "tienda": [
+          "primer-proyecto-7b2f4"
+        ],
+        "almacen": [
+          "proseinet-almacen-admin"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

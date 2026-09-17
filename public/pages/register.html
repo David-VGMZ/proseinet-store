@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Crear Cuenta | PROSEINET</title>
+    <link rel="manifest" href="/manifest.webmanifest"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styleRegister.css">
+    <link rel="apple-touch-icon" href="/assets/icons/Logo-proseinet-rojo.png"/>
+    <link rel="icon" href="/assets/icons/Logo-proseinet-rojo.png">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+
+    <!--Inicio-->
+    <header id="inicio" class=" pt-1 pb-0">
+        <div class="pt-2 mt-3 container-fluid">
+            <div class="toast-container position-fixed top-0 end-0 p-2" id="toastZone"></div>
+        </div>
+    </header>
+
+    <section id="productos" class="container login-container col-lg-8 col-11">
+        <div id="productos-container" class="row px-1 menu-card">
+            <div class="col-lg-12 col-md-12 col-12">
+                <div class="menu-login p-2">
+                    <div class="mt-2 row col-12 col-lg-12">
+                        <a href="/pages/login.html" class="nav-back col-1"><i class="fa-solid fa-arrow-left-long"></i></a>
+                        <a href="/index.html" class="ms-1 col-9 col-lg-9">
+                            <img class="login-logo img-fluid mx-auto d-block " src="/assets/img/Proseinet-Logo-Web.png">
+                        </a>
+                    </div>
+                    <div class="p-3 text-center">
+                        <h2 class="title-login">Crea tu Cuenta</h2>
+                    </div>
+                    <div class="px-3">
+                        <div class="col-lg-8 col-md-8 mx-auto">
+                            <label for="regUser" class="form-label" autocomplete="off" style="color: white;">Usuario</label>
+                            <input id="regUser" type="text" class="form-control mb-4" placeholder="Nombre de usuario">
+                        </div>
+                        <div class="col-lg-8 col-md-8 mx-auto">
+                            <label for="regEmail" class="form-label" autocomplete="off" style="color: white;">Correo Electrónico</label>
+                            <input id="regEmail" type="email" class="form-control mb-4" placeholder="Correo (ej: gmail, outlook, hotmail)">
+                        </div>
+                        <div class="col-lg-8 col-md-8 mx-auto">
+                            <label for="regPass" class="form-label" autocomplete="off" style="color: white;">Contraseña</label>
+                            <div class="input-group mb-3">
+                                <input id="regPass" type="password" class="form-control mb-3" placeholder="Contraseña (mínimo 6 caracteres)">
+                                <button class="btn btn-pass" type="button" id="togglePassBtn" style="color: #c40909;">
+                                    <i id="togglePassIcon" class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+                            <p id="regError" class="text-white text-center"></p>
+                        </div>
+                        <div class="p-3 mt-3 text-center">
+                            <button id="registerBtn" class="login-btn w-50">Crear Cuenta</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row pt-3 mb-3 text-center menu-social">
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <!--Instagram-->
+                            <img class="login-social img-fluid ig-div" src="/assets/icons/ig-icon.png">
+                            <a class="social-title ms-1" href=""
+                                target="_blank" rel="noopener noreferrer">proseinet morelia</a>
+                            <!--TikTok-->
+                            <img class="login-social img-fluid ms-3 ig-div" src="/assets/icons/tk-icon.png">
+                            <a class="social-title ms-1" href=""
+                                target="_blank" rel="noopener noreferrer">@proseinet</a>
+                            <!--Facebook-->
+                            <img class="login-social img-fluid ms-3 ig-div" src="/assets/icons/fb-icon.png">
+                            <a class="social-title ms-1" href="https://www.facebook.com/share/1KUEf3JAKB/"
+                                target="_blank" rel="noopener noreferrer">Proseinet Outlet Computo</a>
+                        </div>
+                    </div>
+                    <div class="menu-social-mb col-lg-12 col-md-12 col-12">
+                        <div class="row col-12 ms-0">
+                            <div class="px-2 col text-center ig-div">
+                                <a class="social-title-2" href="https://www.instagram.com/proseinet?igsh=MWZ1cDR2bDQxbmFsbg=="
+                                target="_blank" rel="noopener noreferrer">
+                                    <img class="login-social-2 img-fluid" src="/assets/icons/ig-icon.png">
+                                    <p class="ms-2 mt-1" target="_blank">proseinet morelia</p>
+                                </a>
+                            </div>
+                            <div class="px-2 col text-center ig-div">
+                                <a class="social-title-2" href="https://www.tiktok.com/@proseinet?_r=1&_t=ZS-94TEW8Iqc42"
+                                target="_blank" rel="noopener noreferrer">
+                                    <img class="login-social-2 img-fluid" src="/assets/icons/tk-icon.png">
+                                    <p class="mt-1">@proseinet</p>
+                                </a>
+                            </div>
+                            <div class="px-2 col text-center ig-div">
+                                <a class="social-title-2" href="https://www.facebook.com/share/1KUEf3JAKB/"
+                                    target="_blank" rel="noopener noreferrer">
+                                        <img class="login-social-2 img-fluid" src="/assets/icons/fb-icon.png">
+                                        <p class="mt-1">Proseinet Outlet Cómputo</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="/js/db.js?=0.1"></script>
+    <!-- Firebase -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getFirestore, collection, getDocs, query, orderBy, setDoc, doc, addDoc, serverTimestamp, getDoc, where, enableIndexedDbPersistence } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBg9o3wVZoA26Aob2RnbVPV8vGv4GE44gs",
+            authDomain: "primer-proyecto-7b2f4.firebaseapp.com",
+            projectId: "primer-proyecto-7b2f4",
+            storageBucket: "primer-proyecto-7b2f4.firebasestorage.app",
+            messagingSenderId: "627220736817",
+            appId: "1:627220736817:web:a2eb4f187322c609f11e10"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // AGREGADO AL INICIO: Inicializar IndexedDB
+        let dbReady = false;
+
+        // FUNCIÓN PARA OBTENER ROL
+        async function obtenerRolUsuario(uid) {
+            try {
+                const docRef = doc(db, "usuarios", uid);
+                const docSnap = await getDoc(docRef);
+                
+                if (docSnap.exists()) {
+                    return docSnap.data().rol || "usuario";
+                } else {
+                    console.warn("Usuario no encontrado en Firestore");
+                    return "usuario";
+                }
+            } catch (error) {
+                console.error("Error obteniendo rol:", error);
+                return "usuario";
+            }
+        }
+
+        // AUTH STATE LISTENER
+        onAuthStateChanged(auth, async (user) => {
+            const btnLoginNav = document.getElementById('loginNavBtn');
+            const btnRegisterNav = document.getElementById('registerNavBtn');
+            const btnLogoutNav = document.getElementById('logoutBtn');
+            const navInventario = document.getElementById('navInventario');
+            const navUsuario = document.getElementById('navUser');
+
+            if (user) {
+                console.log("Usuario autenticado:", user.email);
+                
+                const rol = await obtenerRolUsuario(user.uid);
+                console.log("Rol del usuario:", rol);
+                
+                localStorage.setItem('userRole', rol);
+                localStorage.setItem('userEmail', user.email);
+                localStorage.setItem('userId', user.uid);
+
+                if (btnLoginNav) btnLoginNav.style.display = 'none';
+                if (btnRegisterNav) btnRegisterNav.style.display = 'none';
+                if (btnLogoutNav) btnLogoutNav.style.display = 'block';
+
+                // VERIFICAR SI YA SE MOSTRÓ EL TOAST EN ESTA SESIÓN
+                const toastMostrado = sessionStorage.getItem('loginToastShown');
+                
+                if (navInventario) {
+                    if (rol === 'admin') {
+                        navInventario.style.display = 'block';
+                        navUsuario.style.display = 'block'
+                        
+                        // Solo mostrar si NO se ha mostrado antes
+                        if (!toastMostrado) {
+                            showToast(`Bienvenido Admin: ${user.email}`, 'success');
+                            sessionStorage.setItem('loginToastShown', 'true');
+                        }
+                    } else {
+                        navInventario.style.display = 'none';
+                        
+                        // Solo mostrar si NO se ha mostrado antes
+                        if (!toastMostrado) {
+                            showToast(`Bienvenido: ${user.email}`, 'success');
+                            sessionStorage.setItem('loginToastShown', 'true');
+                        }
+                    }
+                }
+            } else {
+                console.log("No hay usuario autenticado");
+                
+                // LIMPIAR LA BANDERA AL CERRAR SESIÓN
+                sessionStorage.removeItem('loginToastShown');
+                
+                localStorage.removeItem('userRole');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userId');
+
+                if (btnLoginNav) btnLoginNav.style.display = 'block';
+                if (btnRegisterNav) btnRegisterNav.style.display = 'block';
+                if (btnLogoutNav) btnLogoutNav.style.display = 'none';
+                if (navInventario) navInventario.style.display = 'none';
+                if (navUsuario) navUsuario.style.display = 'none';
+            }
+        });
+
+        // LOGIN
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginBtn = document.getElementById('loginBtn');
+            const inputUser = document.getElementById('user');
+            const inputPass = document.getElementById('pass');
+            const errorMsg = document.getElementById('error-msg');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            if (loginBtn) {
+                loginBtn.addEventListener('click', async () => {
+                    const email = loginEmail.value.trim();
+                    const pass = loginPass.value.trim();
+
+                    try {
+                        await signInWithEmailAndPassword(auth, email, pass);
+                        showToast('Sesion iniciada', 'success');
+                        /*
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 1000); */
+
+                    } catch (e) {
+                       console.error(e);
+                       errorMsg.textContent = 'Correo y/o contraseña incorrecto(s)'; 
+                    }
+                });
+            }
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', async (ev) => {
+                    ev.preventDefault();
+                    try {
+                        await signOut(auth);
+                        showToast('Sesión cerrada', 'primary');
+                    } catch (e) {
+                        console.error('Logout error', e);
+                    }
+                });
+            }
+
+            // REGISTRO
+            const registerBtn = document.getElementById('registerBtn');
+            const userName = document.getElementById('regUser');
+            const regEmail = document.getElementById('regEmail');
+            const regPass = document.getElementById('regPass');
+            const regError = document.getElementById('regError');
+            const togglePassBtn = document.getElementById('togglePassBtn');
+            const togglePassIcon = document.getElementById('togglePassIcon');
+
+            if (togglePassBtn) {
+                togglePassBtn.addEventListener('click', () => {
+                    const isPassword = regPass.type === 'password';
+                    regPass.type = isPassword ? 'text' : 'password';
+
+                    if (isPassword) {
+                        togglePassIcon.classList.remove('fa-eye');
+                        togglePassIcon.classList.add('fa-eye-slash');
+                    } else {
+                        togglePassIcon.classList.remove('fa-eye-slash');
+                        togglePassIcon.classList.add('fa-eye');
+                    }
+                });
+            }
+
+            if (registerBtn) {
+                registerBtn.addEventListener('click', async () => {
+                    const name = userName.value.trim();
+                    const email = regEmail.value.trim();
+                    const pass = regPass.value.trim();
+
+                    if (!email || !pass || !name) {
+                        regError.textContent = "Completa todos los campos";
+                        return;
+                    }
+
+                    try {
+                        const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+                        const user = userCredential.user;
+
+                        await setDoc(doc(db, "usuarios", user.uid), {
+                            nombre: name,
+                            email: email,
+                            rol: "Usuario",
+                            fechaCreacion: new Date().toISOString()
+                        });
+
+                        const scriptURL = "https://script.google.com/macros/s/AKfycbxcIUI4JxJherQimxkz52HLZExoZ8ys-gRz6zZQPIoFMJlpRyjyoQ47skj10wj3DhzH7Q/exec";
+
+                        const datosCorreo = {
+                            email: email,
+                            nombre: name
+                        };
+
+                        fetch(scriptURL, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            cache: 'no-cache',
+                            headers: { 'Content-Type' : 'application/json' },
+                            body: JSON.stringify(datosCorreo)
+                        }).catch(err => console.error("Error al enviar el correo ", err));
+
+                        regError.textContent = "";
+                        showToast("Cuenta creada con éxito");
+                        
+                        setTimeout(() => {
+                            window.location.href = '/pages/login.html';
+                        }, 1500);
+
+                    } catch (e) {
+                        console.error(e);
+                        if (e.code === "auth/email-already-in-use") {
+                            regError.textContent = "Este correo ya está registrado";
+                        } else if (e.code === "auth/weak-password") {
+                            regError.textContent = "La contraseña debe tener al menos 6 caracteres";
+                        } else {
+                            regError.textContent = "Error al registrar";
+                        }
+                    }
+                });
+            }
+        });
+
+        // DEBUG: Verificar estado de IndexedDB
+        window.debugIndexedDB = async function() {
+            console.log('=== DEBUG INDEXEDDB ===');
+            console.log('dbReady:', dbReady);
+            
+            try {
+                await initDB();
+                const productos = await obtenerProductosOffline();
+                console.log('Productos en IndexedDB:', productos.length);
+                console.log('Productos:', productos);
+                
+                if (productos.length > 0) {
+                    console.log('IndexedDB funciona correctamente');
+                } else {
+                    console.warn('IndexedDB vacía, necesitas cargar productos con internet primero');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+            console.log('======================');
+        };
+
+        console.log('Ejecuta debugIndexedDB() en consola para verificar');
+
+    </script>
+
+        <script>
+        // Registrar Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sworker.js')
+                    .then(reg => console.log('SW registrado:', reg.scope))
+                    .catch(err => console.warn('SW fallo:', err));
+                });
+            }
+
+            // Manejo del "beforeinstallprompt" para mostrar botón de instalar
+            let deferredPrompt = null;
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                const btn = document.getElementById('btnInstall');
+                if (btn) btn.hidden = false;
+            });
+
+            // Click en el botón para lanzar el prompt
+            document.addEventListener('click', async (e) => {
+                if (e.target && e.target.id === 'btnInstall') {
+                    if (!deferredPrompt) return;
+                    e.target.disabled = true;
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log('Instalación:', outcome);
+                    deferredPrompt = null;
+                    e.target.hidden = true;
+                }
+            });
+
+            // Evento cuando la app fue instalada
+            window.addEventListener('appinstalled', () => {
+                console.log('PWA instalada');
+                const btn = document.getElementById('btnInstall');
+                if (btn) btn.hidden = true;
+            });
+
+           // Agregar después de registrar el SW en index.html
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sworker.js')
+                        .then(reg => {
+                            console.log('SW registrado:', reg.scope);
+                            
+                            // Forzar actualización si hay una nueva versión
+                            reg.addEventListener('updatefound', () => {
+                                const newWorker = reg.installing;
+                                newWorker.addEventListener('statechange', () => {
+                                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                        console.log('Nueva versión disponible');
+                                        // Puedes mostrar un toast aquí para avisar al usuario
+                                    }
+                                });
+                            });
+                        })
+                        .catch(err => console.warn('SW falló:', err));
+                });
+            }
+        </script>
+
+    <script>
+
+        function showToast(msg, type = "success") {
+            const container = document.getElementById("toastZone");
+
+            const toastEl = document.createElement("div");
+            toastEl.className = `toast align-items-center text-bg-${type} border-0`;
+            toastEl.setAttribute("role", "alert");
+            toastEl.setAttribute("aria-live", "assertive");
+            toastEl.setAttribute("aria-atomic", "true");
+
+            toastEl.innerHTML = `
+                <div class="d-flex my-5">
+                    <div class="toast-body">${msg}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            `;
+
+            container.appendChild(toastEl);
+
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+
+            // remover después de 4 segundos
+            setTimeout(() => toastEl.remove(), 2000);
+        }
+
+    // SISTEMA DE TRANSICIONES UNIVERSAL
+    (function() {
+        'use strict';
+        
+        // Prevenir animación en recarga
+        if (performance.navigation.type === 1) {
+            document.body.style.animation = 'none';
+        }
+        
+        // Configuración
+        const config = {
+            animationClass: 'fade-out',
+            duration: 300,
+            ignoreSelectors: [
+                '[data-bs-toggle]',
+                '[href="#"]',
+                '[href*="#modal"]',
+                '[onclick]',
+                '.no-transition'
+            ]
+        };
+        
+        // Función para verificar si debe ignorarse
+        function shouldIgnoreLink(link) {
+            return config.ignoreSelectors.some(selector => {
+                return link.matches(selector) || link.closest(selector);
+            });
+        }
+        
+        // Función de transición
+        function transitionToPage(url) {
+            document.body.classList.add(config.animationClass);
+            setTimeout(() => {
+                window.location.href = url;
+            }, config.duration);
+        }
+        
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Interceptar todos los enlaces internos
+            document.addEventListener('click', function(e) {
+                const link = e.target.closest('a');
+                
+                if (!link) return;
+                
+                const href = link.getAttribute('href');
+                
+                // Verificar si es un enlace válido
+                if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+                    return;
+                }
+                
+                // Ignorar ciertos enlaces
+                if (shouldIgnoreLink(link)) {
+                    return;
+                }
+                
+                // Aplicar transición
+                e.preventDefault();
+                transitionToPage(href);
+            });
+            
+            // Agregar clase a cards para hover
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.style.cursor = 'pointer';
+            });
+        });
+        
+        // Smooth scroll para anclas
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && !this.getAttribute('data-bs-toggle')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    })();
+
+    // RESET AUTOMÁTICO DE MODALES
+    document.addEventListener('DOMContentLoaded', function() {
+        // Obtener todos los modales
+        const modales = document.querySelectorAll('.modal');
+        
+        modales.forEach(modal => {
+            modal.addEventListener('hidden.bs.modal', function () {
+                // Limpiar todos los inputs de texto, email, password, textarea
+                const inputs = this.querySelectorAll('input[type="text"], input[type="email"], input[type="password"], input[type="tel"], textarea');
+                inputs.forEach(input => {
+                    input.value = '';
+                });
+                
+                // Limpiar selects
+                const selects = this.querySelectorAll('select');
+                selects.forEach(select => {
+                    select.selectedIndex = 0;
+                });
+                
+                // Limpiar checkboxes y radios
+                const checkboxes = this.querySelectorAll('input[type="checkbox"], input[type="radio"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                
+                // Limpiar mensajes de error
+                const errorMessages = this.querySelectorAll('.text-danger, .alert-danger');
+                errorMessages.forEach(msg => {
+                    msg.textContent = '';
+                    msg.style.display = 'none';
+                });
+                
+                // Remover clases de validación de Bootstrap
+                const formControls = this.querySelectorAll('.form-control, .form-select');
+                formControls.forEach(control => {
+                    control.classList.remove('is-valid', 'is-invalid');
+                });
+                
+                // Resetear formularios si existen
+                const forms = this.querySelectorAll('form');
+                forms.forEach(form => {
+                    form.reset();
+                });
+            });
+        });
+    });
+    </script>
+</body>
+</html>

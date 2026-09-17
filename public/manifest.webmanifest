@@ -1,0 +1,35 @@
+{
+  "name": "Proseinet",
+  "short_name": "Proseinet",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay"],
+  "background_color": "#a10000",
+  "theme_color": "#a10000",
+  "icons": [
+      {
+        "purpose": "any maskable",
+        "sizes": "128x128",
+        "src": "/assets/icons/maskable_icon_x128.png",
+        "type": "image/png"
+      },
+      {
+        "purpose": "any maskable",
+        "sizes": "192x192",
+        "src": "/assets/icons/maskable_icon_x192.png",
+        "type": "image/png"
+      },
+      {
+        "purpose": "any maskable",
+        "sizes": "384x384",
+        "src": "/assets/icons/maskable_icon_x384.png",
+        "type": "image/png"
+      },
+      {
+        "purpose": "any maskable",
+        "sizes": "512x512",
+        "src": "/assets/icons/maskable_icon_x512.png",
+        "type": "image/png"
+      }
+  ]
+}

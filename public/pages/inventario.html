@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>Inventario | Proseinet</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png" />
+    <link rel="icon" href="/assets/icons/icon-192.png" />
+    <link rel="stylesheet" href="/css/styleInventario.css?=0.194">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+    <script src="https://cdn.tiny.cloud/1/9plnmfzjzgz5pu7jgbgdaunizd0hhls526uikf19lrhsi8bj/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+</head>
+
+<body class="bg-light">
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top"
+        style="background-color: black; border-radius: 0px 0px 15px 15px;">
+        <div class="container">
+
+            <a href="/index.html" class="me-1">
+                <img class="thumbs mx-2 my-2" src="/assets/img/Proseinet-Logo-Web.png" alt="LogoGadget-Go" width="80">
+            </a>
+            <h2 class="mx-3 inventario-text" style="font-size: 1.4rem; font-weight: 700; color: white;"> Inventario
+            </h2>
+
+            <!-- Barra de búsqueda y controles -->
+            <div class="container col">
+                <div class="input-group col-lg-3 col-md-6 col-8">
+                    <input type="text" class="form-control-srch" id="searchInput"
+                        placeholder="Buscar por nombre, modelo, clave o descripción..." autocomplete="off"
+                        style="font-size: 14px;">
+                    <button class="btn-srch" type="button" id="clearSearch">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div>
+
+            </div>
+            <div class="nav-menu">
+                <ul class="navbar-nav ms-auto">
+                    <div class="m-auto nav-add">
+                        <a class="nav-link nav-agregar" style="font-weight: 700; font-size: 1rem;"
+                            data-bs-toggle="modal" data-bs-target="#proyectoModal">Agregar Producto</a>
+                    </div>
+                    <a class="nav-link px-1" href="/pages/pedidos-admin.html"
+                        style="font-weight: 700; font-size: 1rem;">Pedidos</a>
+                    <a class="nav-link px-1" href="/pages/usuarios.html"
+                        style="font-weight: 700; font-size: 1rem;">Usuarios</a>
+                    <a class="nav-link px-1" href="/pages/menu.html"
+                        style="font-weight: 700; font-size: 1rem;">Salir</a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header id="inicio" class="text-center mt-5 pt-5" style="background-color: white;">
+
+    </header>
+
+    <section id="add-product" class="fixed-bottom">
+        <div class="container mt-2 mb-2">
+            <div class="text-center">
+                <button type="button" class="btn-primary mb-2 col-12 col-sm-12 col-md-6" style="font-size: 16px;"
+                    data-bs-toggle="modal" data-bs-target="#proyectoModal">
+                    Agregar Producto
+                </button>
+                <button type="button" id="clearAll" class="btn-primary ms-2" style="font-size: 20px; display: none;">
+                    Limpiar todo
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- Slider de Categorías -->
+    <div class="category-slider-wrapper">
+        <div class="category-slider fixed-top pt-3 pb-2" id="categorySlider">
+            <button class="category-btn active" data-categoria="todas">
+                <i class="fas fa-th"></i>
+                <span>Todas</span>
+                <span class="category-badge">0</span>
+            </button>
+
+            <button class="category-btn" data-categoria="lap">
+                <i class="fa-solid fa-laptop"></i>
+                <span>Laptops</span>
+                <span class="category-badge">0</span>
+            </button>
+
+            <button class="category-btn" data-categoria="lapApple">
+                <i class="fa-brands fa-apple"></i>
+                <span>Laptops Apple</span>
+                <span class="category-badge">0</span>
+            </button>
+
+            <button class="category-btn" data-categoria="aio">
+                <i class="fas fa-desktop"></i>
+                <span>All in One</span>
+                <span class="category-badge">0</span>
+            </button>
+
+            <button class="category-btn" data-categoria="cpu">
+                <i class="fa-solid fa-hard-drive"></i>
+                <span>Desktop solo CPU</span>
+                <span class="category-badge">0</span>
+            </button>
+
+            <button class="category-btn" data-categoria="workLap">
+                <i class="fa-solid fa-server"></i>
+                <span>Workstation Laptop</span>
+                <span class="category-badge">0</span>
+            </button>
+
+            <button class="category-btn" data-categoria="workServ">
+                <i class="fa-solid fa-server"></i>
+                <span>Workstation & Server</span>
+                <span class="category-badge">0</span>
+            </button>
+
+            <button class="category-btn" data-categoria="tablet">
+                <i class="fa-solid fa-tablet"></i>
+                <span>Tablets</span>
+                <span class="category-badge">0</span>
+            </button>
+
+            <button class="category-btn" data-categoria="pc">
+                <i class="fas fa-computer"></i>
+                <span>Desktop Completos</span>
+                <span class="category-badge">0</span>
+            </button>
+
+            <button class="category-btn" data-categoria="monitor">
+                <i class="fa-solid fa-display"></i>
+                <span>Monitores</span>
+                <span class="category-badge">0</span>
+            </button>
+
+            <button class="category-btn" data-categoria="proyectores">
+                <i class="fa-solid fa-photo-film me-2"></i>
+                <span>Proyectores</span>
+                <span class="category-badge">0</span>
+            </button>
+
+            <button class="category-btn" data-categoria="docking">
+                <i class="fa-solid fa-plug"></i>
+                <span>Docking</span>
+                <span class="category-badge">0</span>
+            </button>
+        </div>
+    </div>
+    <!-- Selector de productos por página -->
+    <div id="numProductos" class="num-productos col-md-5 col-12 col-lg-3 mt-4 pt-4">
+        <select class="form-select py-2 w-50" id="itemsPerPage">
+            <option value="8">8 productos</option>
+            <option value="12">12 productos</option>
+            <option value="24" selected>24 productos</option>
+            <option value="48">48 productos</option>
+            <option value="all">Todos</option>
+        </select>
+        <!-- Info de resultados -->
+        <div class="text-center">
+            <span class="badge fs-6 py-2 px-3" id="resultsInfo" style="background-color: black;">
+                0 productos
+            </span>
+        </div>
+    </div>
+
+    <!--Contenedor para mostrar los productos-->
+    <div id="productos" class="px-3">
+        <div class="row justify-content-center">
+            <div id="productsContainer" class="row w-100 mb-5"></div>
+        </div>
+    </div>
+
+    <nav aria-label="Navegación de productos" class="mt-2 mb-5" id="paginationContainer">
+        <ul class="pagination pagination-lg justify-content-center" id="pagination">
+        </ul>
+    </nav>
+    </div>
+
+    <!--Formulario de los productos-->
+    <div class="modal fade" id="proyectoModal" tabindex="-1" aria-labelledby="proyectoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header text-white">
+                    <h5 class="modal-title" id="proyectoModalLabel">
+                        <span id="modalTitleText">Registro de Nuevo Producto</span>
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <!--Formulario para registrar el producto-->
+                <div class="modal-body p-4">
+                    <form id="productoForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="nombreProducto" class="form-label">Nombre *</label>
+                                <input type="text" class="form-control" id="nombreProducto"
+                                    placeholder="Ej: Cargador Tipo C..." required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="categoria" class="form-label">Categoria *</label>
+                                <select class="form-select" id="categoria" required>
+                                    <option value="">Seleccionar categoria</option>
+                                    <option value="lap">Laptops</option>
+                                    <option value="lapApple">Laptops Apple</option>
+                                    <option value="workLap">Workstation Laptop</option>
+                                    <option value="workServ">Workstation & RAC Server</option>
+                                    <option value="pc">Desktop Completos</option>
+                                    <option value="cpu">Desktop solo CPU</option>
+                                    <option value="tablet">Tablets</option>
+                                    <option value="aio">All in One</option>
+                                    <option value="monitor">Monitores</option>
+                                    <option value="proyectores">Proyectores</option>
+                                    <option value="docking">Docking</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="modProducto" class="form-label">Marca *</label>
+                                <input type="text" class="form-control" id="modProducto"
+                                    placeholder="Ej: HP, Lenovo, Dell..." required>
+                            </div>
+                            <div class="col-md-6 cpu-field">
+                                <label for="procesador" class="form-label">Procesador *</label>
+                                <select class="form-select" id="procesador" required>
+                                    <option value="">Seleccionar Procesador</option>
+                                    <option value="i3">Intel Core i3</option>
+                                    <option value="i5">Intel Core i5</option>
+                                    <option value="i7">Intel Core i7</option>
+                                    <option value="i9">Intel Core i9</option>
+                                    <option value="ix-bronze">Intel Xeon Bronze</option>
+                                    <option value="ix-silver">Intel Xeon Silver</option>
+                                    <option value="ix-gold">Intel Xeon Gold</option>
+                                    <option value="ix-platinum">Intel Xeon Platinum</option>
+                                    <option value="ix-w">Intel Xeon W</option>
+                                    <option value="ix-e5">Intel Xeon E5</option>
+                                    <option value="u3">Intel Core Ultra 3</option>
+                                    <option value="u5">Intel Core Ultra 5</option>
+                                    <option value="u7">Intel Core Ultra 7</option>
+                                    <option value="u9">Intel Core Ultra 9</option>
+                                    <option value="ryzen-5">AMD Ryzen 5</option>
+                                    <option value="ryzen-7">AMD Ryzen 7</option>
+                                    <option value="ryzen-9">AMD Ryzen 9</option>
+                                    <option value="M1">Chip M1 Apple</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 cpu-field" id="containerGeneracion">
+                                <label for="generacion" class="form-label">Generación *</label>
+                                <select class="form-select" id="generacion" required>
+                                    <option value="">Seleccionar Generación</option>
+                                    <option value="1ra">1ra Generación</option>
+                                    <option value="2da">2da Generación</option>
+                                    <option value="3ra">3ra Generación</option>
+                                    <option value="4ta">4ta Generación</option>
+                                    <option value="5ta">5ta Generación</option>
+                                    <option value="6ta">6ta Generación</option>
+                                    <option value="7ma">7ma Generación</option>
+                                    <option value="8va">8va Generación</option>
+                                    <option value="9na">9na Generación</option>
+                                    <option value="10ma">10ma Generación</option>
+                                    <option value="11va">11va Generación</option>
+                                    <option value="12va">12va Generación</option>
+                                    <option value="13va">13va Generación</option>
+                                    <option value="14va">14va Generación</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6" id="containerNucleos" style="display: none;">
+                                <label for="nucleos" class="form-label">Núcleos *</label>
+                                <select class="form-select" id="nucleos" required>
+                                    <option value="">Seleccionar Núcleos</option>
+                                    <option value="2nuc">2 Núcleos</option>
+                                    <option value="4nuc">4 Núcleos</option>
+                                    <option value="6nuc">6 Núcleos</option>
+                                    <option value="8nuc">8 Núcleos</option>
+                                    <option value="12nuc">12 Núcleos</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 gpu-field">
+                                <label for="graficos" class="form-label">Graficos</label>
+                                <select class="form-select" id="graficos">
+                                    <option value="">Seleccionar Tarjeta Grafica</option>
+                                    <option value="apu">Graficos Integrados</option>
+                                    <option value="t1000">Nvidia Quadro T1000</option>
+                                    <option value="t1200">Nvidia Quadro T1200</option>
+                                    <option value="t2000">Nvidia Quadro T2000</option>
+                                    <option value="t600">Nvidia Quadro T600</option>
+                                    <option value="p4000">Nvidia Quadro P4000</option>
+                                    <option value="rtx3000">Nvidia RTX 3000</option>
+                                    <option value="rtxA3000">Nvidia RTX A3000</option>
+                                    <option value="rtx5000">Nvidia RTX 5000</option>
+                                    <option value="arc-pro-140t">Intel Arc Pro 140T</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 gpu-field">
+                                <label for="vram" class="form-label">Memoria de Video *</label>
+                                <select class="form-select" id="vram" required>
+                                    <option value="">Seleccionar VRAM</option>
+                                    <option value="shared">Memoria Compartida con el Sistema</option>
+                                    <option value="2gb-vram">2GB VRAM</option>
+                                    <option value="4gb-vram">4GB VRAM</option>
+                                    <option value="6gb-vram">6GB VRAM</option>
+                                    <option value="8gb-vram">8GB VRAM</option>
+                                    <option value="12gb-vram">12GB VRAM</option>
+                                    <option value="16gb-vram">16GB VRAM</option>
+                                    <option value="24gb-vram">24GB VRAM</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 gpu-field">
+                                <label for="gddr" class="form-label">Velocidad de Video (GDDR)</label>
+                                <select class="form-select" id="gddr">
+                                    <option value="">Seleccionar GDDR</option>
+                                    <option value="gddr5">GDDR5</option>
+                                    <option value="gddr5x">GDDR5X</option>
+                                    <option value="gddr6">GDDR6</option>
+                                    <option value="gddr6x">GDDR6X</option>
+                                    <option value="gddr7">GDDR7</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="memoriaRam" class="form-label">Memoria RAM *</label>
+                                <select class="form-select" id="memoriaRam" required>
+                                    <option value="">Seleccionar RAM</option>
+                                    <option value="4gb">4gb</option>
+                                    <option value="8gb">8gb</option>
+                                    <option value="16gb">16gb</option>
+                                    <option value="32gb">32gb</option>
+                                    <option value="64gb">64gb</option>
+                                    <option value="96gb">96gb</option>
+                                    <option value="128gb">128gb</option>
+                                    <option value="256gb">256gb</option>
+                                    <option value="512gb">512gb</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 ram-field">
+                                <label for="ddrRam" class="form-label">Tipo de Memoria RAM *</label>
+                                <select class="form-select" id="ddrRam" required>
+                                    <option value="">Seleccionar DDR</option>
+                                    <option value="ddr3">DDR3</option>
+                                    <option value="ddr4">DDR4</option>
+                                    <option value="lpddr3">LPDDR3</option>
+                                    <option value="lpddr4">LPDDR4</option>
+                                    <option value="lpddr4x">LPDDR4X</option>
+                                    <option value="ddr5">DDR5</option>
+                                    <option value="lpddr5">LPDDR5</option>
+                                    <option value="lpddr5x">LPDDR5X</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 storage-field">
+                                <label for="storage" class="form-label">Almacenamiento *</label>
+                                <select class="form-select" id="storage" required>
+                                    <option value="">Seleccionar Almacenamiento</option>
+                                    <option value="64gb">64gb</option>
+                                    <option value="128gb">128gb</option>
+                                    <option value="240gb">240gb</option>
+                                    <option value="256gb">256gb</option>
+                                    <option value="500gb">500gb</option>
+                                    <option value="512gb">512gb</option>
+                                    <option value="600gb">600gb</option>
+                                    <option value="800gb">800gb</option>
+                                    <option value="1tb">1tb</option>
+                                    <option value="2tb">2tb</option>
+                                    <option value="3tb">3tb</option>
+                                    <option value="4tb">4tb</option>
+                                    <option value="8tb">8tb</option>
+                                    <option value="12tb">12tb</option>
+                                    <option value="24tb">24tb</option>
+                                    <option value="48tb">48tb</option>
+                                    <option value="96tb">96tb</option>
+                                    <option value="128tb">128tb</option>
+                                    <option value="144tb">144tb</option>
+                                    <option value="156tb">156tb</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 storage-field">
+                                <label for="tipoStorage" class="form-label">Tipo de Almacenamiento *</label>
+                                <select class="form-select" id="tipoStorage" required>
+                                    <option value="">Seleccionar HDD / SSD / M.2</option>
+                                    <option value="hdd">HDD</option>
+                                    <option value="ssd">SSD</option>
+                                    <option value="ssd-m2">M.2</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="claveProducto" class="form-label">Clave *</label>
+                                <input type="text" class="form-control" id="claveProducto" placeholder="Ej: SMS-4214"
+                                    required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="precioProd" class="form-label">Precio *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="precioProd" placeholder="0.00"
+                                        step="0.01" required onwheel="this.blur()">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="stockProd" class="form-label">Stock</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="stockProd" placeholder="0" step="1"
+                                        min="0" oninput="if(this.value < 0) this.value = 0;" onwheel="this.blur()">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="estadoProducto" class="form-label">Estado *</label>
+                                <select class="form-select" id="estadoProducto" required>
+                                    <option value="">Seleccionar estado</option>
+                                    <option value="nuevo">Nuevo</option>
+                                    <option value="seminuevo">Seminuevo</option>
+                                    <option value="refur">Refurbished</option>
+                                    <option value="remate">Remate</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <textarea class="form-control" id="descripcion" rows="4"
+                                    placeholder="Descripcion del Producto"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="imgProducto" class="form-label">Imágenes del Producto (Máximo 6
+                                    imágenes)</label>
+                                <input type="file" id="imgProducto" class="form-control" accept="image/*" multiple>
+                                <div class="form-text">Arrastra las imagenes para cambiar su orden (Primera imagen es la
+                                    primera vista) *de preferencia cuadrada (1:1 & 4:3)*</div>
+                                <div id="imagePreviewContainer" class="d-flex gap-2 mt-3 flex-wrap"></div>
+                            </div>
+                            <div class="col-md-12 col-12 text-align">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input check-size" type="checkbox" id="checkMostrarInicio"
+                                        style="height: 28px; width: 46px;">
+                                    <label class="form-check-label" for="checkMostrarInicio">Dar de alta al
+                                        producto</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!--Botones para cancelar y guardar-->
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button id="btnGuardarProd" type="submit" form="productoForm" class="btn btn-primary">
+                        Guardar Producto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <section id="fter" class="text-white p-2 fixed-bottom footer-menu"
+        style="background-color: white; border-radius: 25px 25px 0px 0px;  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.500);">
+        <div class="mt-2">
+            <!--Menu-->
+            <ul class="navbar-nav-ft">
+                <a class="nav-link-ft text-center" href="/pages/inventario.html" style="color: #e90b0b;">
+                    <i class="fa-solid fa-box-archive" style="font-size: 1.3rem;"></i>
+                    <li class="nav-item"></li>
+                    Inventario
+                </a>
+                <a class="nav-link-ft text-center" href="/pages/pedidos-admin.html">
+                    <i class="fa-solid fa-truck" style="font-size: 1.3rem;"></i>
+                    <li class="nav-item"></li>
+                    Pedidos
+                </a>
+                <a class="nav-link-ft text-center" href="/pages/usuarios.html">
+                    <i class="fa fa-user" style="font-size: 1.3rem;"></i>
+                    <li class="nav-item"></li>
+                    Usuarios
+                </a>
+                <a class="nav-link-ft text-center" href="/pages/menu-admin.html">
+                    <i class="fa-solid fa-right-to-bracket" style="font-size: 1.3rem;"></i>
+                    <li class="nav-item"></li>
+                    Salir
+                </a>
+            </ul>
+        </div>
+    </section>
+    <footer id="fter" class="text-white py-5" style="background-color: white;">
+        <div class="container">
+            <p class="text-center mt-2 mb-0">&copy; <strong>Proseinet</strong> - Todos los derechos reservados</p>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+
+        // Inicializar TinyMCE
+        tinymce.init({
+            selector: '#descripcion',
+            height: 300,
+            plugins: 'lists table link wordcount emoticons visualblocks',
+            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table | removeformat',
+            menubar: false,
+            language: 'es',
+            branding: false,
+            promotion: false
+        });
+
+        //Roles de usuarios
+        const userRole = localStorage.getItem('userRole');
+        const userEmail = localStorage.getItem('userEmail');
+
+        if (userRole !== 'Administrador' && userRole !== 'Operador') {
+            alert('Acceso denegado. Solo administradores y operadores pueden acceder al inventario.');
+            window.location.href = '/index.html';
+        }
+        console.log(`Acceso permitido - ${userRole}: ${userEmail}`);
+
+        function generarID() {
+            return 'prod-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 9);
+        }
+
+        // Iniciaizar imagenes en Cloudinary
+        const CLOUD_NAME = "dei5fnqt5";
+        const UPLOAD_PRESET = "pwa-unsigned";
+
+        console.log("¿Existe imgProducto?", document.getElementById("imgProducto"));
+
+        //Inicialiazar modal de Bootstrap
+        const modal = new bootstrap.Modal(document.getElementById('proyectoModal'));
+
+        //Formatear numero a moneda MXN
+        function currencyMX(n) {
+            return Number(n).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        //Toast Helper al subir Producto
+        function showToast(msg, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = 'toast align-items-center text-bg-' + (type === 'success' ? 'success' : 'danger') + ' position-fixed top-0 end-0 m-3';
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'assertive');
+            toast.setAttribute('aria-atomic', 'true');
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">${msg}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>`;
+            document.body.appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+            setTimeout(() => toast.remove(), 3500);
+        }
+
+        async function subirImagenCloudinary(file) {
+            const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`;
+
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", UPLOAD_PRESET);
+
+            const res = await fetch(url, {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await res.json();
+
+            if (!data.secure_url) {
+                throw new Error("Error al subir imagen a Cloudinary");
+            }
+
+            return data.secure_url;
+        }
+        // IMPORTS FIREBASE (CDN)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getFirestore, query, where, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+        // FIREBASE CONFIG
+        const firebaseConfig = {
+            apiKey: "AIzaSyBg9o3wVZoA26Aob2RnbVPV8vGv4GE44gs",
+            authDomain: "primer-proyecto-7b2f4.firebaseapp.com",
+            projectId: "primer-proyecto-7b2f4",
+            storageBucket: "primer-proyecto-7b2f4.firebasestorage.app",
+            messagingSenderId: "627220736817",
+            appId: "1:627220736817:web:a2eb4f187322c609f11e10"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        const qTienda = query(collection(db, "catalogo_tienda"), where("stock", ">", 0));
+        const querySnapshot = await getDocs(qTienda);
+
+        let productos = [];
+        let paginaActual = 1;
+        let productosPorPagina = 24;
+        let terminoBusqueda = '';
+        let imagenesExistentes = [];
+        let archivosNuevos = [];
+
+        let listaImagenes = [];
+        let dragStartIndex = 1;
+
+
+        function renderPreviewImages() {
+            const container = document.getElementById('imagePreviewContainer');
+            container.innerHTML = '';
+
+            listaImagenes.forEach((imgObj, index) => {
+                const div = document.createElement('div');
+                div.className = 'position-relative';
+                div.style.cursor = 'grab';
+                div.draggable = true;
+                div.dataset.index = index;
+
+                div.addEventListener('dragstart', handleDragStart);
+                div.addEventListener('dragover', handleDragOver);
+                div.addEventListener('drop', handleDrop);
+                div.addEventListener('dragenter', (e) => e.preventDefault());
+
+                div.innerHTML = `
+                    <img src="${imgObj.url}" class="img-thumbnail ${imgObj.type === 'nuevo' ? 'border-primary' : 'border-secondary'} shadow-sm" style="width: 80px; height: 80px; object-fit: cover; pointer-events: none;">
+                    <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 rounded-circle py-0 px-1 shadow" 
+                        onclick="removerImagen(${index})" style="transform: translate(30%, -30%); z-index: 10;"><i class="fas fa-times"></i></button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Escuchar cuando el usuario selecciona nuevos archivos
+        document.getElementById('imgProducto').addEventListener('change', function (e) {
+            const files = Array.from(e.target.files);
+            const totalImages = listaImagenes.length + files.length;
+
+            if (totalImages > 6) {
+                showToast('Solo puedes tener un máximo de 6 imágenes en total.', 'danger');
+                e.target.value = '';
+                return;
+            }
+
+            files.forEach(file => {
+                listaImagenes.push({
+                    type: 'nuevo',
+                    file: file,
+                    url: URL.createObjectURL(file) // Creamos un preview temporal
+                });
+            });
+
+            renderPreviewImages();
+            e.target.value = '';
+        });
+
+        function handleDragStart(e) {
+            dragStartIndex = +this.dataset.index;
+            e.dataTransfer.effectAllowed = 'move';
+            setTimeout(() => this.classList.add('opacity-50'), 0);
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        }
+
+        function handleDrop(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            this.classList.remove('opacity-50');
+
+            const dragEndIndex = +this.dataset.index;
+
+            if (dragStartIndex !== -1 && dragStartIndex !== dragEndIndex) {
+                // Intercambiar posiciones en el arreglo
+                const item = listaImagenes.splice(dragStartIndex, 1)[0];
+                listaImagenes.splice(dragEndIndex, 0, item);
+                renderPreviewImages();
+            }
+        }
+
+        // Función unificada para remover imágenes
+        window.removerImagen = function (index) {
+            listaImagenes.splice(index, 1);
+            renderPreviewImages();
+        };
+
+
+        // FUNCIÓN DE BÚSQUEDA
+        function buscarProductos(productos, termino) {
+            if (!termino || termino.trim() === '') {
+                return productos;
+            }
+
+            const terminoLower = termino.toLowerCase().trim();
+
+            return productos.filter(p => {
+                const nombre = (p.nombre || '').toLowerCase();
+                const marca = (p.modelo || '').toLowerCase();
+                const clave = (p.clave || '').toLowerCase();
+                const descripcion = (p.descripcion || '').toLowerCase();
+                const estado = (p.estado || '').toLowerCase();
+
+                return nombre.includes(terminoLower) ||
+                    marca.includes(terminoLower) ||
+                    clave.includes(terminoLower) ||
+                    estado.includes(terminoLower) ||
+                    descripcion.includes(terminoLower);
+            });
+        }
+
+        // RENDERIZAR PAGINACIÓN
+        function renderPagination(totalProductos) {
+            const paginationContainer = document.getElementById('pagination');
+
+            if (productosPorPagina === 'all' || totalProductos <= productosPorPagina) {
+                document.getElementById('paginationContainer').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('paginationContainer').style.display = 'block';
+
+            const totalPaginas = Math.ceil(totalProductos / productosPorPagina);
+            paginationContainer.innerHTML = '';
+
+            // Botón Anterior
+            const prevLi = document.createElement('li');
+            prevLi.className = `page-item ${paginaActual === 1 ? 'disabled' : ''}`;
+            prevLi.innerHTML = `
+                <a class="page-link" href="#productos" aria-label="Anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            `;
+            prevLi.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (paginaActual > 1) {
+                    paginaActual--;
+                    renderProducts(categoriaActual);
+                }
+            });
+            paginationContainer.appendChild(prevLi);
+
+            // Páginas
+            let startPage = Math.max(1, paginaActual - 2);
+            let endPage = Math.min(totalPaginas, paginaActual + 2);
+
+            if (paginaActual <= 3) {
+                endPage = Math.min(5, totalPaginas);
+            }
+            if (paginaActual >= totalPaginas - 2) {
+                startPage = Math.max(1, totalPaginas - 4);
+            }
+
+            // Primera página
+            if (startPage > 1) {
+                const firstLi = document.createElement('li');
+                firstLi.className = 'page-item';
+                firstLi.innerHTML = `<a class="page-link" href="#productos">1</a>`;
+                firstLi.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    paginaActual = 1;
+                    renderProducts(categoriaActual);
+                });
+                paginationContainer.appendChild(firstLi);
+
+                if (startPage > 2) {
+                    const dotsLi = document.createElement('li');
+                    dotsLi.className = 'page-item disabled';
+                    dotsLi.innerHTML = `<span class="page-link">...</span>`;
+                    paginationContainer.appendChild(dotsLi);
+                }
+            }
+
+            // Páginas numeradas
+            for (let i = startPage; i <= endPage; i++) {
+                const li = document.createElement('li');
+                li.className = `page-item ${i === paginaActual ? 'active' : ''}`;
+                li.innerHTML = `<a class="page-link" href="#productos">${i}</a>`;
+                li.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    paginaActual = i;
+                    renderProducts(categoriaActual);
+                });
+                paginationContainer.appendChild(li);
+            }
+
+            // Última página
+            if (endPage < totalPaginas) {
+                if (endPage < totalPaginas - 1) {
+                    const dotsLi = document.createElement('li');
+                    dotsLi.className = 'page-item disabled';
+                    dotsLi.innerHTML = `<span class="page-link">...</span>`;
+                    paginationContainer.appendChild(dotsLi);
+                }
+
+                const lastLi = document.createElement('li');
+                lastLi.className = 'page-item';
+                lastLi.innerHTML = `<a class="page-link" href="#productos">${totalPaginas}</a>`;
+                lastLi.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    paginaActual = totalPaginas;
+                    renderProducts(categoriaActual);
+                });
+                paginationContainer.appendChild(lastLi);
+            }
+
+            // Botón Siguiente
+            const nextLi = document.createElement('li');
+            nextLi.className = `page-item ${paginaActual === totalPaginas ? 'disabled' : ''}`;
+            nextLi.innerHTML = `
+                <a class="page-link" href="#productos" aria-label="Siguiente">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            `;
+            nextLi.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (paginaActual < totalPaginas) {
+                    paginaActual++;
+                    renderProducts(categoriaActual);
+                }
+            });
+            paginationContainer.appendChild(nextLi);
+        }
+
+        // ACTUALIZAR INFO DE RESULTADOS
+        function actualizarInfoResultados(total, mostrando) {
+            const resultsInfo = document.getElementById('resultsInfo');
+
+            if (terminoBusqueda) {
+                resultsInfo.innerHTML = `
+                    <i class="fas fa-search me-1"></i>
+                    ${total} resultado${total !== 1 ? 's' : ''} encontrado${total !== 1 ? 's' : ''}
+                `;
+                resultsInfo.className = 'badge bg-success fs-6 py-2 px-3';
+            } else {
+                resultsInfo.innerHTML = `
+                    <i class="fas fa-box me-1"></i>
+                    ${total} producto${total !== 1 ? 's' : ''}
+                `;
+                resultsInfo.className = 'badge fs-6 py-2 px-3';
+            }
+        }
+
+        document.getElementById('categoria').addEventListener('change', cambiarCamposPorCategoria);
+        document.getElementById('procesador').addEventListener('change', cambiarCamposPorCategoria);
+
+        function cambiarCamposPorCategoria() {
+            const categoria = document.getElementById('categoria').value;
+
+            const cpuFields = document.querySelectorAll('.cpu-field');
+            const procesador = document.getElementById('procesador').value;
+            const gpuFields = document.querySelectorAll('.gpu-field');
+            const ramFields = [document.getElementById('memoriaRam'), document.getElementById('ddrRam')];
+            const storageFields = [document.getElementById('storage'), document.getElementById('tipoStorage')];
+
+            const contGeneracion = document.getElementById('containerGeneracion');
+            const contNucleos = document.getElementById('containerNucleos');
+            const inputGeneracion = document.getElementById('generacion');
+            const inputNucleos = document.getElementById('nucleos');
+
+            const toggleGroup = (elements, show, required = false) => {
+                elements.forEach(el => {
+                    if (!el) return;
+                    const container = el.classList.contains('col-md-6') ? el : (el.closest('.col-md-6')) || el;
+                    if (container) {
+                        container.style.display = show ? 'block' : 'none';
+                    }
+
+                    let input = (el.tagName === 'SELECT' || el.tagName === 'INPUT') ? el : el.querySelector('select, input');
+
+                    if (input) {
+                        input.required = show && required;
+
+                        if (!show) {
+                            input.value = "";
+                        }
+                    }
+                });
+            };
+
+            if (categoria === '' || categoria === 'monitor' || categoria === 'docking' || categoria === 'proyectores') {
+                toggleGroup([...cpuFields, ...gpuFields, ...ramFields, ...storageFields], false);
+                contNucleos.style.display = 'none';
+                inputNucleos.required = false;
+                inputNucleos.value = "";
+
+            } else if (categoria === 'workLap' || categoria === 'workServ') {
+                toggleGroup([...cpuFields, ...ramFields, ...storageFields], true, true);
+                toggleGroup(gpuFields, true, false);
+                contNucleos.style.display = 'none';
+                inputNucleos.required = false;
+                inputNucleos.value = "";
+
+            } else if (categoria === 'lapApple') {
+                toggleGroup([...ramFields, ...storageFields], true, true);
+                toggleGroup(gpuFields, false);
+
+                const cpuProcContainer = document.getElementById('procesador').closest('.col-md-6');
+                if (cpuProcContainer) cpuProcContainer.style.display = 'block';
+                document.getElementById('procesador').required = true;
+
+                toggleGroup([contGeneracion], false);
+
+                contNucleos.style.display = 'block';
+                inputNucleos.required = true;
+
+            } else {
+                toggleGroup([...cpuFields, ...ramFields, ...storageFields], true, true);
+                toggleGroup(gpuFields, false);
+                contNucleos.style.display = 'none';
+                inputNucleos.required = false;
+                inputNucleos.value = "";
+            }
+
+            if (procesador.startsWith("ix-")) {
+                toggleGroup([contGeneracion], false);
+            }
+        }
+
+        // EDITAR PRODUCTO
+        let productoEditando = null;
+
+        function editProduct(id) {
+            console.log("Cargando producto para editar:", id);
+
+            const producto = productos.find(p => p.id === id);
+
+            if (!producto) {
+                showToast("Producto no encontrado", "danger");
+                return;
+            }
+
+            if (tinymce.get('descripcion')) {
+                tinymce.get('descripcion').setContent(producto.descripcion || '');
+            }
+
+            productoEditando = id;
+
+            document.getElementById('modalTitleText').textContent = 'Editar Producto';
+            document.getElementById('nombreProducto').value = producto.nombre || '';
+            document.getElementById('categoria').value = producto.categoria || '';
+            document.getElementById('procesador').value = producto.procesador || '';
+            document.getElementById('graficos').value = producto.graficos || '';
+            document.getElementById('generacion').value = producto.generacion || '';
+            document.getElementById('nucleos').value = producto.nucleos || '';
+            document.getElementById('memoriaRam').value = producto.ram || '';
+            document.getElementById('ddrRam').value = producto.ddrRam || '';
+            document.getElementById('gddr').value = producto.gddr || '';
+            document.getElementById('vram').value = producto.vram || '';
+            document.getElementById('storage').value = producto.espacio || '';
+            document.getElementById('tipoStorage').value = producto.tipoEspacio || '';
+            document.getElementById('modProducto').value = producto.modelo || '';
+            document.getElementById('claveProducto').value = producto.clave || '';
+            document.getElementById('precioProd').value = producto.precio || '';
+            document.getElementById('stockProd').value = producto.stock || '';
+            document.getElementById('estadoProducto').value = producto.estado || '';
+            document.getElementById('descripcion').value = producto.descripcion || '';
+
+
+            const checkInicio = document.getElementById('checkMostrarInicio');
+            if (checkInicio) {
+                checkInicio.checked = producto.mostrarEnInicio || false;
+            }
+
+            listaImagenes = producto.imagenes && Array.isArray(producto.imagenes)
+                ? producto.imagenes.map(urlStr => ({ type: 'existente', url: urlStr, file: null }))
+                : [];
+
+            cambiarCamposPorCategoria();
+            renderPreviewImages();
+
+            const modalEl = document.getElementById("proyectoModal");
+            const modalInstance = new bootstrap.Modal(modalEl);
+            modalInstance.show();
+        }
+
+        async function updateProduct(id, datosActualizados) {
+            const btnGuardarProd = document.getElementById('btnGuardarProd');
+
+            try {
+                const docRef = doc(db, "productos", id);
+                await updateDoc(docRef, datosActualizados);
+
+                if (btnGuardarProd) {
+                    btnGuardarProd.innerHTML = 'Guardar Producto';
+                    btnGuardarProd.disabled = false;
+                }
+
+                console.log("Producto actualizado");
+                showToast("Producto actualizado correctamente", "success");
+                loadProducts();
+            } catch (error) {
+                console.error("Error actualizando producto:", error);
+                showToast("Error al actualizar producto", "danger");
+                btnGuardarProd.innerHTML = 'Guardar Producto';
+                btnGuardarProd.disabled = false;
+            }
+        }
+
+        window.duplicateProduct = function (id) {
+            console.log("Duplicando producto:", id);
+
+            const producto = productos.find(p => p.id === id);
+
+            if (!producto) {
+                showToast("Producto no encontrado", "danger");
+                return;
+            }
+
+            productoEditando = null;
+
+            document.getElementById('modalTitleText').textContent = 'Duplicar Producto';
+
+            document.getElementById('nombreProducto').value = (producto.nombre || '') + ' (Copia)';
+            document.getElementById('categoria').value = producto.categoria || '';
+            document.getElementById('procesador').value = producto.procesador || '';
+            document.getElementById('graficos').value = producto.graficos || '';
+            document.getElementById('generacion').value = producto.generacion || '';
+            document.getElementById('nucleos').value = producto.nucleos || '';
+            document.getElementById('memoriaRam').value = producto.ram || '';
+            document.getElementById('ddrRam').value = producto.ddrRam || '';
+            document.getElementById('gddr').value = producto.gddr || '';
+            document.getElementById('vram').value = producto.vram || '';
+            document.getElementById('storage').value = producto.espacio || '';
+            document.getElementById('tipoStorage').value = producto.tipoEspacio || '';
+            document.getElementById('modProducto').value = producto.modelo || '';
+            document.getElementById('claveProducto').value = (producto.clave || '') + '-COPIA';
+            document.getElementById('precioProd').value = producto.precio || '';
+            document.getElementById('stockProd').value = producto.stock || '';
+            document.getElementById('estadoProducto').value = producto.estado || '';
+
+            if (tinymce.get('descripcion')) {
+                tinymce.get('descripcion').setContent(producto.descripcion || '');
+            }
+
+            const checkInicio = document.getElementById('checkMostrarInicio');
+            if (checkInicio) {
+                checkInicio.checked = false;
+            }
+
+            listaImagenes = producto.imagenes && Array.isArray(producto.imagenes)
+                ? producto.imagenes.map(urlStr => ({ type: 'existente', url: urlStr, file: null }))
+                : [];
+
+            cambiarCamposPorCategoria();
+            renderPreviewImages();
+
+            const modalEl = document.getElementById("proyectoModal");
+            const modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            modalInstance.show();
+        };
+
+        const container = document.getElementById("productsContainer");
+
+        // CARGAR PRODUCTOS
+        export async function loadProducts() {
+            const btnGuardarProd = document.getElementById('btnGuardarProd');
+
+            btnGuardarProd.innerHTML = 'Guardar Producto';
+            btnGuardarProd.disabled = false;
+
+            // Animacion de Carga con Cards
+            for (let i = 1; i < 16; i++) {
+                container.innerHTML += `
+                    <div class="col-6 col-md-4 col-lg-2 col-xxl-8-cols g-3">
+                        <div class="card h-100 shadow border-0" style="border-radius:10px; cursor: pointer; background-color: #e2e2e2;">
+                            <img src="/assets/img/gray-text.jpg" class="card-img-top w-100" style="aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px 10px 0 0;">
+                            <div class="card-body p-3 d-flex flex-column">
+                                <h5 class="card-title mb-2" style="font-size: 1rem; font-weight: 600; color: #e2e2e2;"> Proseinet App</h5>
+                                <div class="mt-auto">
+                                    <p class="fw-bold mb-1" style="font-size: 1.2rem; color: #e2e2e2;">
+                                        9,999
+                                    </p>
+                                    <p class="m-0"><span class="badge" style="background-color: #e2e2e2; color: #e2e2e2;">000000</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            const snap = await getDocs(collection(db, "productos"));
+            productos = snap.docs.map(d => {
+                const data = d.data();
+                delete data.id;
+                return { id: d.id, ...data };
+            });
+            console.log("Productos:", productos);
+            renderProducts(categoriaActual);
+        }
+
+
+        document.getElementById('productoForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const btnGuardarProd = document.getElementById('btnGuardarProd');
+
+            btnGuardarProd.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Guardando';
+            btnGuardarProd.disabled = true;
+
+            let urlsCloudinaryNuevas = [];
+
+            let imagenesFinales = [];
+
+            try {
+                if (listaImagenes.some(img => img.type === 'nuevo')) {
+                    showToast("Procesando y subiendo nuevas imágenes...", "info");
+                }
+
+                for (let imgObj of listaImagenes) {
+                    if (imgObj.type === 'nuevo') {
+                        const archivoWebp = await comprimirImagen(imgObj.file);
+                        const url = await subirImagenCloudinary(archivoWebp);
+                        if (url) imagenesFinales.push(url);
+                    } else {
+                        imagenesFinales.push(imgObj.url);
+                    }
+                }
+            } catch (err) {
+                console.error("Error subiendo imágenes", err);
+                showToast("Error subiendo imágenes a Cloudinary", "danger");
+                return;
+            }
+
+            try {
+                if (archivosNuevos.length > 0) {
+                    showToast("Optimizando y subiendo imágenes...", "info");
+
+                    for (let file of archivosNuevos) {
+                        const archivoWebp = await comprimirImagen(file);
+                        const url = await subirImagenCloudinary(archivoWebp);
+                        if (url) urlsCloudinaryNuevas.push(url);
+                    }
+                }
+            } catch (err) {
+                console.error("Error subiendo imágenes", err);
+                showToast("Error subiendo imágenes a Cloudinary", "danger");
+                return;
+            }
+
+            const datosProducto = {
+                nombre: document.getElementById('nombreProducto').value,
+                categoria: document.getElementById('categoria').value,
+                modelo: document.getElementById('modProducto').value,
+                clave: document.getElementById('claveProducto').value,
+                procesador: document.getElementById('procesador').value,
+                generacion: document.getElementById('generacion').value,
+                nucleos: document.getElementById('nucleos').value,
+                graficos: document.getElementById('graficos').value,
+                generacion: document.getElementById('generacion').value,
+                ram: document.getElementById('memoriaRam').value,
+                ddrRam: document.getElementById('ddrRam').value,
+                gddr: document.getElementById('gddr').value,
+                vram: document.getElementById('vram').value,
+                espacio: document.getElementById('storage').value,
+                tipoEspacio: document.getElementById('tipoStorage').value,
+                precio: parseFloat(document.getElementById('precioProd').value),
+                estado: document.getElementById('estadoProducto').value,
+                stock: document.getElementById('stockProd').value,
+                //descripcion: document.getElementById('descripcion').value,
+                descripcion: tinymce.get('descripcion').getContent(),
+                mostrarEnInicio: document.getElementById('checkMostrarInicio').checked
+            };
+
+            datosProducto.imagenes = imagenesFinales;
+
+            if (imagenesFinales.length > 0) {
+                datosProducto.imagenes = imagenesFinales;
+            } else {
+                datosProducto.imagenes = [];
+            }
+
+            if (datosProducto.categoria === "monitor" || datosProducto.categoria === "docking" || datosProducto.categoria === "proyectores") {
+                datosProducto.procesador = "";
+                datosProducto.generacion = "";
+                datosProducto.ram = "";
+                datosProducto.espacio = "";
+            }
+            if (datosProducto.categoria !== "lapApple") {
+                datosProducto.nucleos = "";
+            }
+
+            if (productoEditando) {
+                console.log("Actualizando producto:", productoEditando);
+                await updateProduct(productoEditando, datosProducto);
+                productoEditando = null;
+            } else {
+                console.log("Creando nuevo producto");
+                await addDoc(collection(db, "productos"), datosProducto);
+                showToast("Producto guardado", "success");
+                loadProducts();
+            }
+
+            const modalEl = document.getElementById("proyectoModal");
+            const modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            modalInstance.hide();
+
+        });
+
+        // BORRAR PRODUCTO
+        async function deleteProduct(id) {
+            try {
+                const confirmar = confirm('¿Estás segur@ de que deseas eliminar este producto? \n\n' +
+                    'Esta acción es permanente y no se puede deshacer.'
+                );
+
+                if (!confirmar) {
+                    return;
+                }
+
+                const documentoRef = doc(db, "productos", id);
+                await deleteDoc(documentoRef);
+                showToast("Producto eliminado correctamente", "danger");
+                await loadProducts();
+
+            } catch (error) {
+                console.error("Error al eliminar producto:", error);
+                showToast("Error al eliminar: " + error.message, "danger");
+            }
+        }
+
+        async function deleteAllProducts() {
+
+            if (!productos || productos.length === 0) {
+                showToast("ℹNo hay productos para eliminar", "info");
+                return;
+            }
+            const cantidadTotal = productos.length;
+
+            const primeraConfirmacion = confirm(
+                'ADVERTENCIA DE ELIMINACIÓN MASIVA \n\n' + '¿Estás completamente segur@ de eliminar TODOS los productos?\n\n' +
+                'Total de productos: ' + cantidadTotal + '\n' + 'Se eliminarán permanentemente de Firestore\n\n' +
+                'ESTA ACCIÓN NO SE PUEDE DESHACER'
+            );
+
+            if (!primeraConfirmacion) {
+                showToast("Operación cancelada - Productos seguros", "info");
+                return;
+            }
+
+            const segundaConfirmacion = confirm(
+                'ÚLTIMA CONFIRMACIÓN \n\n' + 'Esta es tu última oportunidad para cancelar. \n\n' + 'Se eliminarán ' + cantidadTotal + ' productos de la base de datos \n' +
+                'Los cambios se aplicarán en Firestore inmediatamente \n\n' + '¿Proceder con la eliminación total?'
+            );
+
+            if (!segundaConfirmacion) {
+                showToast("Operación cancelada - Productos seguros", "info");
+                return;
+            }
+
+            try {
+                showToast("Eliminando " + cantidadTotal + " productos...", "warning");
+                const promesasDeEliminacion = productos.map(producto => {
+                    const documentoRef = doc(db, "productos", producto.id);
+                    return deleteDoc(documentoRef);
+                });
+
+                await Promise.all(promesasDeEliminacion);
+
+                const mensaje = cantidadTotal === 1 ? '1 producto eliminado exitosamente' : '' + cantidadTotal +
+                    ' productos eliminados exitosamente';
+
+                showToast(mensaje, "success");
+
+                await loadProducts();
+
+            } catch (error) {
+
+                console.error("Error durante la eliminación masiva:", error);
+                showToast("Error al eliminar productos: " + error.message + "\n\n" + "Por favor, intenta nuevamente o contacta al administrador.", "danger");
+            }
+        }
+
+        document.getElementById('clearAll').addEventListener('click', deleteAllProducts);
+
+        let categoriaActual = 'todas';
+        let estadoActual = 'nuevo';
+
+        // RENDERIZAR PRODUCTOS
+        function renderProducts(categoria = 'todas') {
+            const container = document.getElementById("productsContainer");
+            container.innerHTML = "";
+
+            console.log(`Renderizando categoría: ${categoria}`);
+
+            let productosFiltrados = productos;
+            if (categoria !== 'todas') {
+                productosFiltrados = productos.filter(p => p.categoria === categoria);
+            }
+
+            productosFiltrados = buscarProductos(productosFiltrados, terminoBusqueda);
+
+            const totalProductos = productosFiltrados.length;
+            console.log(`Productos filtrados: ${totalProductos}`);
+
+            // Actualizar contadores
+            actualizarContadores();
+
+            // Calcular paginación
+            let productosPaginados = productosFiltrados;
+            if (productosPorPagina !== 'all') {
+                const inicio = (paginaActual - 1) * productosPorPagina;
+                const fin = inicio + productosPorPagina;
+                productosPaginados = productosFiltrados.slice(inicio, fin);
+
+                // Ajustar página si nos pasamos
+                if (productosPaginados.length === 0 && paginaActual > 1) {
+                    paginaActual = 1;
+                    productosPaginados = productosFiltrados.slice(0, productosPorPagina);
+                }
+            }
+
+            // Actualizar info
+            actualizarInfoResultados(totalProductos, productosPaginados.length);
+
+            // Renderizar paginación
+            renderPagination(totalProductos);
+
+            // Mensaje si no hay productos
+            if (totalProductos === 0) {
+                const mensaje = terminoBusqueda
+                    ? `No se encontraron productos que coincidan con "${terminoBusqueda}"` : 'No hay productos en esta categoría';
+
+                container.innerHTML = `
+                    <div class="col-12">
+                        <div class="empty-state">
+                            <div class="empty-box">
+                                <i class="fas fa-${terminoBusqueda ? 'search' : 'box-open'} fa-3x" style="color: black;"></i>
+                            </div>
+                            <h3 style="color: black;">${mensaje}</h3>
+                            <p class="text-muted">
+                                ${terminoBusqueda ? 'Intenta con otros términos de búsqueda' : 'Agrega productos usando el botón "Agregar Producto"'}
+                            </p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            // FUNCIONES AUXILIARES
+            function obtenerNombreCategoria(categoria) {
+                const nombres = {
+                    'lap': 'Laptops',
+                    'lapApple': 'Laptops Apple',
+                    'workLap': 'Workstation Laptop',
+                    'workServ': 'Workstation & RAC Server',
+                    'pc': 'Desktop Completos',
+                    'cpu': 'Desktop solo CPU',
+                    'aio': 'All in One',
+                    'monitor': 'Monitores',
+                    'proyectores': 'Proyectores',
+                    'tablet': 'Tablet',
+                    'docking': 'Docking'
+                };
+                return nombres[categoria] || categoria;
+            }
+
+            function obtenerNombreCpu(procesador) {
+                const nombre = {
+                    'i3': 'Core i3',
+                    'i5': 'Core i5',
+                    'i7': 'Core i7',
+                    'i9': 'Core i9',
+                    'ix-bronze': 'Intel Xeon Bronze',
+                    'ix-silver': 'Intel Xeon Silver',
+                    'ix-gold': 'Intel Xeon Gold',
+                    'ix-platinum': 'Intel Xeon Platinum',
+                    'ix-w': 'Intel Xeon W',
+                    'ix-e5': 'Intel Xeon E5',
+                    'u3': 'Core Ultra 3',
+                    'u5': 'Core Ultra 5',
+                    'u7': 'Core Ultra 7',
+                    'u9': 'Core Ultra 9',
+                    'ryzen-5': 'Ryzen 5',
+                    'ryzen-7': 'Ryzen 7',
+                    'ryzen-9': 'Ryzen 9',
+                    'M1': 'M1 Apple',
+                };
+                return nombre[procesador] || procesador;
+            }
+
+            function obtenerNombreNucleos(nucleos) {
+                const nombre = {
+                    '2nuc': '2 Núcleos',
+                    '4nuc': '4 Núcleos',
+                    '6nuc': '6 Núcleos',
+                    '8nuc': '8 Núcleos',
+                    '12nuc': '12 Núcleos',
+                };
+                return nombre[nucleos] || nucleos;
+            }
+
+            function obtenerNombreGpu(graficos) {
+                const nombre = {
+                    'N/A': 'No Aplica',
+                    'apu' : 'Gráficos Integrados',
+                    't2000': 'Nvidia Quadro T2000',
+                    't1000': 'Nvidia Quadro T1000',
+                    't1200': 'Nvidia Quadro T1200',
+                    't600': 'Nvidia Quadro T600',
+                    'p4000': 'Nvidia Quadro P4000',
+                    'rtxA3000': 'Nvidia RTX A3000',
+                    'rtx3000': 'Nvidia RTX 3000',
+                    'rtx5000': 'Nvidia RTX 5000',
+                    'arc-pro-140t': 'Intel Arc Pro 140T'
+                };
+                return nombre[graficos] || graficos;
+            }
+
+            function obtenerNombreVRAM(vram) {
+                const nombre = {
+                    'shared': 'Memoria Compartida con el Sistema',
+                    '2gb-vram': '2GB VRAM',
+                    '4gb-vram': '4GB VRAM',
+                    '6gb-vram': '6GB VRAM',
+                    '8gb-vram': '8GB VRAM',
+                    '12gb-vram': '12GB VRAM',
+                    '16gb-vram': '16GB VRAM',
+                    '24gb-vram': '24GB VRAM',
+                };
+                return nombre[vram] || vram;
+            }
+
+            function obtenerNombreGDDR(gddr) {
+                const nombre = {
+                    'gddr5': 'GDDR5',
+                    'gddr5x': 'GDDR5X',
+                    'gddr6': 'GDDR6',
+                    'gddr6x': 'GDDR6X',
+                    'gddr7': 'GDDR7',
+                };
+                return nombre[gddr] || gddr;
+            }
+
+            function obtenerNombreDDR(ddrRam) {
+                const nombre = {
+                    'ddr3': 'DDR3',
+                    'ddr4': 'DDR4',
+                    'lpddr3': 'LPDDR3',
+                    'lpddr4': 'LPDDR4',
+                    'lpddr4x': 'LPDDR4X',
+                    'ddr5': 'DDR5',
+                    'lpddr5': 'LPDDR5',
+                    'lpddr5x': 'LPDDR5X',
+                };
+                return nombre[ddrRam] || ddrRam;
+            }
+
+            function obtenerNombreGen(generacion) {
+                const nombre = {
+                    '1ra': '1ra Generación',
+                    '2da': '2da Generación',
+                    '3ra': '3ra Generación',
+                    '4ta': '4ta Generación',
+                    '5ta': '5ta Generación',
+                    '6ta': '6ta Generación',
+                    '7ma': '7ma Generación',
+                    '8va': '8va Generación',
+                    '9na': '9na Generación',
+                    '10ma': '10ma Generación',
+                    '11va': '11va Generación',
+                    '12va': '12va Generación',
+                    '13va': '13va Generación',
+                    '14va': '14va Generación',
+                };
+                return nombre[generacion] || 'N/A';
+            }
+
+            function obtenerNombreEspacio(tipoEspacio) {
+                const nombre = {
+                    'hdd': 'HDD',
+                    'ssd': 'SSD',
+                    'ssd-m2': 'M.2',
+                };
+                return nombre[tipoEspacio] || tipoEspacio;
+            }
+
+            function obtenerColorCategoria(categoria) {
+                const colores = {
+                    'juegos': 'success',
+                    'pc': 'secondary',
+                    'lap': 'dark'
+                };
+                return colores[categoria] || 'dark';
+            }
+
+            // FUNCIONES AUXILIARES
+            function obtenerNombreEstado(estado) {
+                const nombres = {
+                    'nuevo': 'Nuevo',
+                    'seminuevo': 'Seminuevo',
+                    'refur': 'Refurbished',
+                    'remate': 'Remate'
+                };
+                return nombres[estado] || estado;
+            }
+
+            // Función auxiliar para colores
+            function getColorEstado(estado) {
+                const colores = {
+                    'remate': 'primary',
+                    'nuevo': 'success',
+                    'seminuevo': 'secondary',
+                    'refur': 'danger'
+                };
+                return colores[estado] || 'light';
+            }
+
+            // Renderizar productos
+            productosPaginados.forEach((p) => {
+                let imgSrc = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCBmaWxsPSIjZTVlN2ViIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE4MCIvPjx0ZXh0IGZpbGw9IiM5Y2EzYWYiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiB4PSI1MCUiIHk9IjUwJSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+U2luIEltYWdlbjwvdGV4dD48L3N2Zz4=';
+                const isChecked = p.mostrarEnInicio === true ? 'checked' : '';
+
+                if (Array.isArray(p.imagenes) && p.imagenes.length > 0) {
+                    const primeraImagen = p.imagenes[0];
+
+                    if (typeof primeraImagen === 'string' && primeraImagen.trim() !== '') {
+                        imgSrc = primeraImagen;
+                    } else if (typeof primeraImagen === 'object' && primeraImagen.dataURL) {
+                        imgSrc = primeraImagen.dataURL;
+                    }
+                }
+
+                const card = document.createElement("div");
+                card.className = "col-6 col-md-4 col-lg-2 col-xxl-8-cols g-3";
+
+
+                if ((p.categoria === "monitor") || (p.categoria === "docking") || (p.categoria === "proyectores")) {
+
+                    card.innerHTML = `
+                    <div class="card shadow border-0 h-100 position-relative" style="border-radius:10px;">
+                        <button type="button" data-id="${p.id}" class="btn-primary text-white position-absolute top-0 start-0 m-2 duplicate-btn" style="z-index: 2; font-size: 0.8rem;" title="Duplicar producto">
+                            <i class="fa-solid fa-clone"></i>
+                        </button>
+                        <img src="${imgSrc}" class="card-img-top w-100" style="aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px 10px 0 0; cursor: pointer;" alt="${p.nombre}" 
+                            onclick="window.location.href='/pages/producto.html#${p.id}'">
+                        <div class="card-body p-3 d-flex flex-column">
+                            <h5 class="card-title mb-2" style="font-size: 1rem; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+                                overflow: hidden;" title="${p.nombre}">${p.nombre}</h5>
+                            
+                            <div class="mb-3">
+                                <p class="mb-1 card-text"><strong>Marca:</strong> ${p.modelo || 'N/A'}</p>
+                                <p class="mb-1 justify-content-between d-xl-flex card-text"><strong>Clave:</strong> <span class="badge bg-black">${p.clave}</span></p>
+                                <p class="mb-1 justify-content-between d-xl-flex card-text"><strong>Estado:</strong> <span class="badge bg-${getColorEstado(p.estado)}">${obtenerNombreEstado(p.estado) || 'N/A'}</span></p>
+                                <p class="mb-2"><strong class="card-text">Precio:</strong> <span class="text-success fw-bold">$${currencyMX(p.precio)}</span></p>
+                                <p class="mb-0 card-text"><strong>Stock:</strong> ${p.stock || '0'} unidades</p>
+                            </div>
+                            
+                            <div class="mt-auto">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <span class="small fw-bold">Habilitar:</span>
+                                    <label class="switch mb-0">
+                                        <input type="checkbox" class="toggle-inicio" data-id="${p.id}" ${isChecked}>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="d-grid d-lg-flex gap-2">
+                                    <button type="button" class="btn btn-primary btn-sm flex-fill edit-btn" data-id="${p.id}">
+                                        <i class="fas fa-edit me-1"></i>Editar
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm flex-fill delete-btn" data-id="${p.id}">
+                                        <i class="fas fa-trash me-1"></i>Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                } else if ((p.categoria === "workLap") || (p.categoria === "workServ")) {
+
+                    let textoGeneracion = (p.procesador && p.procesador.startsWith("ix-")) ? "" : obtenerNombreGen(p.generacion);
+
+                    card.innerHTML = `
+                    <div class="card shadow border-0 h-100" style="border-radius:10px;">
+                        <button type="button" data-id="${p.id}" class="btn-primary text-white position-absolute top-0 start-0 m-2 duplicate-btn" style="z-index: 2; font-size: 0.8rem;" title="Duplicar producto">
+                            <i class="fa-solid fa-clone"></i>
+                        </button>
+                        <img src="${imgSrc}" class="card-img-top w-100" style="aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px 10px 0 0; cursor: pointer;" alt="${p.nombre}" 
+                            onclick="window.location.href='/pages/producto.html#${p.id}'">
+                        <div class="card-body p-3 d-flex flex-column">
+                            <h5 class="card-title mb-2" style="font-size: 1rem; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+                                overflow: hidden;" title="${p.nombre}">${p.nombre} ${obtenerNombreCpu(p.procesador)} ${p.ram} / ${p.espacio} ${obtenerNombreEspacio(p.tipoEspacio)}</h5>
+                            
+                            <div class="mb-3">
+                                <p class="mb-1 card-text"><strong>Marca:</strong> ${p.modelo || 'N/A'}</p>
+                                <p class="mb-1 justify-content-between d-xl-flex card-text"><strong>Categoría:</strong> <span class="badge bg-${obtenerColorCategoria(p.categoria)}">${obtenerNombreCategoria(p.categoria)}</span></p>
+                                <p class="mb-1 justify-content-between d-xl-flex card-text"><strong>CPU:</strong> <span class="badge bg-black">${obtenerNombreCpu(p.procesador)} ${textoGeneracion}</span></p>
+                                <p class="mb-1 justify-content-between d-xl-flex card-text"><strong>GPU:</strong> <span class="badge bg-black text-wrap text-end" style="max-width: 60%;">${obtenerNombreGpu(p.graficos) || 'N/A'} <br> ${obtenerNombreVRAM(p.vram) || 'N/A'} ${obtenerNombreGDDR(p.gddr) || 'N/A'}</span></p>
+                                <p class="mb-1 justify-content-between d-xl-flex card-text"><strong>RAM:</strong> <span class="badge bg-black">${p.ram} ${obtenerNombreDDR(p.ddrRam)}</span></p>
+                                <p class="mb-1 justify-content-between d-xl-flex card-text"><strong>Capacidad:</strong> <span class="badge bg-black">${p.espacio} ${obtenerNombreEspacio(p.tipoEspacio)}</span></p>
+                                <p class="mb-1 justify-content-between d-xl-flex card-text"><strong>Clave:</strong> <span class="badge bg-black">${p.clave}</span></p>
+                                <p class="mb-1 justify-content-between d-xl-flex card-text"><strong>Estado:</strong> <span class="badge bg-${getColorEstado(p.estado)}">${obtenerNombreEstado(p.estado) || 'N/A'}</span></p>
+                                <p class="mb-2"><strong class="card-text">Precio:</strong> <span class="text-success fw-bold">$${currencyMX(p.precio)}</span></p>
+                                <p class="mb-0 card-text"><strong>Stock:</strong> ${p.stock || '0'} unidades</p>
+                            </div>
+                            
+                            <div class="mt-auto">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <span class="small fw-bold">Habilitar:</span>
+                                    <label class="switch mb-0">
+                                        <input type="checkbox" class="toggle-inicio" data-id="${p.id}" ${isChecked}>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="d-grid d-lg-flex gap-2">
+                                    <button type="button" class="btn btn-primary btn-sm flex-fill edit-btn" data-id="${p.id}">
+                                        <i class="fas fa-edit me-1"></i>Editar
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm flex-fill delete-btn" data-id="${p.id}">
+                                        <i class="fas fa-trash me-1"></i>Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                } else if (p.categoria === "lapApple") {
+                    card.innerHTML = `
+                    <div class="card shadow border-0 h-100" style="border-radius:10px;">
+                        <button type="button" data-id="${p.id}" class="btn-primary text-white position-absolute top-0 start-0 m-2 duplicate-btn" style="z-index: 2; font-size: 0.8rem;" title="Duplicar producto">
+                            <i class="fa-solid fa-clone"></i>
+                        </button>
+                        <img src="${imgSrc}" class="card-img-top w-100" style="aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px 10px 0 0; cursor: pointer;" alt="${p.nombre}" 
+                            onclick="window.location.href='/pages/producto.html#${p.id}'">
+                        <div class="card-body p-3 d-flex flex-column">
+                            <h5 class="card-title mb-2" style="font-size: 1rem; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; 
+                                overflow: hidden;" title="${p.nombre}">${p.nombre} ${obtenerNombreCpu(p.procesador)} ${p.ram} / ${p.espacio} ${obtenerNombreEspacio(p.tipoEspacio)}</h5>
+                            
+                            <div class="mb-3">
+                                <p class="mb-1 card-text"><strong>Marca:</strong> ${p.modelo || 'N/A'}</p>
+                                <p class="mb-1 justify-content-xl-between d-xl-flex card-text"><strong>Categoría:</strong> <span class="badge bg-${obtenerColorCategoria(p.categoria)}">${obtenerNombreCategoria(p.categoria)}</span></p>
+                                <p class="mb-1 justify-content-xl-between d-xl-flex card-text"><strong>CPU:</strong> <span class="badge bg-black">${p.procesador} ${obtenerNombreNucleos(p.nucleos)}</span></p>
+                                <p class="mb-1 justify-content-xl-between d-xl-flex card-text"><strong>RAM:</strong> <span class="badge bg-black">${p.ram} ${obtenerNombreDDR(p.ddrRam)}</span></p>
+                                <p class="mb-1 justify-content-xl-between d-xl-flex card-text"><strong>Capacidad:</strong> <span class="badge bg-black">${p.espacio} ${obtenerNombreEspacio(p.tipoEspacio)}</span></p>
+                                <p class="mb-1 justify-content-xl-between d-xl-flex card-text"><strong>Clave:</strong> <span class="badge bg-black">${p.clave}</span></p>
+                                <p class="mb-1 justify-content-xl-between d-xl-flex card-text"><strong>Estado:</strong> <span class="badge bg-${getColorEstado(p.estado)}">${obtenerNombreEstado(p.estado) || 'N/A'}</span></p>
+                                <p class="mb-2"><strong class="card-text">Precio:</strong> <span class="text-success fw-bold">$${currencyMX(p.precio)}</span></p>
+                                <p class="mb-0 card-text"><strong>Stock:</strong> ${p.stock || '0'} unidades</p>
+                            </div>
+                            
+                            <div class="mt-auto">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <span class="small fw-bold">Habilitar:</span>
+                                    <label class="switch mb-0">
+                                        <input type="checkbox" class="toggle-inicio" data-id="${p.id}" ${isChecked}>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="d-grid d-lg-flex gap-2">
+                                    <button type="button" class="btn btn-primary btn-sm flex-fill edit-btn" data-id="${p.id}">
+                                        <i class="fas fa-edit me-1"></i>Editar
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm flex-fill delete-btn" data-id="${p.id}">
+                                        <i class="fas fa-trash me-1"></i>Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                } else {
+
+                    let textoGeneracion = (p.procesador && p.procesador.startsWith("ix-")) ? "" : obtenerNombreGen(p.generacion);
+
+                    card.innerHTML = `
+                    <div class="card shadow border-0 h-100" style="border-radius:10px;">
+                        <button type="button" data-id="${p.id}" class="btn-primary text-white position-absolute top-0 start-0 m-2 duplicate-btn" style="z-index: 2; font-size: 0.8rem;" title="Duplicar producto">
+                            <i class="fa-solid fa-clone"></i>
+                        </button>
+                        <img src="${imgSrc}" class="card-img-top w-100" style="aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px 10px 0 0; cursor: pointer;" alt="${p.nombre}" 
+                            onclick="window.location.href='/pages/producto.html#${p.id}'">
+                        <div class="card-body p-3 d-flex flex-column">
+                            <h5 class="card-title mb-2" style="font-size: 1rem; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+                                overflow: hidden;" title="${p.nombre}">${p.nombre} ${obtenerNombreCpu(p.procesador)} ${p.ram} / ${p.espacio} ${obtenerNombreEspacio(p.tipoEspacio)}</h5>
+                            
+                            <div class="mb-3">
+                                <p class="mb-1 card-text"><strong>Marca:</strong> ${p.modelo || 'N/A'}</p>
+                                <p class="mb-1 justify-content-xl-between d-xl-flex card-text"><strong>Categoría:</strong> <span class="badge bg-${obtenerColorCategoria(p.categoria)}">${obtenerNombreCategoria(p.categoria)}</span></p>
+                                <p class="mb-1 justify-content-xl-between d-xl-flex card-text"><strong>CPU:</strong> <span class="badge bg-black">${p.procesador} ${textoGeneracion}</span></p>
+                                <p class="mb-1 justify-content-xl-between d-xl-flex card-text"><strong>RAM:</strong> <span class="badge bg-black">${p.ram} ${obtenerNombreDDR(p.ddrRam)}</span></p>
+                                <p class="mb-1 justify-content-xl-between d-xl-flex card-text"><strong>Capacidad:</strong> <span class="badge bg-black">${p.espacio} ${obtenerNombreEspacio(p.tipoEspacio)}</span></p>
+                                <p class="mb-1 justify-content-xl-between d-xl-flex card-text"><strong>Clave:</strong> <span class="badge bg-black">${p.clave}</span></p>
+                                <p class="mb-1 justify-content-xl-between d-xl-flex card-text"><strong>Estado:</strong> <span class="badge bg-${getColorEstado(p.estado)}">${obtenerNombreEstado(p.estado) || 'N/A'}</span></p>
+                                <p class="mb-2"><strong class="card-text">Precio:</strong> <span class="text-success fw-bold">$${currencyMX(p.precio)}</span></p>
+                                <p class="mb-0 card-text"><strong>Stock:</strong> ${p.stock || '0'} unidades</p>
+                            </div>
+                            
+                            <div class="mt-auto">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <span class="small fw-bold">Habilitar:</span>
+                                    <label class="switch mb-0">
+                                        <input type="checkbox" class="toggle-inicio" data-id="${p.id}" ${isChecked}>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="d-grid d-lg-flex gap-2">
+                                    <button type="button" class="btn btn-primary btn-sm flex-fill edit-btn" data-id="${p.id}">
+                                        <i class="fas fa-edit me-1"></i>Editar
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm flex-fill delete-btn" data-id="${p.id}">
+                                        <i class="fas fa-trash me-1"></i>Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                }
+
+                container.appendChild(card);
+
+                // Event listeners
+                card.querySelector(".edit-btn").addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const productoId = e.currentTarget.getAttribute('data-id');
+                    editProduct(productoId);
+                });
+
+                const btnDuplicate = card.querySelector(".duplicate-btn");
+                if (btnDuplicate) {
+                    btnDuplicate.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const productoId = e.currentTarget.getAttribute('data-id');
+                        duplicateProduct(productoId);
+                    });
+                }
+
+                card.querySelector(".delete-btn").addEventListener("click", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const productoId = e.currentTarget.getAttribute('data-id');
+                    deleteProduct(productoId);
+                });
+
+                // Listener para el interruptor de "Mostrar en Inicio"
+                card.querySelector(".toggle-inicio").addEventListener("change", async (e) => {
+                    const productoId = e.target.getAttribute('data-id');
+                    const nuevoEstado = e.target.checked;
+
+                    try {
+                        const docRef = doc(db, "productos", productoId);
+                        await updateDoc(docRef, {
+                            mostrarEnInicio: nuevoEstado
+                        });
+
+                        showToast(nuevoEstado ? "Producto visible en Inicio" : "Producto oculto en Inicio", "success");
+                    } catch (error) {
+                        console.error("Error al actualizar visibilidad:", error);
+                        showToast("Error al actualizar estado", "danger");
+                        // Revertir el switch si falló la red
+                        e.target.checked = !nuevoEstado;
+                    }
+                });
+            });
+
+        }
+
+        function actualizarContadores() {
+            const contadores = {
+                'todas': productos.length,
+                'lap': productos.filter(p => p.categoria === 'lap').length,
+                'pc': productos.filter(p => p.categoria === 'pc').length,
+                'workLap': productos.filter(p => p.categoria === 'workLap').length,
+                'lapApple': productos.filter(p => p.categoria === 'lapApple').length,
+                'workServ': productos.filter(p => p.categoria === 'workServ').length,
+                'monitor': productos.filter(p => p.categoria === 'monitor').length,
+                'proyectores': productos.filter(p => p.categoria === 'proyectores').length,
+                'tablet': productos.filter(p => p.categoria === 'tablet').length,
+                'cpu': productos.filter(p => p.categoria === 'cpu').length,
+                'aio': productos.filter(p => p.categoria === 'aio').length,
+                'docking': productos.filter(p => p.categoria === 'docking').length
+            };
+
+            Object.keys(contadores).forEach(cat => {
+                const tab = document.querySelector(`[data-categoria="${cat}"]`);
+                if (tab) {
+                    const badgeAnterior = tab.querySelector('.category-badge');
+                    if (badgeAnterior) badgeAnterior.remove();
+
+                    const badge = document.createElement('span');
+                    badge.className = 'category-badge';
+                    badge.textContent = contadores[cat];
+                    tab.appendChild(badge);
+                }
+            });
+
+            Object.keys(contadores).forEach(est => {
+                const tabEst = document.querySelector(`[data-estado="${est}"]`);
+                if (tabEst) {
+                    const badgeAnt = tabEst.querySelector('.category-badge');
+                    if (badgeAnt) badgeAnt.remove();
+
+                    const badgeEst = document.createElement('span');
+                    badgeEst.className = 'category-badge';
+                    badgeEst.textContent = contadores[est];
+                    tabEst.appendChild(badgeEst);
+                }
+            });
+        }
+
+        // EVENT LISTENERS PARA BÚSQUEDA
+        document.getElementById('searchInput').addEventListener('input', function (e) {
+            terminoBusqueda = e.target.value;
+            paginaActual = 1; // Resetear a primera página
+            renderProducts(categoriaActual);
+        });
+
+        document.getElementById('clearSearch').addEventListener('click', function () {
+            document.getElementById('searchInput').value = '';
+            terminoBusqueda = '';
+            paginaActual = 1;
+            renderProducts(categoriaActual);
+        });
+
+        // EVENT LISTENER PARA PRODUCTOS POR PÁGINA
+        document.getElementById('itemsPerPage').addEventListener('change', function (e) {
+            productosPorPagina = e.target.value === 'all' ? 'all' : parseInt(e.target.value);
+            paginaActual = 1;
+            renderProducts(categoriaActual);
+        });
+
+
+        // Funcion para comprimir imagenes de los productos
+        // Lee y COMPRIME múltiples imágenes
+        function readFilesAsDataURLs(fileList, maxSize = 512) {
+            const files = Array.from(fileList || []);
+
+            return Promise.all(files.map(file => compressImage(file, maxSize)));
+        }
+
+        // FUNCIÓN PARA COMPRIMIR Y CONVERTIR A WEBP
+        async function comprimirImagen(archivo) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(archivo);
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+
+                        // Ajustar resolución máxima (ejemplo 1200px de ancho)
+                        const maxAncho = 1200;
+                        let ancho = img.width;
+                        let alto = img.height;
+
+                        if (ancho > maxAncho) {
+                            alto = (maxAncho / ancho) * alto;
+                            ancho = maxAncho;
+                        }
+
+                        canvas.width = ancho;
+                        canvas.height = alto;
+                        ctx.drawImage(img, 0, 0, ancho, alto);
+
+                        // Convertir a WebP con calidad del 80%
+                        canvas.toBlob((blob) => {
+                            // Creamos un nuevo archivo con el nombre original pero extensión .webp
+                            const nombreWebp = archivo.name.replace(/\.[^/.]+$/, "") + ".webp";
+                            const archivoComprimido = new File([blob], nombreWebp, {
+                                type: 'image/webp',
+                                lastModified: Date.now()
+                            });
+                            resolve(archivoComprimido);
+                        }, 'image/webp', 0.8);
+                    };
+                };
+            });
+        }
+
+        // Comprime una sola imagen
+        function compressImage(file, maxSize = 512) {
+            return new Promise((resolve, reject) => {
+
+                const reader = new FileReader();
+                reader.onload = e => {
+
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement("canvas");
+
+                        // Obtener tamaño original
+                        let width = img.width;
+                        let height = img.height;
+
+                        // Redimensionar si es necesario
+                        if (width > height) {
+                            if (width > maxSize) {
+                                height *= maxSize / width;
+                                width = maxSize;
+                            }
+                        } else {
+                            if (height > maxSize) {
+                                width *= maxSize / height;
+                                height = maxSize;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+
+                        const ctx = canvas.getContext("2d");
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        // Comprimir como JPG calidad 0.75
+                        const dataURL = canvas.toDataURL("image/jpeg", 0.75);
+
+                        resolve({
+                            name: file.name,
+                            type: "image/jpeg",
+                            dataURL: dataURL
+                        });
+                    };
+
+                    img.onerror = reject;
+                    img.src = e.target.result;
+                };
+
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        /* -----------------------------
+         EVENT LISTENERS PARA SLIDER DE CATEGORÍAS
+         -----------------------------*/
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const slider = document.getElementById('categorySlider');
+
+        // Click en botones de categoría
+        categoryButtons.forEach(btn => {
+            btn.addEventListener('click', function () {
+                // Remover active de todos
+                categoryButtons.forEach(b => b.classList.remove('active'));
+
+                // Agregar active al click
+                this.classList.add('active');
+
+                // Obtener categoría
+                const categoria = this.getAttribute('data-categoria');
+                categoriaActual = categoria;
+
+                // Obtener estado
+                const estado = this.getAttribute('data-estado');
+                estadoActual = estado;
+
+                // Autocentrar el botón seleccionado
+                this.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+
+                // Renderizar productos filtrados
+                renderProducts(categoria);
+            });
+        });
+
+        // Soporte para arrastrar con mouse (escritorio)
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.style.cursor = 'grabbing';
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.style.cursor = 'grab';
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.style.cursor = 'grab';
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2;
+            slider.scrollLeft = scrollLeft - walk;
+        });
+        // INICIO
+        loadProducts();
+
+        // LIMPIAR AL CERRAR MODAL
+        document.getElementById('proyectoModal').addEventListener('hidden.bs.modal', function () {
+            productoEditando = null;
+            document.getElementById('modalTitleText').textContent = 'Registro de Nuevo Producto';
+            document.getElementById('productoForm').reset();
+            cambiarCamposPorCategoria();
+
+            listaImagenes = [];
+            renderPreviewImages();
+
+            if (tinymce.get('descripcion')) {
+                tinymce.get('descripcion').setContent('');
+            }
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Carrito | PROSEINET</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="apple-touch-icon" href="/assets/icons/Logo-proseinet-rojo.png" />
+    <link rel="icon" href="/assets/icons/Logo-proseinet-rojo.png">
+    <link rel="stylesheet" href="/css/styleCarrito.css?=0.13">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="/js/offline-db.js"></script>
+</head>
+
+<body>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top"
+        style="position: fixed !important; background-color: #a10000; border-radius: 0px 0px 15px 15px;">
+        <div class="container">
+            <a href="/index.html" class="logo-nav-lg">
+                <img class="thumbs ms-2 my-2" src="/assets/img/Proseinet-Logo-Web.png" alt="LogoProseinet" width="80">
+            </a>
+            <a href="#" class="nav-back" onclick="history.go(-1); return false;"><i
+                    class="fa-solid fa-arrow-left-long"></i></a>
+            <h2 class="ps-3" style="font-size: 1.3rem; font-weight: 700; color: white;"> Carrito </h2>
+            <a href="/index.html" class="logo-nav">
+                <img class="thumbs ms-2 my-2" src="/assets/img/Proseinet-Logo-Web.png" alt="LogoProseinet" width="80">
+            </a>
+            <div class="nav-menu">
+                <ul class="navbar-nav ms-auto">
+                    <a class="nav-link" href="/index.html" style="font-weight: 700; font-size: 1.2rem;">Inicio</a>
+                    <a class="nav-link" href="/pages/perfil.html"
+                        style="font-weight: 700; font-size: 1.2rem;">Perfil</a>
+                    <a class="nav-link" href="/pages/menu.html" style="font-weight: 700; font-size: 1.2rem;">Menu</a>
+                    <a class="position-relative cart-view carrito-vista-desk  ms-3 me-5" href="/pages/carrito.html">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span
+                            class="contador-carrito cart-span position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                            style="background-color: black; color: white;">
+                            0
+                        </span>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Inicio-->
+    <header id="inicio" class="mt-5 py-4" style="background-color: #ffffff;">
+        <div class="toast-container position-fixed top-0 end-0 p-3" id="toastZone"></div>
+    </header>
+    <!-- Modal Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header" style="background:#ab0303; color:white;">
+                    <h5 class="modal-title" id="loginLabel">Iniciar Sesión</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <input id="user" type="text" class="form-control mb-3" placeholder="Usuario">
+
+                    <input id="pass" type="password" class="form-control mb-3" placeholder="Contraseña">
+
+                    <p id="error-msg" class="text-danger text-center"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="loginBtn" class="btn btn-primary w-100">Ingresar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Registro -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header" style="background:#ab0303; color:white;">
+                    <h5 class="modal-title" id="registerLabel">Crear Cuenta</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <input id="regEmail" type="email" class="form-control mb-3" placeholder="Correo">
+
+                    <input id="regPass" type="password" class="form-control mb-3"
+                        placeholder="Contraseña (mínimo 6 caracteres)">
+
+                    <p id="regError" class="text-danger text-center"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="registerBtn" class="btn btn-primary w-100">Registrarse</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/carrito.js?=0.1"></script>
+
+    <!-- Modal del Carrito -->
+    <div class="mx-3" id="carritoModal" tabindex="-1" aria-labelledby="carritoLabel">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body" id="carrito-container">
+                    <p class="text-center text-muted">Cargando carrito...</p>
+                </div>
+
+                <!-- Total del carrito -->
+                <div class="px-4 py-2 bg-light border-top">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Total:</h5>
+                        <h4 class="mb-0 text-success" id="total-carrito">$0.00</h4>
+                    </div>
+                </div>
+
+                <div class="modal-footer py-3">
+                    <button type="button" class="p-2 px-3 btn btn-sm btn-lg btn-secondary me-3"
+                        onclick="window.location.href='/index.html' ">
+                        Seguir Comprando
+                    </button>
+                    <button type="button" class="btn btn-sm btn-primary" id="btnProcederPago" onclick="abrirCheckout()">
+                        <i class="fa-solid fa-check-to-slot me-2"></i>Proceder al Pedido
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de Checkout -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #ab0303; color: white;">
+                    <h5 class="modal-title" id="checkoutLabel">
+                        <i class="fas fa-shipping-fast me-2"></i>Datos del Pedido
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="checkoutForm">
+                        <div class="mb-4 p-3 border rounded" style="background-color: #f8f9fa;">
+                            <label class="form-label fw-bold d-block mb-3"><i class="fas fa-wallet me-2"></i>Método de
+                                Compra:</label>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="metodoCompra" id="metodoTarjeta"
+                                    value="tarjeta" disabled>
+                                <label class="form-check-label fw-semibold text-muted" for="metodoTarjeta">Pago con
+                                    Tarjeta (Próximamente)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="metodoCompra" id="metodoSoloPedido"
+                                    value="solopedido" checked onchange="toggleMetodoCompra()">
+                                <label class="form-check-label fw-semibold" for="metodoSoloPedido">Solo Pedido (Pago a
+                                    la entrega)</label>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <h6 class="border-bottom pb-2 mt-2">Datos de Contacto</h6>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="nombreEnvio" class="form-label">Nombre completo *</label>
+                                <input type="text" class="form-control" id="nombreEnvio" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="telefonoEnvio" class="form-label">Teléfono *</label>
+                                <input type="tel" class="form-control" id="telefonoEnvio" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="emailEnvio" class="form-label">Correo Electrónico *</label>
+                                <input type="email" class="form-control" id="emailEnvio" required>
+                            </div>
+
+                            <div id="camposDireccion" class="row g-3 m-0 p-0 mt-2">
+                                <div class="col-12">
+                                    <h6 class="border-bottom pb-2">Datos de Envío</h6>
+                                </div>
+                                <div class="col-12">
+                                    <label for="direccionEnvio" class="form-label">Dirección completa *</label>
+                                    <input type="text" class="form-control" id="direccionEnvio"
+                                        placeholder="Calle, número, colonia" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="ciudadEnvio" class="form-label">Ciudad *</label>
+                                    <input type="text" class="form-control" id="ciudadEnvio" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="cpEnvio" class="form-label">Código Postal *</label>
+                                    <input type="text" class="form-control" id="cpEnvio" required>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <label for="notasEnvio" class="form-label">Notas adicionales (opcional)</label>
+                                    <textarea class="form-control" id="notasEnvio" rows="2"
+                                        placeholder="Referencias, instrucciones especiales, etc."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 p-3 bg-light rounded">
+                            <h6 class="mb-3"><i class="fas fa-receipt me-2"></i>Resumen del Pedido</h6>
+                            <div id="resumen-productos"></div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <strong>Total a pagar:</strong>
+                                <strong class="text-success" id="total-checkout">$0.00</strong>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="paymentCardBrick_container" class="px-3">
+                    <div class="info-text alert alert-info border-0" role="alert">
+                        Tus datos de pago están seguros con nosotros, si tienes dudas lee nuestras <a class="link-cart"
+                            href="/pages/politicas-uso.html"><strong>Politicas de Uso</strong></a>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="button" class="btn btn-success" id="btnConfirmarPedido"
+                        onclick="confirmarPedido(event)" style="display: none;">
+                        <i class="fas fa-check-circle me-2"></i>Confirmar Pedido
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Envio -->
+    <div class="modal fade" id="envioModal" tabindex="-1" aria-labelledby="checkoutLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #ab0303; color: white;">
+                    <h5 class="modal-title" id="checkoutLabel">
+                        <i class="fas fa-shipping-fast me-2"></i>Datos de Envío
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="checkoutForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="nombreEnvio" class="form-label">Nombre completo *</label>
+                                <input type="text" class="form-control" id="nombreEnvio" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="telefonoEnvio" class="form-label">Teléfono *</label>
+                                <input type="tel" class="form-control" id="telefonoEnvio" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="direccionEnvio" class="form-label">Dirección completa *</label>
+                                <input type="text" class="form-control" id="direccionEnvio"
+                                    placeholder="Calle, número, colonia" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="ciudadEnvio" class="form-label">Ciudad *</label>
+                                <input type="text" class="form-control" id="ciudadEnvio" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cpEnvio" class="form-label">Código Postal *</label>
+                                <input type="text" class="form-control" id="cpEnvio" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="notasEnvio" class="form-label">Notas adicionales (opcional)</label>
+                                <textarea class="form-control" id="notasEnvio" rows="2"
+                                    placeholder="Referencias, instrucciones especiales, etc."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Resumen del pedido -->
+                        <div class="mt-4 p-3 bg-light rounded">
+                            <h6 class="mb-3"><i class="fas fa-receipt me-2"></i>Resumen del Pedido</h6>
+                            <div id="resumen-productos"></div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <strong>Total a pagar:</strong>
+                                <strong class="text-success" id="total-checkout">$0.00</strong>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="button" class="btn btn-success" id="btnConfirmarPedido"
+                        onclick="confirmarPedido(event)">
+                        <i class="fas fa-check-circle me-2"></i>Confirmar Pedido
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <section id="fter" class="text-white p-2 fixed-bottom footer-menu"
+        style="border-radius: 25px 25px 0px 0px;  box-shadow: 0px -2px 12px rgba(36, 36, 36, 0.20);">
+        <div class="menu-sets">
+            <!--Menu-->
+            <ul class="navbar-nav-ft">
+                <a class="nav-link-ft text-center" href="/index.html">
+                    <i class="fa-solid fa-house" style="font-size: 1.3rem;"></i>
+                    <li class="nav-item"></li>
+                    Inicio
+                </a>
+                <a class="nav-link-ft text-center" href="/pages/perfil.html">
+                    <i class="fa fa-user" style="font-size: 1.3rem;"></i>
+                    <li class="nav-item"></li>
+                    Perfil
+                </a>
+                <a class="nav-link-ft text-center align-items-center" href="/pages/carrito.html" style="color: black;">
+                    <i class="fa-solid fa-cart-shopping" style="font-size: 1.3rem;"><span
+                            class="contador-carrito badge-cart">0</span></i>
+                    <li class="nav-item"></li>
+                    Carrito
+                </a>
+                <a class="nav-link-ft text-center" href="/pages/menu.html">
+                    <i class="fa-solid fa-bars" style="font-size: 1.3rem;"></i>
+                    <li class="nav-item"></li>
+                    Menu
+                </a>
+            </ul>
+        </div>
+    </section>
+    <footer id="fter" class="text-white py-3" style="background-color: white;">
+        <div class="container">
+            <p class="text-center mt-2 mb-0">&copy; <strong>Proseinet</strong> - Todos los derechos reservados</p>
+        </div>
+    </footer>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <!-- Firebase + Catalogo  -->
+    <script type="module" src="/js/carritoScript.js?=0.18"></script>
+
+    <script src="/js/db.js"></script>
+    <script src="/js/serviceWorkerIdent.js"></script>
+    <script>
+        // Sincronización automática cuando vuelve la conexión
+        window.addEventListener('online', async () => {
+            console.log('Conexión restaurada, sincronizando pedidos...');
+            showToast('Conexión restaurada. Sincronizando pedidos...', 'info');
+
+            try {
+                const pedidosPendientes = await offlineDB.obtenerPedidosPendientes();
+
+                if (pedidosPendientes.length > 0) {
+                    for (const pedido of pedidosPendientes) {
+                        try {
+                            // Remover campos de control antes de enviar
+                            const { id, timestamp, synced, offline, ...pedidoLimpio } = pedido;
+
+                            const docRef = await addDoc(collection(db, 'pedidos'), {
+                                ...pedidoLimpio,
+                                fecha: serverTimestamp()
+                            });
+
+                            await offlineDB.eliminarPedido(id);
+                            console.log('Pedido sincronizado:', docRef.id);
+                        } catch (error) {
+                            console.error('Error sincronizando pedido:', error);
+                        }
+                    }
+
+                    showToast(`${pedidosPendientes.length} pedido(s) sincronizado(s)`, 'success');
+                }
+            } catch (error) {
+                console.error('Error en sincronización:', error);
+            }
+        });
+
+        // Indicador de estado de conexión
+        window.addEventListener('offline', () => {
+            showToast('Sin conexión. Los pedidos se guardarán localmente', 'warning');
+        });
+
+        // Mostrar indicador visual de conexión en la navbar
+        function actualizarEstadoConexion() {
+            const navbar = document.querySelector('.navbar .container');
+            let indicador = document.getElementById('conexion-indicator');
+
+            if (!indicador) {
+                indicador = document.createElement('span');
+                indicador.id = 'conexion-indicator';
+                indicador.style.cssText = `
+                position: absolute;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 5px 15px;
+                border-radius: 20px;
+                font-size: 0.85rem;
+                font-weight: 600;
+                z-index: 10000;
+            `;
+                navbar.appendChild(indicador);
+            }
+
+            if (navigator.onLine) {
+                indicador.style.display = 'none';
+            } else {
+                indicador.style.display = 'block';
+                indicador.style.backgroundColor = '#ff9800';
+                indicador.style.color = 'white';
+                indicador.innerHTML = '<i class="fas fa-wifi-slash me-2"></i>Modo Offline';
+            }
+        }
+
+        window.addEventListener('online', actualizarEstadoConexion);
+        window.addEventListener('offline', actualizarEstadoConexion);
+        document.addEventListener('DOMContentLoaded', actualizarEstadoConexion);
+    </script>
+    <script>
+
+        // REGISTRAR EVENTO CUANDO EL MODAL SE MUESTRA
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkoutModal = document.getElementById('checkoutModal');
+
+            if (checkoutModal) {
+                checkoutModal.addEventListener('shown.bs.modal', async function () {
+                    console.log('Modal de checkout abierto');
+
+                    const form = document.getElementById('checkoutForm');
+                    if (form) {
+                        form.onsubmit = window.confirmarPedido;
+                        console.log('Evento submit registrado');
+                    }
+
+                    if (window.cardBrickController) {
+                        window.cardBrickController.unmount();
+                    }
+
+                    const carritoActual = JSON.parse(localStorage.getItem('carrito')) || [];
+                    const total = carritoActual.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);
+
+                    await renderCardBrick(total);
+                });
+            }
+        });
+
+        window.toggleMetodoCompra = function () {
+            const isTarjeta = document.getElementById('metodoTarjeta').checked;
+            const containerDireccion = document.getElementById('camposDireccion');
+            const mpBrick = document.getElementById('paymentCardBrick_container');
+            const btnConfirmar = document.getElementById('btnConfirmarPedido');
+
+            if (isTarjeta) {
+                // Mostrar formulario completo y Mercado Pago
+                containerDireccion.style.display = 'flex';
+                mpBrick.style.display = 'block';
+                btnConfirmar.style.display = 'none'; // El Brick tiene su propio botón de pagar
+
+                // Hacer requeridos los campos de dirección
+                document.getElementById('direccionEnvio').required = true;
+                document.getElementById('ciudadEnvio').required = true;
+                document.getElementById('cpEnvio').required = true;
+                document.getElementById('notasEnvio').required = true;
+            } else {
+                // Ocultar dirección y Mercado Pago, mostrar botón tradicional
+                containerDireccion.style.display = 'none';
+                mpBrick.style.display = 'none';
+                btnConfirmar.style.display = 'block';
+
+                // Quitar requeridos de dirección
+                document.getElementById('direccionEnvio').required = false;
+                document.getElementById('ciudadEnvio').required = false;
+                document.getElementById('cpEnvio').required = false;
+                document.getElementById('notasEnvio').required = false;
+            }
+        }
+    </script>
+</body>
+
+</html>

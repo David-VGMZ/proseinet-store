@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Pedidos | Proseinet</title>
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png" />
+    <link rel="icon" href="/assets/icons/icon-192.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/css/stylePedidosAdmin.css?=0.11">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black; border-radius: 0px 0px 15px 15px;">
+        <div class="container">
+            <a href="/index.html" class="carrito-vista">
+                <img class="thumbs mx-2 my-2" src="/assets/img/Proseinet-Logo-Web.png" alt="Prosienet-img" width="80">
+            </a>
+            <h2 class="inventario-text mx-4" style="font-size: 1.5rem; font-weight: 700; color: white;"> Pedidos </h2>
+            <div class="container col">
+                <div class="input-group col-lg-3 col-md-8 col-8">
+                    <input 
+                        type="text" 
+                        class="form-control-srch" 
+                        id="searchInput" 
+                        placeholder="Buscar por cliente, estado, id o fecha..."
+                        autocomplete="off"
+                        style="font-size: 14px;"
+                    >
+                    <button class="btn-srch" type="button" id="clearSearch">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="nav-menu">
+                <ul class="navbar-nav ms-auto">
+                    <a class="nav-link" href="/pages/inventario.html" style="font-weight: 700; font-size: 1rem;">Inventario</a>
+                    <a class="nav-link" href="/pages/pedidos-admin.html" style="font-weight: 700; font-size: 1rem;">Pedidos</a>
+                    <a class="nav-link" href="/pages/usuarios.html" style="font-weight: 700; font-size: 1rem;">Usuarios</a>
+                    <a class="nav-link" href="/pages/menu.html" style="font-weight: 700; font-size: 1rem;">Salir</a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed top-0 end-" id="toastZone"></div>
+    <div class="col-md-12 col-lg-12 col-12">
+        <div class="mt-4 mx-2">
+            <div class="py-5">
+                <div class="mt-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>ID Pedido</th>
+                                        <th>Cliente</th>
+                                        <th>Correo</th>
+                                        <th>Fecha</th>
+                                        <th>Total</th>
+                                        <th>Estado</th>
+                                        <th class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pedidosContainer">
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEditarPedido" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background: black; color:white;">
+                    <h5 class="modal-title">Actualizar Estado del Pedido</h5>
+                    <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>ID:</strong> <span id="editIDPedido"></span></p>
+                    <label class="fw-bold">Nuevo Estado:</label>
+                    <select id="editEstadoPedido" class="form-control mt-2" aria-placeholder="Seleccionar Estado: ">
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="Pagado">Pagado</option>
+                        <option value="Enviado">Enviado</option>
+                        <option value="Entregado">Entregado</option>
+                        <option value="Completado">Completado</option>
+                        <option value="Cancelado">Cancelado</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button id="btnGuardarEstado" class="btn btn-danger">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+             
+    <!--Footer-->
+    <section id="fter" class="text-white p-2 fixed-bottom footer-menu" style="background-color: white; border-radius: 25px 25px 0px 0px;  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.500);">
+        <div class="mt-2">
+            <!--Menu-->
+            <ul class="navbar-nav-ft">
+                <a class="nav-link-ft text-center" href="/pages/inventario.html">
+                    <i class="fa-solid fa-box-archive" style="font-size: 1.3rem;"></i><li class="nav-item"></li>
+                    Inventario</a>
+                <a class="nav-link-ft text-center" href="/pages/pedidos-admin.html" style="color: #e90b0b;">
+                    <i class="fa-solid fa-truck" style="font-size: 1.3rem;"></i><li class="nav-item"></li>
+                    Pedidos</a>
+                <a class="nav-link-ft text-center" href="/pages/usuarios.html">
+                    <i class="fa fa-user" style="font-size: 1.3rem;"></i><li class="nav-item"></li>
+                    Usuarios</a>
+                <a class="nav-link-ft text-center" href="/pages/menu-admin.html">
+                    <i class="fa-solid fa-right-to-bracket" style="font-size: 1.3rem;"></i><li class="nav-item"></li>
+                    Salir</a>
+            </ul>
+        </div>
+    </section>
+    <footer id="fter" class="text-white py-5" style="background-color: white;">
+        <div class="container">
+            <p class="text-center mt-2 mb-0">&copy; <strong>Gadget Go</strong> - Todos los derechos reservados</p>
+        </div>
+    </footer>
+    <!-- Boton para subir al Header -->
+    <button id="btnUp">
+        <a href="#" class="nav-link-btn"><i class="fa-solid fa-angle-up"></i></a>
+    </button>
+
+    <script type="module">
+        
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, query, getDocs, getDoc, orderBy, doc, updateDoc, deleteDoc, increment, runTransaction } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBg9o3wVZoA26Aob2RnbVPV8vGv4GE44gs",
+            authDomain: "primer-proyecto-7b2f4.firebaseapp.com",
+            projectId: "primer-proyecto-7b2f4",
+            storageBucket: "primer-proyecto-7b2f4.firebasestorage.app",
+            messagingSenderId: "627220736817",
+            appId: "1:627220736817:web:a2eb4f187322c609f11e10"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const pedidosContainer = document.getElementById("pedidosContainer");
+
+        // 1. DEFINIR LA FUNCIÓN CARGAR PEDIDOS
+        async function cargarPedidos() {
+            try {
+                console.log("Cargando pedidos...");
+                // Referencia a la colección 'pedidos' ordenada por fecha
+                const q = query(collection(db, "pedidos"), orderBy("fecha", "desc"));
+                const querySnapshot = await getDocs(q);
+                
+                renderTablaPedidos(querySnapshot);
+            } catch (error) {
+                console.error("Error al cargar pedidos:", error);
+                alert("No se pudieron cargar los pedidos. Revisa la consola.");
+            }
+        }
+
+        //Formatear numero a moneda MXN
+        function currencyMX(n) {
+            return Number(n).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2});
+        }
+
+        // 2. RENDERIZAR LA TABLA
+        function renderTablaPedidos(snapshot) {
+            if (!pedidosContainer) return;
+            pedidosContainer.innerHTML = "";
+
+            if (snapshot.empty) {
+                pedidosContainer.innerHTML = "<tr><td colspan='6' class='text-center'>No hay pedidos registrados</td></tr>";
+                return;
+            }
+
+            snapshot.forEach((docSnap) => {
+                const pedido = docSnap.data();
+                const id = docSnap.id;
+                const cloudName = "dei5fnqt5";
+                const urlCloudinary = `https://res.cloudinary.com/${cloudName}/image/upload/v1776099264/comprobante_${id}.pdf`;
+                const btnPDF = `
+                    <a href="${urlCloudinary}" target="_blank" class="btn btn-sm btn-dark" title="Ver Recibo PDF">
+                        <i class="fa-solid fa-file-pdf"></i>
+                    </a>`;
+
+                // Manejar la fecha
+                let fecha = 'Fecha no disponible';
+                if (pedido.fecha) {
+                    try {
+                        if (pedido.fecha.toDate) {
+                            // Timestamp de Firestore
+                            fecha = pedido.fecha.toDate().toLocaleDateString('es-MX', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                        } else if (pedido.fecha.seconds) {
+                            // Timestamp serializado desde caché
+                            fecha = new Date(pedido.fecha.seconds * 1000).toLocaleDateString('es-MX', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                        } else if (typeof pedido.fecha === 'string') {
+                            // String ISO
+                            fecha = new Date(pedido.fecha).toLocaleDateString('es-MX', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Error procesando fecha:', e);
+                    }
+                }
+
+                pedidosContainer.innerHTML += `
+                    <tr class="tr-text">
+                        <td>${id.substring(7, 22)}</td>
+                        <td>${pedido.datosEnvio.nombre || 'N/A'}</td>
+                        <td>${pedido.userEmail}</td>
+                        <td>${fecha}</td>
+                        <td>$${currencyMX(pedido.total) || 0}</td>
+                        <td><span class="badge bg-${getColorEstado(pedido.estado)}">${pedido.estado || 'Pendiente'}</span></td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center align-items-center gap-2 flex-nowrap flex-md-wrap">
+                                ${btnPDF}
+                                <button class="btn btn-sm btn-primary" onclick="prepararEdicion('${id}', '${pedido.estado}')" title="Editar Estado">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="eliminarPedido('${id}')" title="Eliminar Pedido">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Función auxiliar para colores
+        function getColorEstado(estado) {
+            const colores = { 
+                'Pendiente': 'warning', 
+                'Pagado': 'info', 
+                'Enviado': 'primary', 
+                'Entregado': 'success',
+                'Completado': 'black',
+                'Cancelado': 'danger' 
+            };
+            return colores[estado] || 'secondary';
+        }
+
+        // FUNCIONES DE ACTUALIZAR Y ELIMINAR
+        window.prepararEdicion = function(id, estadoActual) {
+            window.editID = id;
+            document.getElementById("editIDPedido").textContent = id;
+            document.getElementById("editEstadoPedido").value = estadoActual;
+            
+            const modalElement = document.getElementById("modalEditarPedido");
+            const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+            modal.show();
+        };
+
+        document.getElementById("btnGuardarEstado").onclick = async (e) => {
+            const nuevoEstado = document.getElementById("editEstadoPedido").value;
+            const modalElement = document.getElementById("modalEditarPedido");
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            const btnActualizar = document.getElementById('btnGuardarEstado');
+
+            btnActualizar.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Actualizando';
+            btnActualizar.disabled = true;
+
+            try {
+                const pedidoRef = doc(db, 'pedidos', window.editID);
+
+                // EJECUTAMOS LA TRANSACCIÓN
+                const resultado = await runTransaction(db, async (transaction) => {
+                    const pedidoSnap = await transaction.get(pedidoRef);
+
+                    if (!pedidoSnap.exists()) {
+                        throw "El pedido no existe";
+                    }
+
+                    const pedidoData = pedidoSnap.data();
+                    const estadoAnterior = pedidoData.estado;
+                    const idDelCliente = pedidoData.userId;
+
+                    // Si el admin cambia el estado a "Pagado", verificamos y restamos stock
+                    if (nuevoEstado === 'Pagado' && estadoAnterior !== 'Pagado') {
+                        if (pedidoData.productos && pedidoData.productos.length > 0) {
+                            const operacionesStock = [];
+
+                            // 1. Verificar stock de TODOS los productos antes de restar nada
+                            for (const item of pedidoData.productos) {
+                                const productoRef = doc(db, 'productos', item.id);
+                                const prodSnap = await transaction.get(productoRef);
+
+                                if (!prodSnap.exists()) {
+                                    throw `El producto "${item.nombre}" ya no existe en la base de datos.`;
+                                }
+
+                                const stockActual = Number(prodSnap.data().stock) || 0;
+                                const cantidadARestar = Number(item.cantidad) || 1;
+
+                                if (stockActual < cantidadARestar) {
+                                    // Si no hay stock, cancelamos la transacción lanzando un error
+                                    throw `Stock insuficiente para "${item.nombre}". Quedan ${stockActual} piezas.`;
+                                }
+
+                                // Preparamos la actualización si hay stock disponible
+                                operacionesStock.push({ ref: productoRef, nuevoStock: stockActual - cantidadARestar });
+                            }
+
+                            // 2. Si llegamos aquí, hay stock para todo. Aplicamos las restas.
+                            operacionesStock.forEach(op => {
+                                transaction.update(op.ref, { stock: op.nuevoStock });
+                            });
+                        }
+                    }
+
+                    // Actualizamos el estado del pedido
+                    transaction.update(pedidoRef, { estado: nuevoEstado });
+
+                    // Devolvemos datos necesarios para las notificaciones Push
+                    return { idDelCliente, estadoAnterior }; 
+                });
+
+                console.log("Estado y stock actualizados correctamente.");
+
+                // NOTIFICACIÓN PUSH (fuera de la transacción para no bloquear la base de datos)
+                if (resultado.idDelCliente && nuevoEstado !== resultado.estadoAnterior) {
+                    const userSnap = await getDoc(doc(db, 'usuarios', resultado.idDelCliente));
+                    if (userSnap.exists() && userSnap.data().fcmToken) {
+                        await enviarNotificacionPush(userSnap.data().fcmToken, window.editID, nuevoEstado);
+                    }
+                }
+
+                if (modal) modal.hide();
+                alert(`Pedido actualizado a: ${nuevoEstado}`);
+                
+                setTimeout(() => {
+                    window.location.href = '/pages/pedidos-admin.html';
+                }, 500);
+                
+            } catch (error) {
+                console.error("Error al procesar:", error);
+                // Mostrar el mensaje de error específico si es un string (ej. "Stock insuficiente")
+                alert(typeof error === 'string' ? error : "Ocurrió un error al actualizar el pedido.");
+                
+                // Restaurar el botón para intentar de nuevo
+                btnActualizar.innerHTML = 'Actualizar';
+                btnActualizar.disabled = false;
+            }
+        };
+
+        window.eliminarPedido = async function(id) {
+            if (confirm("¿Eliminar este pedido permanentemente?")) {
+                try {
+                    await deleteDoc(doc(db, "pedidos", id));
+                    cargarPedidos();
+                } catch (error) {
+                    console.error("Error al eliminar:", error);
+                }
+            }
+        };
+
+        //Busqueda de Pedidos
+        const searchInput = document.getElementById('searchInput');
+        const clearSearch = document.getElementById('clearSearch');
+
+        searchInput.addEventListener("input", () => {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const rows = pedidosContainer.getElementsByTagName("tr");
+
+            if (rows.length === 1 && rows[0].innerText.includes("No hay pedidos")) return;
+
+            for (let i = 0; i < rows.length; i++) {
+                const rowText = rows[i].innerText.toLowerCase();
+
+                if (rowText.includes(searchTerm)) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = "none";
+                }
+                
+            }
+        });
+
+        clearSearch.addEventListener("click", () => {
+            searchInput.value = "";
+            const rows = pedidosContainer.getElementsByTagName("tr");
+
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].style.display = "";
+            }
+            searchInput.focus();
+        });
+
+        async function enviarNotificacionPush(token, pedidoId, estado) {
+            const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbyzv_E_7erzc4HLA79FRVfjg-0RIo_V3n9fxzUd58xCpJm0rsoUmvrI1gOyDUQvzM2EbQ/exec";
+
+            try {
+                await fetch(URL_APPS_SCRIPT, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        token: token,
+                        pedidoId: pedidoId,
+                        nuevoEstado: estado
+                    })
+                });
+                console.log("Notificación enviada con éxito");
+            } catch (error) {
+                console.error("Error al contactar con el puente de notificaciones:", error);
+            }
+        }
+
+        // INICIALIZAR
+        cargarPedidos();
+        
+    </script>
+    <script>
+
+    // Mostrar/Ocultar botón "Subir" según scroll y proximidad al footer
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnUp = document.getElementById('btnUp');
+        const footer = document.querySelector('footer');
+        
+        if (!btnUp || !footer) return;
+        
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            const footerPosition = footer.offsetTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            if (scrollPosition > 300) {
+                // Verificar si el usuario está cerca del footer
+                const distanceToFooter = footerPosition - (scrollPosition + windowHeight);
+                
+                if (distanceToFooter < 100 || (scrollPosition + windowHeight) >= documentHeight - 50) {
+                    btnUp.style.opacity = '0';
+                    btnUp.style.pointerEvents = 'none';
+                } else {
+                    btnUp.style.opacity = '1';
+                    btnUp.style.pointerEvents = 'auto';
+                }
+            } else {
+                btnUp.style.opacity = '0';
+                btnUp.style.pointerEvents = 'none';
+            }
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title id="titePage">Producto | Proseinet</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="apple-touch-icon" href="/assets/icons/Logo-proseinet-rojo.png" />
+    <link rel="icon" href="/assets/icons/Logo-proseinet-rojo.png">
+    <link rel="stylesheet" href="/css/styleProduct.css?=0.18">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top"
+        style="position: fixed !important; background-color: #a10000; border-radius: 0px 0px 15px 15px;">
+        <div class="container">
+            <a href="#" class="nav-back d-lg-none" onclick="history.go(-1); return false;"><i
+                    class="fa-solid fa-arrow-left-long"></i></a>
+            <a href="#" class="nav-back-lg d-none d-lg-block position-absolute"
+                onclick="history.go(-1); return false;"><i class="fa-solid fa-arrow-left-long"></i></a>
+            <a href="/index.html" class="logo-nav-lg">
+                <img class="thumbs ms-2 my-2 d-lg-none" src="/assets/img/Proseinet-Logo-Web.png" alt="LogoProseinet"
+                    width="80">
+            </a>
+            <h2 id="titleProduct" class="ps-3" style="font-size: 1.3rem; font-weight: 700; color: #ffffff;"></h2>
+            <a href="/index.html" class="logo-nav">
+                <img class="thumbs ms-2 my-2" src="/assets/img/Proseinet-Logo-Web.png" alt="LogoProseinet" width="80">
+            </a>
+            <div class="nav-menu">
+                <ul class="navbar-nav ms-auto">
+                    <a class="nav-link" href="/index.html" style="font-weight: 700; font-size: 1.2rem;">Inicio</a>
+                    <a class="nav-link" href="/pages/perfil.html"
+                        style="font-weight: 700; font-size: 1.2rem;">Perfil</a>
+                    <a class="nav-link" href="/pages/menu.html" style="font-weight: 700; font-size: 1.2rem;">Menu</a>
+                    <a class="position-relative cart-view carrito-vista-desk  ms-3 me-5" href="/pages/carrito.html">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span
+                            class="contador-carrito cart-span position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                            style="background-color: black; color: white;">
+                            0
+                        </span>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header id="inicio" class="mt-5 py-4" style="background-color: #ffffff;">
+        <div class="toast-container position-fixed top-30 end-0 p-3" id="toastZone"></div>
+    </header>
+    <script>
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+        function guardarCarrito() {
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+        }
+
+        function agregarAlCarrito(producto) {
+            const item = carrito.find(p => p.id === producto.id);
+            if (item) {
+                item.cantidad += producto.cantidad;
+            } else {
+                carrito.push({ ...producto });
+            }
+            guardarCarrito();
+
+            if (typeof window.actualizarCarrito === 'function') {
+                window.actualizarCarrito();
+            }
+
+            showToast('<i class="fa-solid fa-cart-plus"></i> Agregado a tu carrito', "danger");
+
+        }
+
+        function eliminarDelCarrito(id) {
+            carrito = carrito.filter(p => String(p.id) !== String(id));
+            guardarCarrito();
+            window.actualizarCarrito;
+            const alert = document.createElement('div');
+            showToast('<i class="fa-solid fa-cart-plus me-2"></i> Producto eliminado del carrito', "danger");
+            alert.className = "alert alert-danger position-fixed top-0 end-0 m-3";
+            alert.textContent = "Producto eliminado del carrito";
+            document.body.appendChild(alert);
+        }
+
+
+        function vaciarCarrito() {
+            carrito = [];
+            guardarCarrito();
+            window.actualizarCarrito;
+        }
+
+        // Mostrar carrito al cargar la página
+        document.addEventListener('DOMContentLoaded', window.actualizarCarrito);
+
+        function showToast(msg, type = "success") {
+            const container = document.getElementById("toastZone");
+
+            const toastEl = document.createElement("div");
+            toastEl.className = `toast align-items-center text-bg-${type} border-0`;
+            toastEl.setAttribute("role", "alert");
+            toastEl.setAttribute("aria-live", "assertive");
+            toastEl.setAttribute("aria-atomic", "true");
+
+            toastEl.innerHTML = `
+            <div class="d-flex mt-1">
+                <div class="toast-body">${msg}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                    data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        `;
+
+            container.appendChild(toastEl);
+
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+
+            // remover después de 4 segundos
+            setTimeout(() => toastEl.remove(), 3000);
+        }
+    </script>
+
+    <section id="productos">
+        <div class="container-fluid mb-3 col-11 col-md-11 col-lg-11" id="producto-container">
+            <p class="text-center text-muted">Cargando producto...</p>
+        </div>
+    </section>
+    <div id="cartDiv"></div>
+    <div id="carrito-container" style="display: none;"></div>
+    <!--Footer-->
+    <section id="fter" class="text-white p-2 fixed-bottom footer-menu"
+        style="border-radius: 25px 25px 0px 0px;  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.500);">
+        <div class="menu-sets">
+            <!--Menu-->
+            <ul class="navbar-nav-ft">
+                <a class="nav-link-ft text-center" href="/index.html">
+                    <i class="fa-solid fa-house" style="font-size: 1.3rem;"></i>
+                    <li class="nav-item"></li>
+                    Inicio
+                </a>
+                <a class="nav-link-ft text-center" href="/pages/perfil.html">
+                    <i class="fa fa-user" style="font-size: 1.3rem;"></i>
+                    <li class="nav-item"></li>
+                    Perfil
+                </a>
+                <a class="nav-link-ft text-center align-items-center" href="/pages/carrito.html">
+                    <i class="fa-solid fa-cart-shopping" style="font-size: 1.3rem;"><span
+                            class="contador-carrito badge-cart">0</span></i>
+                    <li class="nav-item"></li>
+                    Carrito
+                </a>
+                <a class="nav-link-ft text-center" href="/pages/menu.html">
+                    <i class="fa-solid fa-bars" style="font-size: 1.3rem;"></i>
+                    <li class="nav-item"></li>
+                    Menu
+                </a>
+            </ul>
+        </div>
+    </section>
+    <footer id="fter" class="text-white py-3" style="background-color: white;">
+        <div class="container">
+            <p class="text-center mt-2 mb-0">&copy; <strong>Gadget Go</strong> - Todos los derechos reservados</p>
+        </div>
+    </footer>
+    <script src="/js/db.js"></script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getFirestore, doc, getDoc, collection, addDoc, serverTimestamp, increment, updateDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+
+        // CONFIGURACIÓN DE FIREBASE
+        const firebaseConfig = {
+            apiKey: "AIzaSyBg9o3wVZoA26Aob2RnbVPV8vGv4GE44gs",
+            authDomain: "primer-proyecto-7b2f4.firebaseapp.com",
+            projectId: "primer-proyecto-7b2f4",
+            storageBucket: "primer-proyecto-7b2f4.firebasestorage.app",
+            messagingSenderId: "627220736817",
+            appId: "1:627220736817:web:a2eb4f187322c609f11e10"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        let dbReady = false;
+
+        (async function inicializarDB() {
+            try {
+                await initDB();
+                dbReady = true;
+                console.log('IndexedDB lista para usar en producto.html');
+            } catch (error) {
+                console.error('Error inicializando IndexedDB:', error);
+                dbReady = false;
+            }
+        })();
+
+        // FUNCIÓN PARA OBTENER ROL
+        async function obtenerRolUsuario(uid) {
+            try {
+                const docRef = doc(db, "usuarios", uid);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    return docSnap.data().rol || "usuario";
+                } else {
+                    console.warn("Usuario no encontrado en Firestore");
+                    return "usuario";
+                }
+            } catch (error) {
+                console.error("Error obteniendo rol:", error);
+                return "usuario";
+            }
+        }
+
+        // AUTH STATE LISTENER
+        onAuthStateChanged(auth, async (user) => {
+            const btnLoginNav = document.getElementById('loginNavBtn');
+            const btnRegisterNav = document.getElementById('registerNavBtn');
+            const btnLogoutNav = document.getElementById('logoutBtn');
+            const navInventario = document.getElementById('navInventario');
+
+            if (user) {
+                console.log("Usuario autenticado:", user.email);
+
+                const rol = await obtenerRolUsuario(user.uid);
+                console.log("Rol del usuario:", rol);
+
+                localStorage.setItem('userRole', rol);
+                localStorage.setItem('userEmail', user.email);
+                localStorage.setItem('userId', user.uid);
+
+                if (btnLoginNav) btnLoginNav.style.display = 'none';
+                if (btnRegisterNav) btnRegisterNav.style.display = 'none';
+                if (btnLogoutNav) btnLogoutNav.style.display = 'block';
+
+                const toastMostrado = sessionStorage.getItem('loginToastShown');
+
+                if (navInventario) {
+                    if (rol === 'admin') {
+                        navInventario.style.display = 'block';
+
+                        if (!toastMostrado) {
+                            showToast(`Bienvenido Admin: ${user.email}`, 'success');
+                            sessionStorage.setItem('loginToastShown', 'true');
+                        }
+                    } else {
+                        navInventario.style.display = 'none';
+
+                        if (!toastMostrado) {
+                            showToast(`Bienvenido: ${user.email}`, 'success');
+                            sessionStorage.setItem('loginToastShown', 'true');
+                        }
+                    }
+                }
+            } else {
+                console.log("No hay usuario autenticado");
+
+                sessionStorage.removeItem('loginToastShown');
+
+                localStorage.removeItem('userRole');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userId');
+
+                if (btnLoginNav) btnLoginNav.style.display = 'block';
+                if (btnRegisterNav) btnRegisterNav.style.display = 'block';
+                if (btnLogoutNav) btnLogoutNav.style.display = 'none';
+                if (navInventario) navInventario.style.display = 'none';
+            }
+        });
+
+        async function cargarProducto() {
+            const hash = window.location.hash;
+            const id = hash ? hash.substring(1) : null;
+
+            console.log("ID del producto:", id);
+
+            const cont = document.getElementById("producto-container");
+
+            if (!id) {
+                cont.innerHTML = `
+                    <div class="alert alert-danger">
+                        <h4>No se especificó un producto</h4>
+                        <p>Por favor, selecciona un producto desde la página principal.</p>
+                        <a href="index.html" class="btn btn-primary mt-2">Volver al inicio</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Mostrar loader
+            cont.innerHTML = `
+                <div class="shadow pt-1 p-3">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 text-center">
+                        </div>
+                        <div class="col-md-6 col-lg-8 py-2">
+                            <h2 class="text-white">Producto</h2>
+                            <h4 class="text-danger mb-3" style="font-size: 2rem;"><strong></strong></h4>
+                            
+                            <div class="mb-3">
+                                <p class="mb-1 text-white"><strong>Modelo:</strong></p>
+                                <p class="mb-1 text-white"><strong>Estado:</strong> <span class="badge" style="background-color: white;">Nuevo</span></p>
+                                <p class="mb-1 text-white"><strong>Disponibles:</strong></p>
+                            </div>
+
+                            <h5 class="text-white">Características:</h5>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            if (!navigator.onLine) {
+                console.log('📡 Sin conexión, cargando desde IndexedDB...');
+                await cargarProductoOffline(id);
+                return;
+            }
+
+            try {
+                const docRef = doc(db, "productos", id);
+                const docSnap = await getDoc(docRef);
+
+                if (!docSnap.exists()) {
+                    console.log('Producto no encontrado en Firebase, intentando IndexedDB...');
+                    await cargarProductoOffline(id);
+                    return;
+                }
+
+                const prod = { id: docSnap.id, ...docSnap.data() };
+
+                if (dbReady) {
+                    try {
+                        await guardarProductoOffline(prod);
+                        console.log('Producto guardado en IndexedDB');
+                    } catch (err) {
+                        console.warn('No se pudo guardar en IndexedDB:', err);
+                    }
+                }
+
+                renderizarProducto(prod);
+
+            } catch (error) {
+                console.error("Error cargando producto desde Firebase:", error);
+
+                console.log('Intentando cargar desde IndexedDB...');
+                await cargarProductoOffline(id);
+            }
+        }
+
+        async function cargarProductoOffline(id) {
+            const cont = document.getElementById("producto-container");
+
+            try {
+                if (!dbReady) {
+                    await initDB();
+                    dbReady = true;
+                }
+
+                const producto = await obtenerProductoPorId(id);
+
+                if (producto) {
+                    console.log('Producto cargado desde IndexedDB');
+                    renderizarProducto(producto);
+                    showToast('Modo offline: producto cargado desde caché', 'warning');
+                } else {
+                    cont.innerHTML = `
+                        <div class="alert alert-warning text-center my-5">
+                            <i class="fas fa-wifi-slash fa-3x mb-3"></i>
+                            <h5>Sin conexión</h5>
+                            <p>Este producto no está disponible offline.</p>
+                            <p>Conéctate a internet para verlo.</p>
+                            <a href="index.html" class="btn btn-primary mt-3">Volver al catálogo</a>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error cargando producto offline:', error);
+                cont.innerHTML = `
+                    <div class="alert alert-danger text-center my-5">
+                        <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
+                        <h5>Error</h5>
+                        <p>No se pudo cargar el producto</p>
+                        <a href="index.html" class="btn btn-primary mt-3">Volver al catálogo</a>
+                    </div>
+                `;
+            }
+        }
+
+        window.compartirProducto = async function (nombreProducto) {
+            const urlActual = window.location.href;
+            const titulo = nombreProducto + " | Proseinet";
+            const texto = "¡Mira este increíble producto que encontré en Proseinet";
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: titulo,
+                        text: texto,
+                        url: urlActual
+                    });
+                    console.log('Producto compartido exitosamente');
+                } catch (error) {
+                    console.log('Error al compartir o el usuario canceló:', error);
+                }
+            } else {
+                try {
+                    await navigator.clipboard.writeText(urlActual);
+                    showToast('<i class="fa-solid fa-link me-2"></i> Enlace copiado al portapapeles', 'success');
+                } catch (err) {
+                    showToast('<i class="fa-solid fa-circle-exclamation me-2"></i> Error al copiar el enlace', 'danger');
+                    console.error('Error al copiar:', err);
+                }
+            }
+        };
+
+        // RENDERIZAR PRODUCTO
+        function renderizarProducto(prod) {
+            document.getElementById('titleProduct').textContent = obtenerNombreCategoria(prod.categoria);
+            document.getElementById('titePage').textContent = prod.nombre + " | Proseinet";
+
+            const cont = document.getElementById("producto-container");
+            const btnAgregar = document.getElementById('btnAgregar');
+            const cartDiv = document.getElementById("cartDiv");
+            const stockDisponible = Number(prod.stock) || 0;
+            const userRole = localStorage.getItem("userRole");
+            let precioFinal = Number(prod.precio);
+            let aplicaPrecioMayorista = false;
+
+            if (userRole === "Mayorista" && prod.clave) {
+                const precioClave = parseFloat(prod.clave.replace(/[^\d.]/g, ''));
+                if (!isNaN(precioClave) && precioClave > 0) {
+                    precioFinal = precioClave;
+                    aplicaPrecioMayorista = true;
+                }
+            }
+
+            const productoParaCarrito = {
+                ...prod,
+                precio: precioFinal,
+                esMayorista: aplicaPrecioMayorista
+            }
+
+            let imagenesValidas = [];
+            if (Array.isArray(prod.imagenes) && prod.imagenes.length > 0) {
+                imagenesValidas = prod.imagenes.map(img => {
+                    if (typeof img === 'string' && img.trim() !== '') return img;
+                    if (typeof img === 'object' && img.dataURL) return img.dataURL;
+                    return null;
+                }).filter(img => img !== null);
+            }
+
+            if (imagenesValidas.length === 0) {
+                imagenesValidas.push('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCBmaWxsPSIjZTVlN2ViIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIvPjx0ZXh0IGZpbGw9IiM5Y2EzYWYiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiB4PSI1MCUiIHk9IjUwJSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+U2luIEltYWdlbjwvdGV4dD48L3N2Zz4=');
+            }
+
+            const indicadoresHTML = imagenesValidas.map((_, index) => `
+                <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="${index}" 
+                    class="${index === 0 ? 'active' : ''}" aria-current="${index === 0 ? 'true' : 'false'}" 
+                    aria-label="Slide ${index + 1}">
+                </button>
+            `).join('');
+
+            const itemsHTML = imagenesValidas.map((img, index) => `
+                <div class="carousel-item ${index === 0 ? 'active' : ''}" onclick="window.abrirModalZoom('${img}')" style="cursor: pointer">
+                    <img src="${img}" class="img-items d-block w-100 rounded shadow-sm" alt="${prod.nombre.replace(/"/g, '&quot;')}">
+                </div>
+            `).join('');
+
+            const imgSrc = imagenesValidas[0];
+
+            let galeriaHTML = `
+                <div class="position-relative">
+                    <div id="productCarousel" class="carousel slide carousel-dark shadow-sm rounded" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            ${indicadoresHTML}
+                        </div>
+                        <div class="carousel-inner">
+                            ${itemsHTML}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Siguiente</span>
+                        </button>
+                    </div>
+                    
+                    <button class="btn position-absolute bottom-0 end-0 m-3 rounded-circle shadow d-flex align-items-center justify-content-center" 
+                            style="z-index: 10; width: 45px; height: 45px; background-color: #a10000; color: white; border: 2px solid white;" 
+                            onclick="window.compartirProducto('${prod.nombre.replace(/'/g, "\\'").replace(/"/g, '&quot;')}')"
+                            title="Compartir producto">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+                </div>
+            `;
+
+            if (stockDisponible <= 0) {
+                cartDiv.innerHTML = `<div class="cart-fixed-container bg-light text-center">
+                    <p class="w-100 m-0 text-danger fw-bold">Producto agotado temporalmente</p>
+                </div>`;
+            } else {
+                cartDiv.innerHTML = `
+                    <div class="cart-fixed-container">
+                        <div class="qty-controls">
+                            <button class="qty-btn-fixed shadow-sm" id="btnMinus">-</button>
+                            <input type="number" id="qty" class="qty-input-fixed" value="1" readonly>
+                            <button class="qty-btn-fixed shadow-sm" id="btnPlus">+</button>
+                        </div>
+                        
+                        <button class="btn-add-fixed shadow" id="btnAgregar">
+                            <i class="fas fa-cart-plus"></i>Agregar al Carrito
+                        </button>
+                    </div>
+                `;
+
+                const input = document.getElementById('qty');
+                document.getElementById('btnMinus').onclick = () => {
+                    input.value = Math.max(1, parseInt(input.value) - 1);
+                };
+                document.getElementById('btnPlus').onclick = () => {
+                    if (parseInt(input.value) < stockDisponible) {
+                        input.value = parseInt(input.value) + 1;
+                    } else {
+                        showToast('Maximo stock alcanzado', 'warning');
+                    }
+                };
+
+                document.getElementById('btnAgregar').onclick = () => {
+                    const cantidad = parseInt(input.value);
+                    agregarAlCarrito({
+                        id: prod.id,
+                        nombre: prod.nombre,
+                        precio: precioFinal,
+                        cantidad: cantidad,
+                        imagenes: imagenesValidas[0],
+                        esMayorista: aplicaPrecioMayorista
+                    }, stockDisponible)
+                };
+            }
+
+            if ((prod.categoria == "monitor") || (prod.categoria == "docking") || (prod.categoria === 'proyectores')) {
+
+                cont.innerHTML = `
+                <div class="pb-5">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 text-center">
+                            ${galeriaHTML}
+                        </div>
+                        <div class="col-md-6 col-lg-8 col-12 py-3">
+                            <h2>${prod.nombre}</h2>
+                            <h4 class="text-danger mb-3" style="font-size: 2rem;">
+                                <strong>
+                                    ${aplicaPrecioMayorista ? `</strong><p style="font-size: 18px; color: black;">Descuento de Mayorista</p><strong><span class="text-muted text-decoration-line-through fs-5 me-2">$${Number(prod.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>` : ''}
+                                    $${precioFinal.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+                                </strong>
+                            </h4>
+                            <p class="m-1"><span class="badge bg-black">${prod.clave}</span></p>
+                            
+                            <div class="mb-3">
+                                <hr>
+                                <h5>Características:</h5>
+                                <p class="mb-1"><strong>Marca:</strong> ${prod.modelo || 'N/A'}</p>
+                                <p class="mb-1"><strong>Disponibles:</strong> ${prod.stock || '0'} unidades</p>
+                                <p class="mb-1"><strong>Estado:</strong> <span class="badge" style="background-color: red;">${obtenerNombreEstado(prod.estado) || 'N/A'}</span></p>
+                            </div>
+                            
+                            <h5>Descripción:</h5>
+                            <p class="text-muted small product-description-text">${prod.descripcion || "Sin descripción"}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            } else if ((prod.categoria == "workLap") || (prod.categoria == "workServ")) {
+
+                let textoGeneracion = (prod.procesador && prod.procesador.startsWith("ix-")) ? "" : obtenerNombreGen(prod.generacion);
+
+                cont.innerHTML = `  
+                    <div class="pb-5">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4 text-center">
+                                ${galeriaHTML}
+                            </div>
+                            <div class="col-md-6 col-lg-8 col-12 py-3">
+                                <h2>${prod.nombre}</h2>
+                                <h4 class="text-danger mb-3" style="font-size: 2rem;">
+                                    <strong>
+                                        ${aplicaPrecioMayorista ? `</strong><p style="font-size: 18px; color: black;">Descuento de Mayorista</p><strong><span class="text-muted text-decoration-line-through fs-5 me-2">$${Number(prod.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>` : ''}
+                                        $${precioFinal.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+                                    </strong>
+                                </h4>
+                                <p class="m-1"><span class="badge bg-black">${prod.clave}</span></p>
+                                <div class="mb-3">
+                                    <hr>
+                                    <h5>Características:</h5>
+                                    <p class="mb-1"><strong>Marca:</strong> ${prod.modelo || 'N/A'}</p>
+                                    <p class="mb-1"><strong>Disponibles:</strong> ${prod.stock || '0'} unidades</p>
+                                    <p class="mb-1"><strong>Estado:</strong> <span class="badge" style="background-color: red;">${obtenerNombreEstado(prod.estado) || 'N/A'}</span></p>
+                                    <p class="mb-1"><strong>Procesador:</strong> ${obtenerNombreCpu(prod.procesador)} ${textoGeneracion}</p>
+                                    <p class="mb-1"><strong>Tarjeta Gráfica:</strong> ${obtenerNombreGpu(prod.graficos) || ''} ${obtenerNombreVRAM(prod.vram) || ''} ${obtenerNombreGDDR(prod.gddr) || ''}</p>
+
+                                    <p class="mb-1"><strong>Memoria RAM:</strong> ${prod.ram || 'N/A'} ${obtenerNombreDDR(prod.ddrRam)}</p>
+                                    <p class="mb-1"><strong>Almacenamiento:</strong> ${prod.espacio || 'N/A'} ${obtenerNombreEspacio(prod.tipoEspacio)}</p>
+                                </div>
+                                
+                                <h5>Descripción:</h5>
+                                <p class="text-muted small product-description-text">${prod.descripcion || "Sin descripción"}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+            } else if (prod.categoria === "lapApple") {
+                cont.innerHTML = `  
+                    <div class="pb-5">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-5 text-center">
+                                ${galeriaHTML}
+                            </div>
+                            <div class="col-md-6 col-lg-7 col-12 py-3">
+                                <h2>${prod.nombre}</h2>
+                                <h4 class="text-danger mb-3" style="font-size: 2rem;">
+                                    <strong>
+                                        ${aplicaPrecioMayorista ? `</strong><p style="font-size: 18px; color: black;">Descuento de Mayorista</p><strong><span class="text-muted text-decoration-line-through fs-5 me-2">$${Number(prod.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>` : ''}
+                                        $${precioFinal.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+                                    </strong>
+                                </h4>
+                                <p class="m-1"><span class="badge bg-black">${prod.clave}</span></p>
+                                <div class="mb-3">
+                                    <hr>
+                                    <h5>Características:</h5>
+                                    <p class="mb-1"><strong>Marca:</strong> ${prod.modelo || 'N/A'}</p>
+                                    <p class="mb-1"><strong>Disponibles:</strong> ${prod.stock || '0'} unidades</p>
+                                    <p class="mb-1"><strong>Estado:</strong> <span class="badge" style="background-color: red;">${obtenerNombreEstado(prod.estado) || 'N/A'}</span></p>
+                                    <p class="mb-1"><strong>Procesador:</strong> ${obtenerNombreCpu(prod.procesador)} ${obtenerNombreGen(prod.generacion)} ${obtenerNombreNucleos(prod.nucleos)}</p>
+                                    <p class="mb-1"><strong>Memoria RAM:</strong> ${prod.ram || 'N/A'} ${obtenerNombreDDR(prod.ddrRam)}</p>
+                                    <p class="mb-1"><strong>Almacenamiento:</strong> ${prod.espacio || 'N/A'} ${obtenerNombreEspacio(prod.tipoEspacio)}</p>
+                                </div>
+                                
+                                <h5>Descripción:</h5>
+                                <p class="text-muted small product-description-text">${prod.descripcion || "Sin descripción"}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                cont.innerHTML = `  
+                <div class="pb-5">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-5 text-center">
+                            ${galeriaHTML}
+                        </div>
+                        <div class="col-md-6 col-lg-7 col-12 py-3">
+                            <h2>${prod.nombre}</h2>
+                            <h4 class="text-danger mb-3" style="font-size: 2rem;">
+                                <strong>
+                                    ${aplicaPrecioMayorista ? `</strong><p style="font-size: 18px; color: black;">Descuento de Mayorista</p><strong><span class="text-muted text-decoration-line-through fs-5 me-2">$${Number(prod.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>` : ''}
+                                    $${precioFinal.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+                                </strong>
+                            </h4>
+                            <p class="m-1"><span class="badge bg-black">${prod.clave}</span></p>
+                            <div class="mb-3">
+                                <hr>
+                                <h5>Características:</h5>
+                                <p class="mb-1"><strong>Marca:</strong> ${prod.modelo || 'N/A'}</p>
+                                <p class="mb-1"><strong>Disponibles:</strong> ${prod.stock || '0'} unidades</p>
+                                <p class="mb-1"><strong>Estado:</strong> <span class="badge" style="background-color: red;">${obtenerNombreEstado(prod.estado) || 'N/A'}</span></p>
+                                <p class="mb-1"><strong>Procesador:</strong> ${obtenerNombreCpu(prod.procesador)} ${obtenerNombreGen(prod.generacion)}</p>
+                                <p class="mb-1"><strong>Memoria RAM:</strong> ${prod.ram || 'N/A'} ${obtenerNombreDDR(prod.ddrRam)}</p>
+                                <p class="mb-1"><strong>Almacenamiento:</strong> ${prod.espacio || 'N/A'} ${obtenerNombreEspacio(prod.tipoEspacio)}</p>
+                            </div>
+                            
+                            <h5>Descripción:</h5>
+                            <p class="text-muted small product-description-text">${prod.descripcion || "Sin descripción"}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            }
+
+            const carouselEl = document.querySelector('#productCarousel');
+            if (carouselEl) {
+                new bootstrap.Carousel(carouselEl, {
+                    ride: 'carousel',
+                    interval: 3000
+                });
+            }
+        }
+
+        window.cambiarImagenPrincipal = function (elemento, src) {
+            document.getElementById('main-product-img').src = src;
+
+            const thumbs = document.querySelectorAll('.thumbs-grid .thumb');
+            thumbs.forEach(t => t.style.border = '2px solid transparent');
+
+            elemento.style.border = '2px solid #ab0303';
+        }
+
+        window.actualizarCarrito = function () {
+            const contenedor = document.getElementById('carrito-container');
+
+            const totalElement = document.getElementById('total-carrito');
+            const btnProceder = document.getElementById('btnProcederPago');
+
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const totalProductos = carrito.reduce((acc, p) => acc + (p.cantidad || 0), 0);
+
+
+            const contadores = document.querySelectorAll('.contador-carrito');
+            contadores.forEach(contador => {
+                contador.textContent = totalProductos;
+            });
+
+            if (carrito.length === 0) {
+                contenedor.innerHTML = '<p class="text-center text-muted py-4">Tu carrito está vacío</p>';
+                if (totalElement) totalElement.textContent = '$0.00';
+                if (btnProceder) btnProceder.disabled = true;
+                return;
+            }
+
+            if (btnProceder) btnProceder.disabled = false;
+
+            const total = carrito.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);
+            if (totalElement) {
+                totalElement.textContent = '$' + total.toLocaleString('es-MX', { minimumFractionDigits: 2 });
+            }
+
+            contenedor.innerHTML = carrito.map(p => `
+                <div class="producto border rounded p-3 my-2 d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <img src="${p.imagenes}" width="80" height="80" class="me-3 rounded" style="object-fit: cover; cursor: pointer;" onclick="window.location.href='producto.html#${p.id}'">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">${p.nombre}</h6>
+                            <p class="mb-0 text-muted">$${Number(p.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })} x ${p.cantidad} Pieza(s)</p>
+                            <p class="mb-0 fw-bold text-success">Subtotal: $${(p.precio * p.cantidad).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-danger btn-sm" onclick="eliminarDelCarrito('${p.id}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        monitorearConexion(
+            () => {
+                showToast('Conexión restaurada', 'success');
+                cargarProducto();
+            },
+            () => {
+                showToast('Sin conexión - Modo offline activado', 'warning');
+            }
+        );
+
+        // FUNCIONES AUXILIARES
+        function obtenerNombreCategoria(categoria) {
+            const nombres = {
+                'lap': 'Laptops',
+                'lapApple': 'Laptops Apple',
+                'workLap': 'Workstation Laptop',
+                'workServ': 'Workstation & Rack',
+                'pc': 'Equipos Completos',
+                'cpu': 'Desktop solo CPU',
+                'aio': 'All in One',
+                'monitor': 'Monitores',
+                'tablet': 'Tablet',
+                'proyectores': 'Proyectores',
+                'docking': 'Docking'
+            };
+            return nombres[categoria] || categoria;
+        }
+
+        // FUNCIONES AUXILIARES
+        function obtenerNombreEstado(estado) {
+            const nombres = {
+                'nuevo': 'Nuevo',
+                'seminuevo': 'Seminuevo',
+                'refur': 'Refurbished',
+                'remate': 'Remate'
+            };
+            return nombres[estado] || estado;
+        }
+
+        function obtenerNombreCpu(procesador) {
+            const nombre = {
+                'i3': 'Intel Core i3',
+                'i5': 'Intel Core i5',
+                'i7': 'Intel Core i7',
+                'i9': 'Intel Core i9',
+                'u3': 'Intel Core Ultra 3',
+                'u5': 'Intel Core Ultra 5',
+                'u7': 'Intel Core Ultra 7',
+                'u9': 'Intel Core Ultra 9',
+                'ryzen-3': 'AMD Ryzen 3',
+                'ryzen-5': 'AMD Ryzen 5',
+                'ryzen-7': 'AMD Ryzen 7',
+                'ryzen-9': 'AMD Ryzen 9',
+                'M1': 'Chip M1 Apple',
+                'ix-silver': 'Intel Xeon Silver',
+                'ix-bronze': 'Intel Xeon Bronze',
+                'ix-gold': 'Intel Xeon Gold',
+                'ix-w': 'Intel Xeon W',
+                'ix-e5': 'Intel Xeon E5'
+            };
+            return nombre[procesador] || procesador;
+        }
+
+        function obtenerNombreGen(generacion) {
+            const nombre = {
+                '1ra': '1ra Generación',
+                '2da': '2da Generación',
+                '3ra': '3ra Generación',
+                '4ta': '4ta Generación',
+                '5ta': '5ta Generación',
+                '6ta': '6ta Generación',
+                '7ma': '7ma Generación',
+                '8va': '8va Generación',
+                '9na': '9na Generación',
+                '10ma': '10ma Generación',
+                '11va': '11va Generación',
+                '12va': '12va Generación',
+                '13va': '13va Generación',
+                '14va': '14va Generación',
+            };
+            return nombre[generacion] || generacion;
+        }
+
+        function obtenerNombreNucleos(nucleos) {
+            const nombre = {
+                '2nuc': '2 Núcleos',
+                '4nuc': '4 Núcleos',
+                '6nuc': '6 Núcleos',
+                '8nuc': '8 Núcleos',
+                '12nuc': '12 Núcleos',
+            };
+            return nombre[nucleos] || nucleos;
+        }
+
+        function obtenerNombreDDR(ddrRam) {
+            const nombre = {
+                'ddr3': 'DDR3',
+                'ddr4': 'DDR4',
+                'lpddr3': 'LPDDR3',
+                'lpddr4': 'LPDDR4',
+                'lpddr4x': 'LPDDR4X',
+                'ddr5': 'DDR5',
+                'lpddr5': 'LPDDR5',
+                'lpddr5x': 'LPDDR5X',
+            };
+            return nombre[ddrRam] || ddrRam;
+        }
+
+        function obtenerNombreGpu(graficos) {
+            const nombre = {
+                't2000': 'Nvidia Quadro T2000',
+                't1000': 'Nvidia Quadro T1000',
+                't1200': 'Nvidia Quadro T1200',
+                't600': 'Nvidia Quadro T600',
+                'p4000': 'Nvidia Quadro P4000',
+                'rtxA3000': 'Nvidia RTX A3000',
+                'rtx3000': 'Nvidia RTX 3000',
+                'rtx5000': 'Nvidia RTX 5000',
+                'arc-pro-140t': 'Intel Arc Pro 140T'
+            };
+            return nombre[graficos] || graficos;
+        }
+
+        function obtenerNombreVRAM(vram) {
+            const nombre = {
+                'shared': 'Memoria Compartida con el Sistema',
+                '2gb-vram': '2GB VRAM',
+                '4gb-vram': '4GB VRAM',
+                '6gb-vram': '6GB VRAM',
+                '8gb-vram': '8GB VRAM',
+                '12gb-vram': '12GB VRAM',
+                '16gb-vram': '16GB VRAM',
+                '24gb-vram': '24GB VRAM',
+            };
+            return nombre[vram] || vram;
+        }
+
+        function obtenerNombreGDDR(gddr) {
+            const nombre = {
+                'gddr5': 'GDDR5',
+                'gddr5x': 'GDDR5X',
+                'gddr6': 'GDDR6',
+                'gddr6x': 'GDDR6X',
+                'gddr7': 'GDDR7',
+            };
+            return nombre[gddr] || gddr;
+        }
+
+        function obtenerNombreEspacio(tipoEspacio) {
+            const nombre = {
+                'hdd': 'HDD',
+                'ssd': 'SSD',
+                'ssd-m2': 'NVMe M.2',
+            };
+            return nombre[tipoEspacio] || tipoEspacio;
+        }
+
+        window.addEventListener('hashchange', () => {
+            cargarProducto();
+            actualizarCarrito();
+        });
+
+        // INICIALIZAR
+        cargarProducto();
+        window.actualizarCarrito();
+
+    </script>
+    <script>
+
+        window.abrirModalZoom = function (src) {
+            const modalElement = document.getElementById('zoomModal');
+            const imgElement = document.getElementById('zoomModalImg');
+
+            imgElement.src = src;
+
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
+        };
+
+        document.addEventListener('mousemove', function (e) {
+            if (e.target?.classList?.contains('zoom-img')) {
+                const rect = e.target.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+                e.target.style.transformOrigin = `${x}% ${y}%`;
+            }
+        });
+
+        document.addEventListener('mouseleave', function (e) {
+            if (e.target?.classList?.contains('zoom-img')) {
+                e.target.style.transformOrigin = 'center center';
+            }
+        }, true);
+
+        function procesarZoomTactil(e, target) {
+            const rect = target.getBoundingClientRect();
+            const touch = e.touches[0];
+
+            const x = ((touch.clientX - rect.left) / rect.width) * 100;
+            const y = ((touch.clientY - rect.top) / rect.height) * 100;
+
+            target.style.transformOrigin = `${x}% ${y}%`;
+        }
+
+        document.addEventListener('touchstart', function (e) {
+            if (e.target?.classList?.contains('zoom-img')) {
+                e.target.classList.add('zoom-touch-active');
+                procesarZoomTactil(e, e.target);
+            }
+        }, { passive: true });
+
+        document.addEventListener('touchmove', function (e) {
+            if (e.target?.classList?.contains('zoom-touch-active')) {
+                procesarZoomTactil(e, e.target);
+            }
+        }, { passive: true });
+
+        document.addEventListener('touchend', function (e) {
+            if (e.target?.classList?.contains('zoom-img')) {
+                e.target.classList.remove('zoom-touch-active');
+
+                setTimeout(() => {
+                    if (!e.target.classList.contains('zoom-touch-active')) {
+                        e.target.style.transformOrigin = 'center center';
+                    }
+                }, 200);
+            }
+        });
+
+        document.addEventListener('contextmenu', function (e) {
+            if (e.target?.classList?.contains('zoom-img')) {
+                e.preventDefault();
+            }
+        });
+
+        // SISTEMA DE TRANSICIONES UNIVERSAL
+        (function () {
+            'use strict';
+
+            if (performance.navigation.type === 1) {
+                document.body.style.animation = 'none';
+            }
+
+            const config = {
+                animationClass: 'zoom-out',
+                duration: 300,
+                ignoreSelectors: [
+                    '[data-bs-toggle]',
+                    '[href="#"]',
+                    '[href*="#modal"]',
+                    '[onclick]',
+                    '.no-transition'
+                ]
+            };
+
+            function shouldIgnoreLink(link) {
+                return config.ignoreSelectors.some(selector => {
+                    return link.matches(selector) || link.closest(selector);
+                });
+            }
+
+            function transitionToPage(url) {
+                document.body.classList.add(config.animationClass);
+                setTimeout(() => {
+                    window.location.href = url;
+                }, config.duration);
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                document.addEventListener('click', function (e) {
+                    const link = e.target.closest('a');
+
+                    if (!link) return;
+
+                    const href = link.getAttribute('href');
+
+                    if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('https://wa.me')) {
+                        return;
+                    }
+
+                    if (shouldIgnoreLink(link)) {
+                        return;
+                    }
+
+                    e.preventDefault();
+                    transitionToPage(href);
+                });
+
+                // Smooth scroll para anclas
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        const href = this.getAttribute('href');
+                        if (href !== '#' && !this.getAttribute('data-bs-toggle')) {
+                            e.preventDefault();
+                            const target = document.querySelector(href);
+                            if (target) {
+                                target.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+        })();
+    </script>
+    <div class="modal fade" id="zoomModal" tabindex="-1" aria-hidden="true"
+        style="backdrop-filter: blur(5px); background-color: rgba(0,0,0,0.8); z-index: 99999 !important;">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content bg-transparent border-0">
+                <div class="modal-header bg-transparent border-0 pb-0 position-relative" style="z-index: 2;">
+                    <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center p-0 d-flex justify-content-center">
+                    <div class="zoom-container d-inline-block"
+                        style="border-radius: 0.5rem; background-color: transparent;">
+                        <img id="zoomModalImg" src="" class="img-fluid shadow zoom-img" alt="Producto ampliado"
+                            style="max-height: 85vh; object-fit: contain; cursor: zoom-in;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

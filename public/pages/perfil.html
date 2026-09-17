@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Mi Perfil | PROSEINET</title>
+    <link rel="apple-touch-icon" href="/assets/icons/Logo-proseinet-rojo.png" />
+    <link rel="icon" href="/assets/icons/Logo-proseinet-rojo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="/css/stylePerfil.css?=0.12">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top"
+        style="position: fixed !important; background-color: #a10000; border-radius: 0px 0px 15px 15px;">
+        <div class="container">
+            <a href="/index.html" class="logo-nav-lg">
+                <img class="thumbs ms-2 my-2" src="/assets/img/Proseinet-Logo-Web.png" alt="LogoProseinet" width="80">
+            </a>
+            <a href="#" class="nav-back" onclick="history.go(-1); return false;"><i
+                    class="fa-solid fa-arrow-left-long"></i></a>
+            <h2 id="nombreUsuarioNav" class="ps-5" style="font-size: 1.3rem; font-weight: 700; color: white;">
+                Cargando...</h2>
+            <a href="/index.html" class="logo-nav">
+                <img class="thumbs ms-2 my-2" src="/assets/img/Proseinet-Logo-Web.png" alt="LogoProseinet" width="80">
+            </a>
+            <div class="nav-menu">
+                <ul class="navbar-nav ms-auto">
+                    <a class="nav-link" href="/index.html" style="font-weight: 700; font-size: 1.2rem;">Inicio</a>
+                    <a class="nav-link" href="/pages/perfil.html"
+                        style="font-weight: 700; font-size: 1.2rem;">Perfil</a>
+                    <a class="nav-link" href="/pages/menu.html" style="font-weight: 700; font-size: 1.2rem;">Menu</a>
+                    <a class="position-relative cart-view carrito-vista-desk  ms-3 me-5" href="/pages/carrito.html">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span
+                            class="contador-carrito cart-span position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                            style="background-color: black; color: white;">
+                            0
+                        </span>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" id="toastZone"></div>
+
+    <div id="productos-container">
+        <!-- Contenido Principal -->
+        <div class="container col-lg-10" style="margin-top: 100px;">
+            <!-- Header de Perfil -->
+            <div class="profile-header text-center col-lg-11">
+                <div class="profile-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h2 id="nombreUsuario">Cargando...</h2>
+                <p id="emailUsuario" class="mb-0">Cargando correo...</p>
+            </div>
+
+            <section class="container">
+                <div class="row g-2">
+                    <!-- Información del Usuario -->
+                    <div class=" col-lg-5 col-md-6 col-12">
+                        <div class="info-card ">
+                            <h4 class="mb-3"><i class="fas fa-user-circle me-2"></i>Información Personal</h4>
+                            <div id="infoUsuario ">
+                                <p><strong>Email:</strong> <span id="infoEmail">-</span></p>
+                                <p><strong>Rol de Cliente:</strong> <span id="infoUserId">-</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Estadísticas -->
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="info-card" onclick="window.location.href='/pages/pedidos.html' "
+                            style="cursor: pointer;">
+                            <h4 class="mb-4"><i class="fas fa-chart-bar me-2"></i>Estadísticas</h4>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Total de pedidos:</span>
+                                <strong id="totalPedidos">0</strong>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Total gastado:</span>
+                                <strong class="text-success" id="totalGastado">$0.00</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Historial de Pedidos -->
+                <div class="col-md-8" style="display: none;">
+                    <div class="info-card">
+                        <h4 class="mb-4"><i class="fas fa-shopping-bag me-2"></i>Mis Pedidos</h4>
+                        <div id="listaPedidos">
+                            <div class="text-center py-5">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Cargando...</span>
+                                </div>
+                                <p class="mt-3">Cargando tus pedidos...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!--Footer-->
+    <section id="fter" class="text-white p-2 fixed-bottom footer-menu"
+        style="border-radius: 25px 25px 0px 0px;  box-shadow: 0px -2px 12px rgba(36, 36, 36, 0.20);">
+        <div class="menu-sets">
+            <!--Menu-->
+            <ul class="navbar-nav-ft">
+                <a class="nav-link-ft text-center" href="/index.html">
+                    <i class="fa-solid fa-house" style="font-size: 1.3rem;"></i>
+                    <li class="nav-item"></li>
+                    Inicio
+                </a>
+                <a class="nav-link-ft text-center" href="/pages/perfil.html" style="color: black;">
+                    <i class="fa fa-user" style="font-size: 1.3rem;"></i>
+                    <li class="nav-item"></li>
+                    Perfil
+                </a>
+                <a class="nav-link-ft text-center align-items-center" href="/pages/carrito.html">
+                    <i class="fa-solid fa-cart-shopping" style="font-size: 1.3rem;"><span
+                            class="contador-carrito badge-cart">0</span></i>
+                    <li class="nav-item"></li>
+                    Carrito
+                </a>
+                <a class="nav-link-ft text-center" href="/pages/menu.html">
+                    <i class="fa-solid fa-bars" style="font-size: 1.3rem;"></i>
+                    <li class="nav-item"></li>
+                    Menu
+                </a>
+            </ul>
+        </div>
+    </section>
+    <footer id="fter" class="text-white" style="background-color: white;">
+        <div class="container">
+            <p class="text-center mt-2 mb-0">&copy; <strong>Proseinet</strong> - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+
+        function showToast(msg, type = "success") {
+            const container = document.getElementById("toastZone");
+
+            const toastEl = document.createElement("div");
+            toastEl.className = `toast align-items-center text-bg-${type} border-0`;
+            toastEl.setAttribute("role", "alert");
+            toastEl.setAttribute("aria-live", "assertive");
+            toastEl.setAttribute("aria-atomic", "true");
+
+            toastEl.innerHTML = `
+                    <div class="d-flex">
+                        <div class="toast-body">${msg}</div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                            data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                `;
+
+            container.appendChild(toastEl);
+
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+
+            // remover después de 4 segundos
+            setTimeout(() => toastEl.remove(), 4000);
+        }
+    </script>
+    <script src="/js/carrito.js"></script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getFirestore, collection, query, where, getDocs, orderBy, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBg9o3wVZoA26Aob2RnbVPV8vGv4GE44gs",
+            authDomain: "primer-proyecto-7b2f4.firebaseapp.com",
+            projectId: "primer-proyecto-7b2f4",
+            storageBucket: "primer-proyecto-7b2f4.firebasestorage.app",
+            messagingSenderId: "627220736817",
+            appId: "1:627220736817:web:a2eb4f187322c609f11e10"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // SISTEMA DE CACHÉ PARA PEDIDOS
+        const CACHE_KEY_PEDIDOS = 'pedidos_cache';
+        const CACHE_TIMESTAMP_KEY = 'pedidos_cache_timestamp';
+        const CACHE_DURATION = 5 * 60 * 1000;
+
+        // Función para guardar pedidos en caché
+        function guardarPedidosEnCache(pedidos) {
+            try {
+                // Serializar los pedidos con fechas convertidas
+                const pedidosSerializados = pedidos.map(p => ({
+                    ...p,
+                    fecha: p.fecha?.seconds ? p.fecha : { seconds: Date.now() / 1000 }
+                }));
+                localStorage.setItem(CACHE_KEY_PEDIDOS, JSON.stringify(pedidosSerializados));
+                localStorage.setItem(CACHE_TIMESTAMP_KEY, Date.now().toString());
+                console.log('Pedidos guardados en caché');
+            } catch (error) {
+                console.error('Error guardando caché:', error);
+            }
+        }
+
+        // Función para obtener pedidos del caché
+        function obtenerPedidosDeCache() {
+            try {
+                const timestamp = localStorage.getItem(CACHE_TIMESTAMP_KEY);
+                const now = Date.now();
+
+                // Verificar si el caché es válido
+                if (timestamp && (now - parseInt(timestamp)) < CACHE_DURATION) {
+                    const cachedData = localStorage.getItem(CACHE_KEY_PEDIDOS);
+                    if (cachedData) {
+                        console.log('Caché válido encontrado');
+                        return JSON.parse(cachedData);
+                    }
+                } else if (timestamp) {
+                    console.log('Caché expirado');
+                }
+                return null;
+            } catch (error) {
+                console.error('Error leyendo caché:', error);
+                return null;
+            }
+        }
+
+        // AUTH STATE LISTENER
+        onAuthStateChanged(auth, async (user) => {
+            const btnLoginNav = document.getElementById('loginNavBtn');
+            const btnRegisterNav = document.getElementById('registerNavBtn');
+            const btnLogoutNav = document.getElementById('logoutBtn');
+            const navInventario = document.getElementById('navInventario');
+
+            if (user) {
+
+                const nombre = await obtenerNombreUsuario(user.uid) || 'Usuario';
+                const rol = await obtenerRolUsuario(user.uid);
+
+                console.log("Usuario autenticado:", user.email);
+                console.log("Nombre autenticado:", nombre);
+                console.log("Rol del usuario:", rol);
+
+                localStorage.setItem('userRole', rol);
+                localStorage.setItem('nombre', nombre)
+                localStorage.setItem('userEmail', user.email);
+                localStorage.setItem('userId', user.uid);
+
+                cargarInfoUsuario(nombre, user.email, rol);
+
+                if (btnLoginNav) btnLoginNav.style.display = 'none';
+                if (btnRegisterNav) btnRegisterNav.style.display = 'none';
+                if (btnLogoutNav) btnLogoutNav.style.display = 'block';
+
+                const toastMostrado = sessionStorage.getItem('loginToastShown');
+
+                if (navInventario) {
+                    if (rol === 'Administrador' || rol === 'Operador') {
+                        navInventario.style.display = 'block';
+                        if (!toastMostrado) {
+                            showToast(`Bienvenido Admin: ${user.email}`, 'success');
+                            sessionStorage.setItem('loginToastShown', 'true');
+                        }
+                    } else {
+                        navInventario.style.display = 'none';
+                        if (!toastMostrado) {
+                            showToast(`Bienvenido: ${user.email}`, 'success');
+                            sessionStorage.setItem('loginToastShown', 'true');
+                        }
+                    }
+                }
+            } else {
+                console.log("No hay usuario autenticado");
+                sessionStorage.removeItem('loginToastShown');
+                localStorage.removeItem('userRole');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('nombre');
+                localStorage.removeItem(CACHE_KEY_PEDIDOS);
+
+                if (btnLoginNav) btnLoginNav.style.display = 'block';
+                if (btnRegisterNav) btnRegisterNav.style.display = 'block';
+                if (btnLogoutNav) btnLogoutNav.style.display = 'none';
+                if (navInventario) navInventario.style.display = 'none';
+            }
+        });
+
+        // Función auxiliar para mostrar pedidos
+        function mostrarPedidos(pedidosArray, fromCache = false) {
+            const listaPedidos = document.getElementById('listaPedidos');
+            let totalPedidos = 0;
+            let totalGastado = 0;
+            let pedidosHTML = '';
+
+            pedidosArray.forEach((pedido) => {
+                totalPedidos++;
+                totalGastado += pedido.total || 0;
+
+                // Manejar la fecha
+                let fecha = 'Fecha no disponible';
+                if (pedido.fecha) {
+                    try {
+                        if (pedido.fecha.toDate) {
+                            // Timestamp de Firestore
+                            fecha = pedido.fecha.toDate().toLocaleDateString('es-MX', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                        } else if (pedido.fecha.seconds) {
+                            // Timestamp serializado desde caché
+                            fecha = new Date(pedido.fecha.seconds * 1000).toLocaleDateString('es-MX', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                        } else if (typeof pedido.fecha === 'string') {
+                            // String ISO
+                            fecha = new Date(pedido.fecha).toLocaleDateString('es-MX', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Error procesando fecha:', e);
+                    }
+                }
+
+                const estadoClass = {
+                    'pendiente': 'bg-warning',
+                    'enviado': 'bg-info',
+                    'entregado': 'bg-success',
+                    'cancelado': 'bg-danger'
+                }[pedido.estado] || 'bg-secondary';
+
+                const productosHTML = pedido.productos.map(p => `
+                    <div class="producto-pedido d-flex align-items-center">
+                        <img src="${p.imagenes}" width="50" height="50" class="rounded me-3" style="object-fit: cover; cursor: pointer;" onclick="window.location.href='producto.html#${p.id}'">
+                        <div class="flex-grow-1">
+                            <strong>${p.nombre}</strong><br>
+                            <small class="text-muted">$${Number(p.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })} x ${p.cantidad}</small>
+                        </div>
+                        <strong class="text-success">$${(p.precio * p.cantidad).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</strong>
+                    </div>
+                `).join('');
+
+                pedidosHTML += `
+                    <div class="pedido-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h5 class="mb-1">Pedido #${pedido.id.substring(0, 8)}</h5>
+                                <small class="text-muted"><i class="far fa-calendar me-1"></i>${fecha}</small>
+                            </div>
+                            <span class="badge badge-estado ${estadoClass}">${pedido.estado}</span>
+                        </div>
+
+                        <div class="mb-3">
+                            ${productosHTML}
+                        </div>
+
+                        <div class="border-top pt-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <small class="text-muted d-block mb-1"><strong>Envío a:</strong></small>
+                                    <small>${pedido.datosEnvio?.nombre || 'N/A'}</small><br>
+                                    <small>${pedido.datosEnvio?.direccion || 'N/A'}</small><br>
+                                    <small>${pedido.datosEnvio?.ciudad || 'N/A'} - CP: ${pedido.datosEnvio?.codigoPostal || 'N/A'}</small>
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <h4 class="text-success mb-0">Total: $${Number(pedido.total).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Agregar banner si es desde caché
+            if (fromCache) {
+                const cacheBanner = `
+                    <div class="alert alert-info mb-3" id="cache-banner">
+                        <i class="fas fa-database me-2"></i>
+                        Mostrando datos guardados (última actualización hace ${Math.floor((Date.now() - parseInt(localStorage.getItem(CACHE_TIMESTAMP_KEY))) / 60000)} minutos)
+                    </div>
+                `;
+                listaPedidos.innerHTML = cacheBanner + pedidosHTML;
+            } else {
+                listaPedidos.innerHTML = pedidosHTML;
+            }
+
+            // Actualizar estadísticas
+            document.getElementById('totalPedidos').textContent = totalPedidos;
+            document.getElementById('totalGastado').textContent = '$' + totalGastado.toLocaleString('es-MX', { minimumFractionDigits: 2 });
+        }
+
+        // Verificar sesión
+        const userId = localStorage.getItem('userId');
+        const userEmail = localStorage.getItem('userEmail');
+        const nombre = localStorage.getItem('nombre');
+
+        if (!userId || !userEmail) {
+            alert('Debes iniciar sesión para ver tu cuenta');
+            setTimeout(() => {
+                window.location.href = '/index.html';
+            }, 2000);
+        }
+
+        // FUNCIÓN PARA OBTENER ROL
+        async function obtenerRolUsuario(uid) {
+            try {
+                const docRef = doc(db, "usuarios", uid);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    return docSnap.data().rol || "Usuario";
+                } else {
+                    console.warn("Usuario no encontrado en Firestore");
+                    return "Usuario";
+                }
+            } catch (error) {
+                console.error("Error obteniendo rol:", error);
+                return "Usuario";
+            }
+        }
+
+        // FUNCIÓN PARA OBTENER NOMBRE
+        async function obtenerNombreUsuario(uid) {
+            try {
+                const userRef = doc(db, "usuarios", uid);
+                const userSnap = await getDoc(userRef);
+
+                if (userSnap.exists()) {
+                    return userSnap.data().nombre || "Usuario";
+                } else {
+                    console.warn("Usuario no encontrado en Firestore");
+                    return "Usuario";
+                }
+            } catch (error) {
+                console.error("Error obteniendo rol:", error);
+                return "Usuario";
+            }
+        }
+
+        // Función para mostrar toast
+        function showToast(msg, type = "success") {
+            const container = document.getElementById("toastZone");
+            const toastEl = document.createElement("div");
+            toastEl.className = `toast align-items-center text-bg-${type} border-0`;
+            toastEl.setAttribute("role", "alert");
+            toastEl.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">${msg}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            `;
+            container.appendChild(toastEl);
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+            setTimeout(() => toastEl.remove(), 4000);
+        }
+
+
+
+        // Cargar información del usuario
+        function cargarInfoUsuario(nombreUsuario, emailUsuario, rolUsuario) {
+
+            document.getElementById('nombreUsuario').textContent = nombreUsuario;
+            document.getElementById('emailUsuario').textContent = emailUsuario;
+            document.getElementById('infoEmail').textContent = emailUsuario;
+            document.getElementById('infoUserId').textContent = rolUsuario;
+            document.getElementById('nombreUsuarioNav').textContent = nombreUsuarioNav;
+
+            nombreUsuarioNav.innerHTML = `Hola, ${nombreUsuario}`;
+        }
+
+        // FUNCIÓN PRINCIPAL PARA CARGAR PEDIDOS
+        async function cargarPedidos() {
+            const listaPedidos = document.getElementById('listaPedidos');
+
+            // 1. Intentar cargar desde caché primero (para carga rápida)
+            const cachedPedidos = obtenerPedidosDeCache();
+            if (cachedPedidos && cachedPedidos.length > 0) {
+                console.log('Cargando pedidos desde caché...');
+                mostrarPedidos(cachedPedidos, true);
+            }
+
+            // 2. Verificar conexión
+            if (!navigator.onLine) {
+                console.log('Sin conexión a internet');
+                if (!cachedPedidos || cachedPedidos.length === 0) {
+                    listaPedidos.innerHTML = `
+                        <div class="alert alert-warning">
+                            <i class="fas fa-wifi-slash me-2"></i>
+                            Sin conexión a internet. No hay pedidos guardados en caché.
+                        </div>
+                    `;
+                } else {
+                    // Agregar banner de modo offline si no existe
+                    if (!document.getElementById('cache-banner')) {
+                        const offlineBanner = document.createElement('div');
+                        offlineBanner.id = 'offline-banner';
+                        offlineBanner.className = 'alert alert-warning mb-3';
+                        offlineBanner.innerHTML = `
+                            <i class="fas fa-wifi-slash me-2"></i>
+                            Modo offline - Mostrando datos guardados
+                        `;
+                        listaPedidos.insertBefore(offlineBanner, listaPedidos.firstChild);
+                    }
+                }
+                return;
+            }
+
+            // 3. Intentar cargar desde Firebase
+            try {
+                console.log('Cargando pedidos desde Firebase...');
+                const q = query(
+                    collection(db, 'pedidos'),
+                    where('userId', '==', userId),
+                    orderBy('fecha', 'desc')
+                );
+
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    listaPedidos.innerHTML = `
+                        <div class="text-center py-5">
+                            <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
+                            <p class="text-muted">No tienes pedidos aún</p>
+                            <a href="/index.html" class="btn btn-primary">Ver productos</a>
+                        </div>
+                    `;
+                    // Limpiar caché si no hay pedidos
+                    localStorage.removeItem(CACHE_KEY_PEDIDOS);
+                    localStorage.removeItem(CACHE_TIMESTAMP_KEY);
+                    return;
+                }
+
+                let pedidosArray = [];
+                querySnapshot.forEach((doc) => {
+                    pedidosArray.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+
+                console.log(`${pedidosArray.length} pedidos cargados desde Firebase`);
+
+                // Guardar en caché
+                guardarPedidosEnCache(pedidosArray);
+
+                // Mostrar pedidos (sin el banner de caché)
+                mostrarPedidos(pedidosArray, false);
+
+            } catch (error) {
+                console.error('Error cargando pedidos desde Firebase:', error);
+
+                // Si hay error y existe caché, usar el caché
+                if (cachedPedidos && cachedPedidos.length > 0) {
+                    console.log('Usando caché por error en Firebase');
+                    mostrarPedidos(cachedPedidos, true);
+
+                    // Remover banner anterior y agregar banner de error
+                    const oldBanner = document.getElementById('cache-banner');
+                    if (oldBanner) oldBanner.remove();
+
+                    const errorBanner = document.createElement('div');
+                    errorBanner.className = 'alert alert-warning mb-3';
+                    errorBanner.innerHTML = `
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Error al actualizar. Mostrando datos guardados.
+                    `;
+                    listaPedidos.insertBefore(errorBanner, listaPedidos.firstChild);
+                } else {
+                    listaPedidos.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            Error al cargar los pedidos: ${error.message}
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        // Detectar cambios en el estado de conexión
+        window.addEventListener('online', () => {
+            console.log('Conexión restaurada');
+            showToast('Conexión restaurada. Actualizando pedidos...', 'success');
+            cargarPedidos();
+        });
+
+        window.addEventListener('offline', () => {
+            console.log('Conexión perdida');
+            showToast('Sin conexión. Mostrando datos guardados.', 'warning');
+        });
+
+        // LOGIN
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginBtn = document.getElementById('loginBtn');
+            const inputUser = document.getElementById('user');
+            const inputPass = document.getElementById('pass');
+            const errorMsg = document.getElementById('error-msg');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            if (loginBtn && inputUser && inputPass) {
+                loginBtn.addEventListener('click', async (ev) => {
+                    ev.preventDefault();
+                    const email = inputUser.value.trim();
+                    const pass = inputPass.value;
+
+                    if (!email || !pass) {
+                        if (errorMsg) errorMsg.textContent = 'Completa todos los campos';
+                        return;
+                    }
+
+                    try {
+                        await signInWithEmailAndPassword(auth, email, pass);
+                        if (errorMsg) errorMsg.textContent = '';
+                        const modalEl = document.getElementById('loginModal');
+                        if (modalEl) {
+                            const bs = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+                            bs.hide();
+                        }
+                    } catch (e) {
+                        console.error('Login error:', e);
+                        if (errorMsg) errorMsg.textContent = 'Credenciales inválidas';
+                    }
+                });
+            }
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', async (ev) => {
+                    ev.preventDefault();
+                    try {
+                        await signOut(auth);
+                        showToast('Sesión cerrada', 'primary');
+                    } catch (e) {
+                        console.error('Logout error', e);
+                    }
+                });
+            }
+
+            // REGISTRO
+            const registerBtn = document.getElementById('registerBtn');
+            const regEmail = document.getElementById('regEmail');
+            const regPass = document.getElementById('regPass');
+            const regError = document.getElementById('regError');
+
+            if (registerBtn) {
+                registerBtn.addEventListener('click', async () => {
+                    const email = regEmail.value.trim();
+                    const pass = regPass.value.trim();
+
+                    if (!email || !pass) {
+                        regError.textContent = "Completa todos los campos";
+                        return;
+                    }
+
+                    try {
+                        const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+                        const user = userCredential.user;
+
+                        await setDoc(doc(db, "usuarios", user.uid), {
+                            email: email,
+                            rol: "usuario",
+                            fechaCreacion: new Date().toISOString()
+                        });
+
+                        regError.textContent = "";
+
+                        const modalEl = document.getElementById('registerModal');
+                        const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+                        modal.hide();
+
+                        showToast("Cuenta creada con éxito");
+                    } catch (e) {
+                        console.error(e);
+                        if (e.code === "auth/email-already-in-use") {
+                            regError.textContent = "Este correo ya está registrado";
+                        } else if (e.code === "auth/weak-password") {
+                            regError.textContent = "La contraseña debe tener al menos 6 caracteres";
+                        } else {
+                            regError.textContent = "Error al registrar";
+                        }
+                    }
+                });
+            }
+        });
+
+        cargarPedidos();
+
+    </script>
+    <script>
+
+        // SISTEMA DE TRANSICIONES UNIVERSAL
+        (function () {
+            'use strict';
+
+            if (performance.navigation.type === 1) {
+                document.body.style.animation = 'none';
+            }
+
+            // Configuración
+            const config = {
+                animationClass: 'fade-out',
+                duration: 300,
+                ignoreSelectors: [
+                    '[data-bs-toggle]',
+                    '[href="#"]',
+                    '[href*="#modal"]',
+                    '[onclick]',
+                    '.no-transition',
+                    '[href^="https://wa.me"]'
+                ]
+            };
+
+            // Función para verificar si debe ignorarse
+            function shouldIgnoreLink(link) {
+                return config.ignoreSelectors.some(selector => {
+                    return link.matches(selector) || link.closest(selector);
+                });
+            }
+
+            // Función de transición
+            function transitionToPage(url) {
+                document.body.classList.add(config.animationClass);
+                setTimeout(() => {
+                    window.location.href = url;
+                }, config.duration);
+            }
+
+            // Inicializar cuando el DOM esté listo
+            document.addEventListener('DOMContentLoaded', function () {
+                // Interceptar todos los enlaces internos
+                document.addEventListener('click', function (e) {
+                    const link = e.target.closest('a');
+
+                    if (!link) return;
+
+                    const href = link.getAttribute('href');
+
+                    // Verificar si es un enlace válido
+                    if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('https://wa.me')) {
+                        return;
+                    }
+
+                    // Ignorar ciertos enlaces
+                    if (shouldIgnoreLink(link)) {
+                        return;
+                    }
+
+                    // Aplicar transición
+                    e.preventDefault();
+                    transitionToPage(href);
+                });
+
+                // Smooth scroll para anclas
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        const href = this.getAttribute('href');
+                        if (href !== '#' && !this.getAttribute('data-bs-toggle')) {
+                            e.preventDefault();
+                            const target = document.querySelector(href);
+                            if (target) {
+                                target.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                            }
+                        }
+                    });
+                });
+
+                // Animación al actualizar estadísticas
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.target.id === 'totalPedidos' || mutation.target.id === 'totalGastado') {
+                            mutation.target.style.animation = 'none';
+                            setTimeout(() => {
+                                mutation.target.style.animation = 'numberPop 0.5s ease-out';
+                            }, 10);
+                        }
+                    });
+                });
+
+                const totalPedidos = document.getElementById('totalPedidos');
+                const totalGastado = document.getElementById('totalGastado');
+
+                if (totalPedidos) observer.observe(totalPedidos, { childList: true, characterData: true, subtree: true });
+                if (totalGastado) observer.observe(totalGastado, { childList: true, characterData: true, subtree: true });
+            });
+        })();
+
+        // Mostrar/Ocultar botón "Subir" según scroll y proximidad al footer
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnUp = document.getElementById('btnUp');
+            const footer = document.querySelector('footer');
+
+            if (!btnUp || !footer) return;
+
+            // Inicialmente oculto
+            btnUp.style.opacity = '0';
+            btnUp.style.pointerEvents = 'none';
+
+            window.addEventListener('scroll', function () {
+                const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+                const footerPosition = footer.offsetTop;
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+
+                // Mostrar botón si se ha hecho scroll hacia abajo (más de 300px)
+                if (scrollPosition > 300) {
+                    // Verificar si el usuario está cerca del footer
+                    const distanceToFooter = footerPosition - (scrollPosition + windowHeight);
+
+                    // Ocultar si está a menos de 100px del footer o si llegó al final
+                    if (distanceToFooter < 100 || (scrollPosition + windowHeight) >= documentHeight - 50) {
+                        btnUp.style.opacity = '0';
+                        btnUp.style.pointerEvents = 'none';
+                    } else {
+                        btnUp.style.opacity = '1';
+                        btnUp.style.pointerEvents = 'auto';
+                    }
+                } else {
+                    // Ocultar si está en la parte superior
+                    btnUp.style.opacity = '0';
+                    btnUp.style.pointerEvents = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

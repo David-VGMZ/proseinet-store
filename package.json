@@ -1,0 +1,26 @@
+{
+  "name": "proseinet",
+  "version": "1.0.1",
+  "description": "",
+  "main": "/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "serve:proseinet": "firebase serve --only hosting:proseinet",
+    "deploy:proseinet": "firebase deploy --only hosting:proseinet"
+  },
+  "keywords": [],
+  "author": "David Villagomez",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "^6.39.0",
+    "cors": "^2.8.6",
+    "mercadopago": "^0.5.0",
+    "nodemailer": "^8.0.0",
+    "pdfkit": "^0.18.0"
+  }
+}

@@ -1,0 +1,276 @@
+<section id="productos" class="container-fluid mt-3 mb-5 col-12 col-md-12 col-xl-11">
+        <div class="col-lg-2 d-none d-lg-block position-sticky start-100">
+            <div class="dropdown w-100">
+                <button class="btn border shadow-sm w-100 d-flex justify-content-between align-items-center mb-2 px-3 py-2" 
+                        type="button" 
+                        id="btnMainFiltroDesk" 
+                        data-bs-toggle="dropdown" 
+                        data-bs-auto-close="outside"
+                        aria-expanded="false" 
+                        style="border-radius: 16px; background-color: white; font-weight: 600;">
+                    <span><i class="fa-solid fa-filter me-2 text-dark"></i> Filtrar por</span>
+                    <i class="fa-solid fa-chevron-down text-muted" style="font-size: 0.8rem;"></i>
+                </button>
+
+                <div class="dropdown-menu shadow w-100 p-2 border" style="background-color: #f8f9fa; border-radius: 16px; border-color: #eaeaea; z-index: 1050; min-width: 100%;">
+                    <div class="accordion accordion-flush w-100" id="accordionFiltros" style="border-radius: 10px; overflow: hidden; background-color: transparent;">
+                        <div class="accordion-item" style="background-color: transparent;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed p-2 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCPU" style="background-color: transparent; box-shadow: none; font-size: 0.90rem;">
+                                    <i class="fa-solid fa-microchip me-2"></i> Procesador
+                                </button>
+                            </h2>
+                            <div id="collapseCPU" class="accordion-collapse collapse" data-bs-parent="#accordionFiltros">
+                                <div class="accordion-body p-1">
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarCPU('i3', this)">Intel Core i3</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarCPU('i5', this)">Intel Core i5</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarCPU('i7', this)">Intel Core i7</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarCPU('i9', this)">Intel Core i9</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarCPU('ix-w', this)">Intel Xeon W</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarCPU('M1', this)">Chip M1 Apple</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" style="background-color: transparent;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed p-2 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRAM" style="background-color: transparent; box-shadow: none; font-size: 0.90rem;">
+                                    <i class="fa-solid fa-memory me-2"></i> Memoria RAM
+                                </button>
+                            </h2>
+                            <div id="collapseRAM" class="accordion-collapse collapse" data-bs-parent="#accordionFiltros">
+                                <div class="accordion-body p-1">
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarRAM('4gb', this)">4 GB</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarRAM('8gb', this)">8 GB</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarRAM('16gb', this)">16 GB</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarRAM('32gb', this)">32 GB</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarRAM('64gb', this)">64 GB</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarRAM('128gb', this)">128 GB</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" style="background-color: transparent;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed p-2 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSSD" style="background-color: transparent; box-shadow: none; font-size: 0.90rem;">
+                                    <i class="fa-solid fa-hard-drive me-2"></i> Almacenamiento
+                                </button>
+                            </h2>
+                            <div id="collapseSSD" class="accordion-collapse collapse" data-bs-parent="#accordionFiltros">
+                                <div class="accordion-body p-1">
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarSSD('128gb', this)">128 GB</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarSSD('256gb', this)">256 GB</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarSSD('512gb', this)">512 GB</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarSSD('1tb', this)">1 TB</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarSSD('2tb', this)">2 TB</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" style="background-color: transparent;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed p-2 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrecio" style="background-color: transparent; box-shadow: none; font-size: 0.90rem;">
+                                    <i class="fa-solid fa-filter-circle-dollar me-2"></i> Precio
+                                </button>
+                            </h2>
+                            <div id="collapsePrecio" class="accordion-collapse collapse" data-bs-parent="#accordionFiltros">
+                                <div class="accordion-body p-1">
+                                    <div class="categoria-item w-75 py-1" onclick="ordenarPorPrecio('asc', this)">Menor Precio</div>
+                                    <div class="categoria-item w-75 py-1" onclick="ordenarPorPrecio('desc', this)">Mayor Precio</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" style="background-color: transparent;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed p-2 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEstado" style="background-color: transparent; box-shadow: none; font-size: 0.90rem;">
+                                    <i class="fa-solid fa-heart-pulse me-2"></i> Estado
+                                </button>
+                            </h2>
+                            <div id="collapseEstado" class="accordion-collapse collapse" data-bs-parent="#accordionFiltros">
+                                <div class="accordion-body p-1">
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarEstado('nuevo', this)">Nuevo</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarEstado('refur', this)">Refurbished</div>
+                                    <div class="categoria-item w-75 py-1" onclick="filtrarEstado('remate', this)">Remate</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 mb-1 px-2 w-100">
+                        <button class="btn btn-outline-danger btn-sm w-75 fw-semibold" style="border-radius: 12px;" onclick="limpiarFiltros()">
+                            <i class="fa-solid fa-rotate-left me-1"></i> Limpiar filtros
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 d-block d-lg-none">
+            <div class="dropdown w-50">
+                <button class="btn border shadow-sm w-100 d-flex justify-content-between align-items-center mb-2 px-3 py-2" 
+                        type="button" 
+                        id="btnMainFiltroMovil"
+                        data-bs-toggle="dropdown" 
+                        data-bs-auto-close="outside"
+                        aria-expanded="false" 
+                        style="border-radius: 16px; background-color: white; font-weight: 600;">
+                    <span class="filter-title"><i class="fa-solid fa-filter me-2 text-dark"></i> Filtrar por</span>
+                    <i class="fa-solid fa-chevron-down text-muted" style="font-size: 0.8rem;"></i>
+                </button>
+
+                <div class="dropdown-menu shadow w-100 p-2 border" style="background-color: #f8f9fa; border-radius: 16px; border-color: #eaeaea; z-index: 1050; min-width: 100%;">
+                    <div class="accordion accordion-flush w-100" id="accordionFiltros" style="border-radius: 10px; overflow: hidden; background-color: transparent;">
+                        <div class="accordion-item" style="background-color: transparent;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed p-2 fw-semibold btn-text" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCPU" style="background-color: transparent; box-shadow: none; font-size: 0.90rem;">
+                                    <i class="fa-solid fa-microchip me-2"></i> Procesador
+                                </button>
+                            </h2>
+                            <div id="collapseCPU" class="accordion-collapse collapse" data-bs-parent="#accordionFiltros">
+                                <div class="accordion-body p-1">
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarCPU('i3', this)">Intel Core i3</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarCPU('i5', this)">Intel Core i5</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarCPU('i7', this)">Intel Core i7</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarCPU('i9', this)">Intel Core i9</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarCPU('x-w', this)">Intel Xeon W</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarCPU('M1', this)">M1 Apple</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" style="background-color: transparent;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed p-2 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRAM" style="background-color: transparent; box-shadow: none; font-size: 0.90rem;">
+                                    <i class="fa-solid fa-memory me-2"></i> Memoria RAM
+                                </button>
+                            </h2>
+                            <div id="collapseRAM" class="accordion-collapse collapse" data-bs-parent="#accordionFiltros">
+                                <div class="accordion-body p-1">
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarRAM('8gb', this)">8 GB</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarRAM('16gb', this)">16 GB</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarRAM('32gb', this)">32 GB</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarRAM('64gb', this)">64 GB</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarRAM('128gb', this)">128 GB</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" style="background-color: transparent;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed p-2 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSSD" style="background-color: transparent; box-shadow: none; font-size: 0.90rem;">
+                                    <i class="fa-solid fa-hard-drive me-2"></i> Almacenamiento
+                                </button>
+                            </h2>
+                            <div id="collapseSSD" class="accordion-collapse collapse" data-bs-parent="#accordionFiltros">
+                                <div class="accordion-body p-1">
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarSSD('128gb', this)">128 GB</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarSSD('256gb', this)">256 GB</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarSSD('512gb', this)">512 GB</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarSSD('1tb', this)">1 TB</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarSSD('2tb', this)">2 TB</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" style="background-color: transparent;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed p-2 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrecio" style="background-color: transparent; box-shadow: none; font-size: 0.90rem;">
+                                    <i class="fa-solid fa-dollar-sign me-2"></i> Precio
+                                </button>
+                            </h2>
+                            <div id="collapsePrecio" class="accordion-collapse collapse" data-bs-parent="#accordionFiltros">
+                                <div class="accordion-body p-1">
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="ordenarPorPrecio('asc', this)">Menor Precio</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="ordenarPorPrecio('desc', this)">Mayor Precio</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" style="background-color: transparent;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed p-2 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEstado" style="background-color: transparent; box-shadow: none; font-size: 0.90rem;">
+                                    <i class="fa-solid fa-heart-pulse me-2"></i> Estado
+                                </button>
+                            </h2>
+                            <div id="collapseEstado" class="accordion-collapse collapse" data-bs-parent="#accordionFiltros">
+                                <div class="accordion-body p-1">
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarEstado('nuevo', this)">Nuevo</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarEstado('refur', this)">Refurbished</div>
+                                    <div class="categoria-item w-75 py-1 my-1" onclick="filtrarEstado('remate', this)">Remate</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 mb-1 px-2 w-100">
+                        <button class="btn btn-outline-danger btn-sm w-100 fw-semibold" style="border-radius: 12px;" onclick="limpiarFiltros()">
+                            <i class="fa-solid fa-rotate-left me-1"></i> Limpiar filtros
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="deskCategory" class="row g-2 align-items-start"><div class="col-lg-2 d-none d-lg-block"> 
+            <div class="category-desk container p-2 px-1" style="border-radius: 16px;">
+                <div class="ms-5">
+                    <h5 style="font-size: 20px">Categorias</h5>
+                </div>
+                <!-- Todos -->
+                <div class="categoria-item active w-75" onclick="filtrarCategoria('todas', this)">
+                    <i class="fa-solid fa-globe me-2"></i>
+                    <span class="ms-2">Todos</span>
+                </div>
+                <!-- Laptops -->
+                <div class="categoria-item w-75" onclick="filtrarCategoria('lap', this)">
+                    <i class="fa-solid fa-laptop me-2"></i>
+                    <span class="ms-2">Laptops</span>
+                </div>
+                <!-- Workstation Laptops -->
+                <div class="categoria-item w-75" onclick="filtrarCategoria('workLap', this)">
+                    <i class="fa fa-laptop me-2"></i>
+                    <span class="ms-2">Workstation <br> Laptops</span>
+                </div>
+                <!-- Work y Servers -->
+                <div class="categoria-item w-75" onclick="filtrarCategoria('workServ', this)">
+                    <i class="fa-solid fa-server me-2"></i>
+                    <span class="ms-2">Workstation<br> & Servers</span>
+                </div>
+                <!-- Apple -->
+                <div class="categoria-item w-75" onclick="filtrarCategoria('lapApple', this)">
+                    <i class="fa-brands fa-apple me-2"></i>
+                    <span class="ms-2">Laptops <br> Apple</span>
+                </div>
+                <!-- Tablets -->
+                <div class="categoria-item w-75" onclick="filtrarCategoria('tablet', this)">
+                    <i class="fa-solid fa-tablet me-2"></i>
+                    <span class="ms-2">Tablets</span>
+                </div>
+                <!-- CPU -->
+                <div class="categoria-item w-75" onclick="filtrarCategoria('cpu', this)">
+                    <i class="fa-solid fa-hard-drive me-2"></i>
+                    <span class="ms-2">Desktop <br> solo CPU</span>
+                </div>
+                <!-- Equipos de Cómputo -->
+                <div class="categoria-item w-75" onclick="filtrarCategoria('pc', this)">
+                    <i class="fas fa-computer me-2"></i>
+                    <span class="ms-2">Desktop <br> Completos</span>
+                </div>
+                <!-- All in One -->
+                <div class="categoria-item w-75" onclick="filtrarCategoria('aio', this)">
+                    <i class="fas fa-desktop me-2"></i>
+                    <span class="ms-2">All in One</span>
+                </div>
+                <!-- Monitores -->
+                <div class="categoria-item w-75" onclick="filtrarCategoria('monitores', this)">
+                    <i class="fa-solid fa-display me-2"></i>
+                    <span class="ms-2">Monitores</span>
+                </div>
+                <!-- Proyectores -->
+                <div class="categoria-item w-75" onclick="filtrarCategoria('proyectores', this)">
+                    <i class="fa-solid fa-photo-film me-2"></i>
+                    <span class="ms-2">Proyectores</span>
+                </div>
+                <!-- Otros -->
+                <div class="categoria-item w-75" onclick="filtrarCategoria('otros', this)">
+                    <i class="fa-solid fa-plug me-2"></i>
+                    <span class="ms-2">Accesorios</span>
+                </div>
+            </div>
+        </div>    
+        <div id="productos-container" class="col-lg-10 row g-2 mb-3 pt-1" style="border-radius: 16px;"></div>
+        
+    </section>

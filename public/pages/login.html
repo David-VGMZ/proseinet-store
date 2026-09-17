@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Acceder | PROSEINET</title>
+    <link rel="manifest" href="/manifest.webmanifest"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="apple-touch-icon" href="/assets/img/PROSEINET-LOGO-02.png"/>
+    <link rel="icon" href="/assets/img/PROSEINET-LOGO-02.png">
+    <link rel="stylesheet" href="/css/styleLogin.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <!--Inicio-->
+    <header id="inicio" class=" pt-1 pb-0">
+        <div class="pt-2 mt-3 container-fluid">
+            <div class="toast-container position-fixed top-0 end-0 p-2" id="toastZone"></div>
+        </div>
+    </header>
+
+    <section id="productos" class="container login-container col-lg-8 col-md-8 col-11">
+        <div id="productos-container" class="row px-1 menu-card">
+            <div class="col-lg-12 col-md-12 col-12">
+                <div class="menu-login p-2">
+                        <div class="mt-2 row col-12 col-lg-12">
+                            <a href="#" class="nav-back col-1" onclick="history.go(-1); return false;"><i class="fa-solid fa-arrow-left-long"></i></a>
+                            <a href="/index.html" class="ms-1 col-9 col-lg-9">
+                                <img class="login-logo img-fluid mx-auto d-block " src="/assets/img/Proseinet-Logo-Web.png">
+                            </a>
+                        </div>
+                    <div class="p-3 text-center">
+                        <h2 class="title-login mb-1">
+                            Iniciar Sesion</h2>
+                    </div>
+                    <div class="px-3">
+                        <div class="col-lg-8 mx-auto">
+                            <label for="loginEmail" class="form-label mb-1" style="color: white;">Correo Electrónico</label>
+                            <input id="loginEmail" type="email" class="form-control mb-4" placeholder="Escribe tu correo">
+                        </div>
+                        <div class="col-lg-8 mx-auto">
+                            <label for="loginPass" class="form-label mb-1" style="color: white;">Contraseña</label>
+                            <div class="input-group mb-3">
+                                <input id="loginPass" type="password" class="form-control mb-3" placeholder="Escribe tu contraseña">
+                                <button class="btn btn-pass" type="button" id="togglePassBtn" style="color: #c40909;">
+                                    <i id="togglePassIcon" class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+                            <p id="error-msg" class="text-white text-center"></p>
+                        </div>
+                        <div class="pt-2 m-3 text-center">
+                            <button id="loginBtn" class="login-btn w-50">Ingresar</button>
+                        </div>
+                        <div>
+                            <p class="text-center mb-1" style="color: white;">¿No tienes cuenta?</p>
+                        </div>
+                        <div class="pt-1 mb-3 text-center">
+                            <button class="reg-btn w-50" onclick="window.location.href='register.html'">Crear cuenta</button>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="row pt-3 mb-3 text-center menu-social">
+                        <div class="col-lg-8 offset-lg-2">
+                            <div class="row col-12 ms-0">
+                                <!--Instagram-->
+                                <div class="px-2 col text-center ig-div">
+                                    <a class="social-title" href="https://www.instagram.com/proseinet?igsh=MWZ1cDR2bDQxbmFsbg=="
+                                    target="_blank" rel="noopener noreferrer">
+                                        <img class="login-social img-fluid" src="/assets/icons/ig-icon.png">
+                                        <p class="ms-2 mt-1" target="_blank">proseinet morelia</p>
+                                    </a>
+                                </div>
+                                <!--TikTok-->
+                                <div class="px-2 col text-center ig-div">
+                                    <a class="social-title" href="https://www.tiktok.com/@proseinet?_r=1&_t=ZS-94TEW8Iqc42"
+                                    target="_blank" rel="noopener noreferrer">
+                                        <img class="login-social img-fluid" src="/assets/icons/tk-icon.png">
+                                        <p class="mt-1">@proseinet</p>
+                                    </a>
+                                </div>
+                                <!--Facebook-->
+                                <div class="px-2 col text-center ig-div">
+                                    <a class="social-title" href="https://www.facebook.com/share/1KUEf3JAKB/"
+                                        target="_blank" rel="noopener noreferrer">
+                                            <img class="login-social img-fluid" src="/assets/icons/fb-icon.png">
+                                            <p class="mt-1">Proseinet Outlet Cómputo</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-social-mb col-lg-12 col-md-12 col-12">
+                        <div class="row col-12 ms-0">
+                            <div class="px-2 col text-center ig-div">
+                                <a class="social-title-2" href="https://www.instagram.com/proseinet?igsh=MWZ1cDR2bDQxbmFsbg=="
+                                target="_blank" rel="noopener noreferrer">
+                                    <img class="login-social-2 img-fluid" src="/assets/icons/ig-icon.png">
+                                    <p class="ms-2 mt-1" target="_blank">proseinet morelia</p>
+                                </a>
+                            </div>
+                            <div class="px-2 col text-center ig-div">
+                                <a class="social-title-2" href="https://www.tiktok.com/@proseinet?_r=1&_t=ZS-94TEW8Iqc42"
+                                target="_blank" rel="noopener noreferrer">
+                                    <img class="login-social-2 img-fluid" src="/assets/icons/tk-icon.png">
+                                    <p class="mt-1">@proseinet</p>
+                                </a>
+                            </div>
+                            <div class="px-2 col text-center ig-div">
+                                <a class="social-title-2" href="https://www.facebook.com/share/1KUEf3JAKB/"
+                                    target="_blank" rel="noopener noreferrer">
+                                        <img class="login-social-2 img-fluid" src="/assets/icons/fb-icon.png">
+                                        <p class="mt-1">Proseinet Outlet Cómputo</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="/js/db.js?=0.11"></script>
+    <!-- Firebase -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getFirestore, collection, getDocs, query, orderBy, setDoc, doc, addDoc, serverTimestamp, getDoc, where, enableIndexedDbPersistence } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBg9o3wVZoA26Aob2RnbVPV8vGv4GE44gs",
+            authDomain: "primer-proyecto-7b2f4.firebaseapp.com",
+            projectId: "primer-proyecto-7b2f4",
+            storageBucket: "primer-proyecto-7b2f4.firebasestorage.app",
+            messagingSenderId: "627220736817",
+            appId: "1:627220736817:web:a2eb4f187322c609f11e10"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        const messaging = getMessaging(app);
+
+        // AGREGADO AL INICIO: Inicializar IndexedDB
+        let dbReady = false;
+
+        // Inicializar IndexedDB al cargar la página
+        (async function inicializarDB() {
+            try {
+                await initDB();
+                dbReady = true;
+                console.log('IndexedDB lista para usar');
+            } catch (error) {
+                console.error('Error inicializando IndexedDB:', error);
+                dbReady = false;
+            }
+        })();
+
+        // FUNCIÓN PARA OBTENER ROL
+        async function obtenerRolUsuario(uid) {
+            try {
+                const docRef = doc(db, "usuarios", uid);
+                const docSnap = await getDoc(docRef);
+                
+                if (docSnap.exists()) {
+                    return docSnap.data().rol || "usuario";
+                } else {
+                    console.warn("Usuario no encontrado en Firestore");
+                    return "eliminado";
+                }
+            } catch (error) {
+                console.error("Error obteniendo rol:", error);
+                return "eliminado";
+            }
+        }
+
+        // AUTH STATE LISTENER
+        onAuthStateChanged(auth, async (user) => {
+            const btnLoginNav = document.getElementById('loginNavBtn');
+            const btnRegisterNav = document.getElementById('registerNavBtn');
+            const btnLogoutNav = document.getElementById('logoutBtn');
+            const navInventario = document.getElementById('navInventario');
+            const navUsuario = document.getElementById('navUser');
+
+            if (user) {
+                const rol = await obtenerRolUsuario(user.uid);
+
+                if (rol === "eliminado") {
+                    await signOut(auth);
+                    showToast('Tu cuenta ha sido desactivada o no existe.', 'danger');
+                    return;
+                }
+
+                console.log("Usuario autenticado:", user.email);
+                console.log("Rol del usuario:", rol);
+                
+                localStorage.setItem('userRole', rol);
+                localStorage.setItem('userEmail', user.email);
+                localStorage.setItem('userId', user.uid);
+
+                if (btnLoginNav) btnLoginNav.style.display = 'none';
+                if (btnRegisterNav) btnRegisterNav.style.display = 'none';
+                if (btnLogoutNav) btnLogoutNav.style.display = 'block';
+
+                // VERIFICAR SI YA SE MOSTRÓ EL TOAST EN ESTA SESIÓN
+                const toastMostrado = sessionStorage.getItem('loginToastShown');
+                
+                if (navInventario) {
+                    if (rol === 'Administrador') {
+                        navInventario.style.display = 'block';
+                        navUsuario.style.display = 'block'
+                        
+                        // Solo mostrar si NO se ha mostrado antes
+                        if (!toastMostrado) {
+                            showToast(`Bienvenido Admin: ${user.email}`, 'success');
+                            sessionStorage.setItem('loginToastShown', 'true');
+                        }
+                    } else {
+                        navInventario.style.display = 'none';
+                        
+                        // Solo mostrar si NO se ha mostrado antes
+                        if (!toastMostrado) {
+                            showToast(`Bienvenido: ${user.email}`, 'success');
+                            sessionStorage.setItem('loginToastShown', 'true');
+                        }
+                    }
+                }
+            } else {
+                console.log("No hay usuario autenticado");
+                
+                // LIMPIAR LA BANDERA AL CERRAR SESIÓN
+                sessionStorage.removeItem('loginToastShown');
+                
+                localStorage.removeItem('userRole');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userId');
+
+                if (btnLoginNav) btnLoginNav.style.display = 'block';
+                if (btnRegisterNav) btnRegisterNav.style.display = 'block';
+                if (btnLogoutNav) btnLogoutNav.style.display = 'none';
+                if (navInventario) navInventario.style.display = 'none';
+                if (navUsuario) navUsuario.style.display = 'none';
+            }
+        });
+
+        // LOGIN
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginBtn = document.getElementById('loginBtn');
+            const inputUser = document.getElementById('user');
+            const inputPass = document.getElementById('pass');
+            const errorMsg = document.getElementById('error-msg');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const togglePassBtn = document.getElementById('togglePassBtn');
+            const loginPass = document.getElementById('loginPass');
+            const togglePassIcon = document.getElementById('togglePassIcon');
+
+            if (togglePassBtn) {
+                togglePassBtn.addEventListener('click', () => {
+                    const isPassword = loginPass.type === 'password';
+                    loginPass.type = isPassword ? 'text' : 'password';
+
+                    if (isPassword) {
+                        togglePassIcon.classList.remove('fa-eye');
+                        togglePassIcon.classList.add('fa-eye-slash');
+                    } else {
+                        togglePassIcon.classList.remove('fa-eye-slash');
+                        togglePassIcon.classList.add('fa-eye');
+                    }
+                });
+            }
+
+            if (loginBtn) {
+                loginBtn.addEventListener('click', async () => {
+                    const email = loginEmail.value.trim();
+                    const pass = loginPass.value.trim();
+
+                    try {
+                        const registration = await navigator.serviceWorker.getRegistration();
+                        const userCredential = await signInWithEmailAndPassword(auth, email, pass);
+                        const user = userCredential.user;
+
+                        showToast('Sesion iniciada', 'success');
+
+                        if(registration) {
+
+                            try {
+                                const currentToken = await getToken(messaging, {
+                                    vapidKey: 'BOBNEhfpPbnz0ew_HRCewocD6KyQYLy9ZmW0fjE6I4FThbc1vEcqW5hZD6SzugWi3GLpS9m7c__LiVyCvj3BLeM',
+                                    serviceWorkerRegistration: registration
+                                });
+
+                                if (currentToken) {
+                                    await setDoc(doc(db, 'usuarios', user.uid), {
+                                        fcmToken: currentToken,
+                                        email: user.email,
+                                        ultimaConexion: new Date()
+                                    }, { merge: true });
+
+                                    console.log("Token de notificaciones actualizado");
+                                }
+                            } catch (tokenErr) {
+                                console.warn("No se pudo obtener el token", tokenErr);
+                            }
+                        } else {
+                            console.warn("No hay service worker registrado todavia");
+                        }
+
+                        setTimeout(() => {
+                            window.location.href = '/index.html';
+                        }, 500);
+
+                    } catch (e) {
+                       console.error(e);
+                       errorMsg.textContent = 'Correo y/o contraseña incorrecto(s)'; 
+                    }
+                });
+            }
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', async (ev) => {
+                    ev.preventDefault();
+                    try {
+                        await signOut(auth);
+                        showToast('Sesión cerrada', 'primary');
+                    } catch (e) {
+                        console.error('Logout error', e);
+                    }
+                });
+            }
+
+            // REGISTRO
+            const registerBtn = document.getElementById('registerBtn');
+            const regEmail = document.getElementById('regEmail');
+            const regPass = document.getElementById('regPass');
+            const regError = document.getElementById('regError');
+
+            if (registerBtn) {
+                registerBtn.addEventListener('click', async () => {
+                    const email = regEmail.value.trim();
+                    const pass = regPass.value.trim();
+
+                    if (!email || !pass) {
+                        regError.textContent = "Completa todos los campos";
+                        return;
+                    }
+
+                    try {
+                        const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+                        const user = userCredential.user;
+
+                        await setDoc(doc(db, "usuarios", user.uid), {
+                            email: email,
+                            rol: "usuario",
+                            fechaCreacion: new Date().toLocaleDateString()
+                        });
+
+                        regError.textContent = "";
+
+                        const modalEl = document.getElementById('registerModal');
+                        const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+                        modal.hide();
+
+                        showToast("Cuenta creada con éxito");
+                    } catch (e) {
+                        console.error(e);
+                        if (e.code === "auth/email-already-in-use") {
+                            regError.textContent = "Este correo ya está registrado";
+                        } else if (e.code === "auth/weak-password") {
+                            regError.textContent = "La contraseña debe tener al menos 6 caracteres";
+                        } else {
+                            regError.textContent = "Error al registrar";
+                        }
+                    }
+                });
+            }
+        });
+
+        // CARGAR Y RENDERIZAR PRODUCTOS
+        async function cargarProductos(){
+            productosSection.innerHTML = `'<div class="text-center">
+            `;
+
+            // Verificar conexión PRIMERO
+            if (!navigator.onLine) {
+                console.log('Sin conexión detectada, cargando desde IndexedDB...');
+                await cargarProductosOffline();
+                return;
+            }
+
+            try {
+                const q = query(collection(db, 'productos'), orderBy('nombre'));
+                const snap = await getDocs(q);
+                const lista = snap.docs.map(d => {
+                    const data = d.data();
+                    delete data.id;
+                    return { id: d.id, ...data };
+                });
+                listaGlobal = lista;
+                console.log('Productos cargados:', lista.length);
+                
+                // AGREGADO: Guardar en IndexedDB
+                if (dbReady && lista.length > 0) {
+                    try {
+                        await guardarProductosOffline(lista);
+                        console.log('Productos guardados en IndexedDB');
+                    } catch (err) {
+                        console.warn('No se pudieron guardar en IndexedDB:', err);
+                    }
+                }
+
+                renderLista(lista);
+                
+
+            } catch (e) {
+                console.error('Error cargando productos desde Firebase:', e);
+                
+                // AGREGADO: Fallback a IndexedDB
+                console.log('Intentando cargar desde IndexedDB...');
+                await cargarProductosOffline();
+            }
+        }
+
+        // Cargar productos desde IndexedDB
+        async function cargarProductosOffline() {
+            try {
+                // Esperar a que IndexedDB esté lista
+                if (!dbReady) {
+                    console.log('Esperando IndexedDB...');
+                    await initDB();
+                    dbReady = true;
+                }
+                
+                const productosOffline = await obtenerProductosOffline();
+                listaGlobal = productosOffline;
+                renderLista(productosOffline);
+                
+                if (productosOffline.length > 0) {
+                    console.log('Productos cargados desde IndexedDB:', productosOffline.length);
+                    listaGlobal = productosOffline;
+                    renderLista(productosOffline);
+                    
+                    // SOLO MOSTRAR TOAST SI NO SE HA MOSTRADO ANTES
+                    if (!sessionStorage.getItem('offlineToastShown')) {
+                        showToast('Modo offline: mostrando productos guardados', 'warning');
+                        sessionStorage.setItem('offlineToastShown', 'true');
+                    }
+                } else {
+                    productosSection.innerHTML = `
+                        <div class="col-12">
+                            <div class="alert alert-warning text-center my-5">
+                                <i class="fas fa-wifi-slash fa-3x mb-3"></i>
+                                <h5>Sin conexión</h5>
+                                <p>No hay productos disponibles offline.<br>Conéctate a internet para cargar el catálogo.</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error cargando productos offline:', error);
+                productosSection.innerHTML = `
+                    <div class="col-12">
+                        <div class="alert alert-danger text-center my-5">
+                            <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
+                            <h5>Error</h5>
+                            <p>No se pudieron cargar los productos</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function renderLista(lista) {
+            productosSection.innerHTML = "";
+
+            if (!lista.length) {
+                productosSection.innerHTML = '<p class="text-center text-muted">No hay productos disponibles</p>';
+                return;
+            }
+
+                const col = document.createElement("div");
+                col.className = "col-6 col-md-4 col-lg-3";
+                
+                col.innerHTML = `
+                    
+                `;
+
+                productosSection.appendChild(col);
+        }
+
+        // DEBUG: Verificar estado de IndexedDB
+        window.debugIndexedDB = async function() {
+            console.log('=== DEBUG INDEXEDDB ===');
+            console.log('dbReady:', dbReady);
+            
+            try {
+                await initDB();
+                const productos = await obtenerProductosOffline();
+                console.log('Productos en IndexedDB:', productos.length);
+                console.log('Productos:', productos);
+                
+                if (productos.length > 0) {
+                    console.log('IndexedDB funciona correctamente');
+                } else {
+                    console.warn('IndexedDB vacía, necesitas cargar productos con internet primero');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+            console.log('======================');
+        };
+
+        console.log('Ejecuta debugIndexedDB() en consola para verificar');
+
+        // SCROLL DE CATEGORÍAS
+        const categoriasContainer = document.getElementById('categoriasContainer');
+        const scrollPrev = document.getElementById('scrollPrev');
+        const scrollNext = document.getElementById('scrollNext');
+
+        if (scrollPrev && scrollNext && categoriasContainer) {
+            scrollPrev.addEventListener('click', () => {
+                const scrollAmount = 300;
+                categoriasContainer.querySelector('.categorias-scroll').scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+
+            scrollNext.addEventListener('click', () => {
+                const scrollAmount = 300;
+                categoriasContainer.querySelector('.categorias-scroll').scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // FILTRAR POR CATEGORÍA
+        window.filtrarCategoria = function(categoria, elemento) {
+            console.log('Filtrando por categoría:', categoria);
+            
+            // Remover clase active de todos
+            document.querySelectorAll('.categoria-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Agregar clase active al seleccionado
+            if (elemento) {
+                elemento.classList.add('active');
+            }
+            
+            /* Scroll suave a productos
+            const productosSection = document.getElementById('productos');
+            if (productosSection) {
+                productosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+                */
+            
+            // Cargar productos
+            setTimeout(() => {
+                if (categoria === 'todas') {
+                    cargarProductos(); // Cargar todos
+                } else {
+                    cargarProductosFiltrados(categoria);
+                }
+            }, 300);
+        }
+
+        async function cargarProductosFiltrados(categoria) {
+            const productosSection = document.getElementById('productos-container');
+            productosSection.innerHTML = `<div class="text-center">
+            <div class="spinner-border" role="status"><span class="visually-hidden">Cargando...</span></div></div>'
+            <p class="text-center">Cargando productos...</p>
+            `;
+
+            // Verificar conexión
+            if (!navigator.onLine) {
+                console.log('Sin conexión, filtrando desde IndexedDB...');
+                await filtrarProductosOffline(categoria);
+                return;
+            }
+            
+            try {
+                const q = query(
+                    collection(db, 'productos'), 
+                    where('categoria', '==', categoria),
+                    orderBy('nombre')
+                );
+                const snap = await getDocs(q);
+                const lista = snap.docs.map(d => {
+                    const data = d.data();
+                    delete data.id;
+                    return { id: d.id, ...data };
+                });
+                listaGlobal = lista;
+                //renderLista(lista);
+                
+                console.log(`Productos encontrados (${categoria}):`, lista.length);
+                
+                if (lista.length === 0) {
+                    productosSection.innerHTML = `
+                        <div class="col-12">
+                            <div class="alert alert-info text-center">
+                                <i class="fas fa-info-circle me-2"></i>
+                                No hay productos disponibles en esta categoría
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    //renderLista(lista);
+                }
+            } catch (e) {
+                console.error('Error cargando productos filtrados:', e);
+                
+                // Fallback a IndexedDB
+                await filtrarProductosOffline(categoria);
+            }
+        }
+
+        // Filtrar productos offline
+        async function filtrarProductosOffline(categoria) {
+            try {
+                if (!dbReady) {
+                    await initDB();
+                    dbReady = true;
+                }
+                
+                const productosOffline = await obtenerProductosPorCategoria(categoria);
+                
+                if (productosOffline.length > 0) {
+                    console.log(`${productosOffline.length} productos de "${categoria}" desde IndexedDB`);
+                    renderLista(productosOffline);
+                    
+                    // SOLO MOSTRAR TOAST SI NO SE HA MOSTRADO ANTES
+                    if (!sessionStorage.getItem('offlineToastShown')) {
+                        showToast('Modo offline', 'warning');
+                        sessionStorage.setItem('offlineToastShown', 'true');
+                    }
+                } else {
+                    document.getElementById('productos-container').innerHTML = `
+                        <div class="col-12">
+                            <div class="alert alert-warning text-center my-5">
+                                <i class="fas fa-wifi-slash me-2"></i>
+                                No hay productos de esta categoría disponibles offline
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error filtrando offline:', error);
+                document.getElementById('productos-container').innerHTML = `
+                    <div class="col-12">
+                        <div class="alert alert-danger text-center my-5">
+                            Error cargando productos offline
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // ACTUALIZAR CARRITO
+        
+
+        // Monitoreo de conexión mejorado
+
+    </script>
+
+
+        <script>
+        // Registrar Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sworker.js')
+                    .then(reg => console.log('SW registrado:', reg.scope))
+                    .catch(err => console.warn('SW fallo:', err));
+                });
+            }
+
+            // Manejo del "beforeinstallprompt" para mostrar botón de instalar
+            let deferredPrompt = null;
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                const btn = document.getElementById('btnInstall');
+                if (btn) btn.hidden = false;
+            });
+
+            // Click en el botón para lanzar el prompt
+            document.addEventListener('click', async (e) => {
+                if (e.target && e.target.id === 'btnInstall') {
+                    if (!deferredPrompt) return;
+                    e.target.disabled = true;
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log('Instalación:', outcome);
+                    deferredPrompt = null;
+                    e.target.hidden = true;
+                }
+            });
+
+            // Evento cuando la app fue instalada
+            window.addEventListener('appinstalled', () => {
+                console.log('PWA instalada');
+                const btn = document.getElementById('btnInstall');
+                if (btn) btn.hidden = true;
+            });
+
+           // Agregar después de registrar el SW en index.html
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sworker.js')
+                        .then(reg => {
+                            console.log('SW registrado:', reg.scope);
+                            
+                            // Forzar actualización si hay una nueva versión
+                            reg.addEventListener('updatefound', () => {
+                                const newWorker = reg.installing;
+                                newWorker.addEventListener('statechange', () => {
+                                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                        console.log('Nueva versión disponible');
+                                        // Puedes mostrar un toast aquí para avisar al usuario
+                                    }
+                                });
+                            });
+                        })
+                        .catch(err => console.warn('SW falló:', err));
+                });
+            }
+        </script>
+
+    <script>
+
+        function showToast(msg, type = "success") {
+            const container = document.getElementById("toastZone");
+
+            const toastEl = document.createElement("div");
+            toastEl.className = `toast align-items-center text-bg-${type} border-0`;
+            toastEl.setAttribute("role", "alert");
+            toastEl.setAttribute("aria-live", "assertive");
+            toastEl.setAttribute("aria-atomic", "true");
+
+            toastEl.innerHTML = `
+                <div class="d-flex mt-1">
+                    <div class="toast-body">${msg}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            `;
+
+            container.appendChild(toastEl);
+
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+
+            // remover después de 4 segundos
+            setTimeout(() => toastEl.remove(), 3000);
+        }
+
+    // SISTEMA DE TRANSICIONES UNIVERSAL
+    (function() {
+        'use strict';
+        
+        // Prevenir animación en recarga
+        if (performance.navigation.type === 1) {
+            document.body.style.animation = 'none';
+        }
+        
+        // Configuración
+        const config = {
+            animationClass: 'fade-out',
+            duration: 300,
+            ignoreSelectors: [
+                '[data-bs-toggle]',
+                '[href="#"]',
+                '[href*="#modal"]',
+                '[onclick]',
+                '.no-transition'
+            ]
+        };
+        
+        // Función para verificar si debe ignorarse
+        function shouldIgnoreLink(link) {
+            return config.ignoreSelectors.some(selector => {
+                return link.matches(selector) || link.closest(selector);
+            });
+        }
+        
+        // Función de transición
+        function transitionToPage(url) {
+            document.body.classList.add(config.animationClass);
+            setTimeout(() => {
+                window.location.href = url;
+            }, config.duration);
+        }
+        
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Interceptar todos los enlaces internos
+            document.addEventListener('click', function(e) {
+                const link = e.target.closest('a');
+                
+                if (!link) return;
+                
+                const href = link.getAttribute('href');
+                
+                // Verificar si es un enlace válido
+                if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+                    return;
+                }
+                
+                // Ignorar ciertos enlaces
+                if (shouldIgnoreLink(link)) {
+                    return;
+                }
+                
+                // Aplicar transición
+                e.preventDefault();
+                transitionToPage(href);
+            });
+            
+            // Agregar clase a cards para hover
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.style.cursor = 'pointer';
+            });
+        });
+        
+        // Smooth scroll para anclas
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && !this.getAttribute('data-bs-toggle')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    })();
+
+    // RESET AUTOMÁTICO DE MODALES
+    document.addEventListener('DOMContentLoaded', function() {
+        // Obtener todos los modales
+        const modales = document.querySelectorAll('.modal');
+        
+        modales.forEach(modal => {
+            modal.addEventListener('hidden.bs.modal', function () {
+                // Limpiar todos los inputs de texto, email, password, textarea
+                const inputs = this.querySelectorAll('input[type="text"], input[type="email"], input[type="password"], input[type="tel"], textarea');
+                inputs.forEach(input => {
+                    input.value = '';
+                });
+                
+                // Limpiar selects
+                const selects = this.querySelectorAll('select');
+                selects.forEach(select => {
+                    select.selectedIndex = 0;
+                });
+                
+                // Limpiar checkboxes y radios
+                const checkboxes = this.querySelectorAll('input[type="checkbox"], input[type="radio"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                
+                // Limpiar mensajes de error
+                const errorMessages = this.querySelectorAll('.text-danger, .alert-danger');
+                errorMessages.forEach(msg => {
+                    msg.textContent = '';
+                    msg.style.display = 'none';
+                });
+                
+                // Remover clases de validación de Bootstrap
+                const formControls = this.querySelectorAll('.form-control, .form-select');
+                formControls.forEach(control => {
+                    control.classList.remove('is-valid', 'is-invalid');
+                });
+                
+                // Resetear formularios si existen
+                const forms = this.querySelectorAll('form');
+                forms.forEach(form => {
+                    form.reset();
+                });
+            });
+        });
+    });
+    </script>
+</body>
+</html>

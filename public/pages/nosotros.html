@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Nosotros | Proseinet</title>
+    <link rel="manifest" href="/manifest.webmanifest"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="apple-touch-icon" href="/assets/img/PROSEINET-LOGO-02.png" />
+    <link rel="icon" href="/assets/img/PROSEINET-LOGO-02.png">
+    <link rel="stylesheet" href="/css/styleMenu.css?=0.11">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+
+        /* Botón Subir - Base */
+        #btnUp {
+            position: fixed;
+            bottom: 108px;
+            padding: 12px 12px;
+            border: 0;
+            border-radius: 50%;
+            background: #b50707;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0,0,0,.3);
+            z-index: 9999;
+            display: none;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0; /* Inicialmente oculto */
+            pointer-events: none; /* Deshabilitado inicialmente */
+            transition: all 0.3s ease, opacity 0.3s ease; /* Añadir transición de opacidad */
+        }
+
+        /* Posición en móvil */
+        @media (max-width: 576px) { 
+            #btnUp {
+                right: 320px;
+                left: auto;
+            }
+        }
+
+        /* Posición en tablet */
+        @media (min-width: 577px) and (max-width: 991px) {
+            #btnUp {
+                right: 680px;
+                left: auto;
+            }
+        }
+
+        /* Posición en desktop */
+        @media (min-width: 992px) {
+            #btnUp {
+                left: 20px;
+                right: auto;
+            }
+        }
+
+        /* Hover effect */
+        #btnUp:hover {
+            background: #ec0606;
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        #btnUp:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+
+        .hero-section {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            border: none;
+            color: white;
+            padding: .5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-danger {
+            border: 2px solid #891521;
+            background-color: #891521;
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-left: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-ig {
+            background-color: #891521;
+            border: none;
+            color: white;
+            padding: .5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-ig:hover {
+            background-color: #d8472d;
+            border: none;
+            color: white;
+            padding: .5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--primary-blue);
+            border: none;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: #a10000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+        }
+
+        .btn-outline-danger-custom {
+            border: 2px solid #DC3545;
+            color: #DC3545;
+            background-color: transparent;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-left: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-danger-custom:hover {
+            background-color: #DC3545;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .empty-box {
+            width: 120px;
+            height: 120px;
+            border: 3px solid var(--primary-blue);
+            border-radius: 12px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-card .card-header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        .modal-content {
+            border-radius: 12px;
+            border: none;
+        }
+
+        .modal-header {
+            background-color: var(--primary-blue);
+            color: white;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #CED4DA;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+        }
+
+        .badge {
+            padding: 0.3rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        .nav-link .bi-cart {
+        font-size: 1.8rem;
+        color: white;
+        }
+
+        .nav-link .bi-cart:hover {
+        color: #ffc107;
+        }
+
+        /* Ajustes generales para tarjetas de productos */
+        .card-title {
+            font-size: 0.9rem !important;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-text {
+            font-size: 0.75rem !important;
+        }
+
+        .card-body {
+            padding: 0.6rem !important;
+        }
+
+        .price-text {
+            font-size: 1rem !important;
+            font-weight: bold;
+        }
+        /* Altura compacta para celulares */
+        .product-img {
+            height: 110px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Altura mayor cuando la pantalla es grande */
+        @media (min-width: 768px) {
+            .product-img {
+                height: 180px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .product-img {
+                height: 220px;
+            }
+        }
+
+        .carousel-img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Ajuste de texto del carrusel en móviles */
+        @media (max-width: 576px) {
+            .carousel-caption {
+                bottom: 50px !important;
+                padding: 0 10px !important;
+                width: 100% !important;
+                left: 0 !important;
+                right: 0 !important;
+                text-align: center;
+            }
+
+            .carousel-caption h5 {
+                font-size: 1.5rem !important;   
+                font-weight: 700;
+                line-height: 1.2;
+                text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
+                
+            }
+
+            .carousel-caption p {
+                font-size: 1rem !important; 
+                font-weight: 600;
+                line-height: 1.2;
+                margin-bottom: 0;
+                text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+            }
+        }
+
+        /* Ajuste ed texto del carrusel para escritorio */
+        @media (min-width: 992px) {
+            .carousel-caption {
+                bottom: 80px !important;
+                padding: 0 10px !important;
+                width: 100% !important;
+                left: 0 !important;
+                right: 0 !important;
+                text-align: center;
+            }
+
+            .carousel-caption h5 {
+                font-size: 3rem;
+                text-shadow: 2px 2px 7px rgba(0,0,0,0.7);
+            }
+
+            .carousel-caption p {
+                font-size: 1.5rem !important; 
+                font-weight: 600;
+                line-height: 1.2;
+                margin-bottom: 0;
+                text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+            }
+        }
+
+        /* Tablet */
+        @media (min-width: 768px) {
+            .carousel-img {
+                height: 260px;
+            }
+        }
+
+        /* Escritorio grande */
+        @media (min-width: 1200px) {
+            .carousel-img {
+                height: 320px;
+            }
+        }
+
+        /* Márgenes y estilo del carrusel - MÁS RECTANGULAR */
+        #heroCarousel {
+            margin: 2rem auto;
+            max-width: 95%;
+            border-radius: 15px; 
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Ajustar altura de las imágenes para hacerlo más rectangular */
+        .carousel-img {
+            height: 280px;
+            object-fit: cover;
+        }
+
+        #heroCarousel .carousel-inner img {
+            height: 280px !important; 
+            object-fit: cover;
+        }
+
+        /* Responsive - Márgenes más pequeños en móvil */
+        @media (max-width: 768px) {
+            #heroCarousel {
+                max-width: 94%;
+                margin: 0.50rem auto;
+            }
+            
+            #heroCarousel .carousel-inner img {
+                height: 125px !important; /* Menos alto en móvil */
+            }
+        }
+
+
+        /* Desktop - Más rectangular (más ancho que alto) */
+        @media (min-width: 1200px) {
+            #heroCarousel {
+                margin: 3rem auto;
+                max-width: 92%;
+            }
+            
+            #heroCarousel .carousel-inner img {
+                height: 250px !important;
+            }
+        }
+
+        /* Ultra ancho (pantallas grandes) */
+        @media (min-width: 1600px) {
+            #heroCarousel .carousel-inner img {
+                height: 250px !important;
+            }
+        }
+
+        /* Slider de Categorías */
+        .categorias-scroll-container {
+            overflow: hidden;
+            position: relative; 
+        }
+
+        /* Slider de Categorias (Escritorio) */
+        @media (min-width: 1200px) {
+            .categorias-scroll-container {
+                overflow: hidden;
+                position: relative;
+                margin-left: 16rem;
+            }
+        }
+
+        .categorias-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            /*padding: 10px 0; */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .categorias-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .categoria-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 24px;
+            background-color: #fff;
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
+            color: #a10000;
+            font-weight: 600;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .categoria-item:hover {
+            background-color: #f3f4f6;
+            border-color: #a10000;
+            box-shadow: 0 4px 8px rgba(18, 44, 79, 0.15);
+        }
+
+        .categoria-item.active {
+            background-color: #a10000;
+            color: white;
+            border-color: #a10000;
+            box-shadow: 0 4px 12px rgba(18, 44, 79, 0.3);
+        }
+
+        .categoria-item i {
+            font-size: 1.1rem;
+        }
+
+        /* Botones de navegación */
+        .carousel-scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            color: #d80a0a;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-scroll-btn:hover {
+            background-color: #a10000;
+            color: white;
+            border-color: #a10000;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 4px 12px rgba(18, 44, 79, 0.3);
+        }
+
+        .carousel-scroll-btn:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .carousel-scroll-btn.prev {
+            left: -15px;
+        }
+
+        .carousel-scroll-btn.next {
+            right: -15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .categoria-item {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .carousel-scroll-btn {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .carousel-scroll-btn.prev {
+                left: 0;
+            }
+            
+            .carousel-scroll-btn.next {
+                right: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .categoria-item {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+        }
+
+
+        .slider-container {
+            position: relative;
+            max-width: 1400px;
+            overflow: hidden;
+        }
+
+        .slider-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .slider-slide {
+            min-width: 100%;
+            max-width: 100%;
+            width: 100%;
+            position: relative;
+            flex-shrink: 0;
+            flex-grow: 0;
+        }
+
+        .slider-slide img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        /* Textos sobre las imágenes */
+        .slider-caption {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            width: 90%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .slider-caption h5 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            margin-bottom: 0.5rem;
+        }
+
+        .slider-caption p {
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Flechas de navegación */
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #a10000;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .slider-arrow:hover {
+            background-color: #a10000;
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-prev {
+            left: 20px;
+        }
+
+        .slider-next {
+            right: 20px;
+        }
+
+        /* Indicadores (dots) */
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 2px solid white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background-color: white;
+            transform: scale(1.3);
+        }
+
+        .slider-dot:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ========================================
+        RESPONSIVE
+        ======================================== */
+
+        /* Tablets */
+        @media (max-width: 768px) {
+            .slider-container {
+                width: 94%;
+                margin: 0.5rem auto;
+            }
+            
+            .slider-slide img {
+                height: 200px;
+            }
+            
+            .slider-caption {
+                bottom: 30px;
+            }
+            
+            .slider-caption h5 {
+                font-size: 1.5rem;
+            }
+            
+            .slider-caption p {
+                font-size: 1rem;
+            }
+            
+            .slider-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .slider-prev {
+                left: 10px;
+            }
+            
+            .slider-next {
+                right: 10px;
+            }
+        }
+
+        /* Móviles */
+        @media (max-width: 576px) {
+            .slider-container {
+                width: 100%;
+                margin: 0.5rem auto;
+            }
+            
+            .slider-slide img {
+                height: 150px;
+                zoom: 250%;
+                object-fit: cover;
+            }
+            
+            .slider-caption {
+                bottom: 20px;
+            }
+            
+            .slider-caption h5 {
+                font-size: 1.2rem;
+            }
+            
+            .slider-caption p {
+                font-size: 0.85rem;
+            }
+            
+            .slider-arrow {
+                width: 25px;
+                height: 25px;
+                font-size: 0.7rem;
+            }
+            
+            .slider-dots {
+                bottom: 10px;
+            }
+            
+            .slider-dot {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        /* Desktop grande */
+        @media (min-width: 1200px) {
+            .slider-container {
+                max-width: 1924px;
+                width: 100%;
+            }
+            
+            .slider-slide img {
+                height: 350px;
+                zoom: 110%;
+            }
+            
+            .slider-caption {
+                bottom: 60px;
+            }
+            
+            .slider-caption h5 {
+                font-size: 3rem;
+            }
+            
+            .slider-caption p {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Desktop ultra ancho */
+        @media (min-width: 1600px) {
+            .slider-slide img {
+                height: 450px;
+            }
+        }
+
+        /* Team Card */
+        .team-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #a10000, #d80a0a, #a10000);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .team-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(18, 44, 79, 0.2);
+        }
+
+        .prop-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prop-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #a10000, #d80a0a, #a10000);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .prop-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .prop-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(18, 44, 79, 0.2);
+        }
+
+        .vent-card {
+            background: white;
+            border: solid #ebebeb;
+            border-radius: 50px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vent-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #000000, #d80a0a, #000000);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .vent-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .vent-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(18, 44, 79, 0.2);
+        }
+
+        .team-image-wrapper {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .team-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 10%;
+            object-fit: cover;
+            border: 5px solid #a10000;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .vent-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #000000;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .vent-card:hover .vent-image {
+            border-color: #d40505;
+            transform: scale(1.05);
+        }
+
+        .port-image-card {
+            width: 15%;
+            display: flex;
+            margin: 12px;
+            margin-left: 24px;
+        }
+
+        .port-image {
+            border-radius: 20%;
+            width: 100%;
+        }
+
+        @media (max-width: 576px) {
+            .port-image-card {
+                margin: 12px;
+                margin-top: 24px;
+            }
+            .port-image {
+                border-radius: 20%;
+                width: 200%;
+            }
+            .card-port {
+                padding: 12px !important;
+            }
+        }
+
+        .prop-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 20%;
+            object-fit: cover;
+            border: 5px solid #a10000;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .prop-card:hover .prop-image {
+            border-color: #000000;
+            transform: scale(1.05);
+        }
+
+        .team-card:hover .team-image {
+            border-color: #000000;
+            transform: scale(1.05);
+        }
+
+        .team-role {
+            display: inline-block;
+            background: linear-gradient(135deg, #a10000, #d61414);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .team-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #d80a0a;
+            margin-bottom: 1rem;
+        }
+
+        .team-quote {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 1rem;
+            line-height: 1.6;
+            position: relative;
+            padding: 1rem;
+        }
+
+        .team-quote::before {
+            content: '|';
+            font-size: 3rem;
+            color: #d80a0a;
+            opacity: 0.2;
+            position: absolute;
+            top: -10px;
+            left: 0;
+        }
+
+        .team-social {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f8f9fa;
+            color: #a10000;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: #810303;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .slider-slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70%;
+            background: linear-gradient(to bottom, 
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0) 50%,
+                rgba(255, 255, 255, 1) 100%
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .nav-link-btn {
+            text-decoration: none;
+            color: white;
+        }
+
+        .card-port {
+            padding: 32px;
+            background-color: #f1f1f1;
+            border-radius: 50px;
+        }
+
+    </style>
+</head>
+<body>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="position: fixed !important; background-color: #a10000; border-radius: 0px 0px 15px 15px;">
+        <div class="container">
+            <a href="/index.html" class="logo-nav-lg">
+                <img class="thumbs ms-2 my-2" src="/assets/img/Proseinet-Logo-Web.png" alt="LogoProseinet" width="80">
+            </a>
+            <a href="#" class="nav-back" onclick="history.go(-1); return false;"><i class="fa-solid fa-arrow-left-long"></i></a>
+            <h2 class="ps-3" style="font-size: 1.3rem; font-weight: 700; color: white;"> Sobre Nosotros </h2>
+            <a href="/index.html" class="logo-nav">
+                <img class="thumbs ms-2 my-2" src="/assets/img/Proseinet-Logo-Web.png" alt="LogoProseinet" width="80">
+            </a>
+            <div class="nav-menu">
+                <ul class="navbar-nav ms-auto">
+                    <a class="nav-link" href="/index.html" style="font-weight: 700; font-size: 1.2rem;">Inicio</a>
+                    <a class="nav-link" href="/pages/perfil.html" style="font-weight: 700; font-size: 1.2rem;">Perfil</a>
+                    <a class="nav-link" href="/pages/menu.html" style="font-weight: 700; font-size: 1.2rem;">Menu</a>
+                    <a class="position-relative cart-view carrito-vista-desk  ms-3 me-5" href="/pages/carrito.html">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="contador-carrito cart-span position-absolute top-0 start-100 translate-middle badge rounded-pill" style="background-color: black; color: white;">
+                            0
+                        </span>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Inicio-->
+    <section class="pt-3">
+        <div class="mt-5 pt-3">
+            <!-- Slider Deslizable -->
+            <div class="slider-container">
+                <div class="slider-wrapper" id="sliderWrapper">
+                    <div class="slider-track" id="sliderTrack">
+                        <!-- Slide 1 -->
+                        <div class="slider-slide">
+                            <img class="slider-img" src="/assets/img/Wallpaper-Proseinet-Web-03.png" alt="Banner-Politicas">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mb-5 policy-content mt-3">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-sm border-0 p-4 mt-3">
+
+                    <h1 class="mb-5 text-center" style="color: #a10000;"><strong>Quiénes Somos</strong></h1>
+                    <p><strong>PROseiNET</strong> es una empresa mexicana especializada en la comercialización y distribución estratégica de
+                    equipos de cómputo nuevos y reacondicionados de grado empresarial.</p>
+                    <p>Fundada en 2018, la empresa surge con el propósito de ampliar el acceso a infraestructura tecnológica confiable y costo-eficiente, atendiendo
+                        los segmentos corporativo, mayorista y minorista especializado.
+                    </p>
+                    <p>Opera bajo un mdelo estructurado que integra abastecimiento estratégico, reacondicionamiento técnico profesional y control de calidad,
+                        garantizando soluciones competitivas y confiables.</p>
+                </div>
+                <div class="card shadow-sm border-0 p-4 mt-5">
+                    <h1 class="text-center" style="color: #a10000;"><strong>Misión</strong></h1>
+                    <p>“Facilitar el acceso a tecnología confiable,
+                        funcional y costo-eficiente a través de la comercialización estratégica de equipos de
+                        cómputo nuevos y reacondicionados, contribuyendo al desarrollo productivo de empresas y consumidores en un entorno digital
+                        en constante evolución.”</p>
+ 
+                    <h1 class="mt-3 text-center" style="color: #a10000;"><strong>Visión</strong></h1>
+                    <p>“Consolidarse como un proveedor regional líder en distribución tecnológica, reconocido por su eficiencia operativa, solidez comercial
+                        y capacidad de expansión sostenible, impulsando la transformación digital de sus clientes y fortaleciendo su participación en un mercado
+                        nacional en crecimiento.”</p>
+
+                    <h1 class="mt-3 mb-3 text-center" style="color: #a10000;"><strong>Valores</strong></h1>
+                    <ul class="row">
+                        <div class="col-lg-3">
+                            <li class="pt-2"><strong>Integridad</strong></li>
+                            <li class="pt-2"><strong>Compromiso</strong></li>
+                            <li class="pt-2"><strong>Eficiencia</strong></li>
+                            <li class="pt-2"><strong>Innovación</strong></li>
+                            <li class="pt-2"><strong>Sostenibilidad</strong></li>
+                            <li class="pt-2"><strong>Empoderamiento</strong></li>
+                        </div>
+                        <div class="col-lg-8 col-12 mt-4 mt-lg-1">
+                            <p>En Proseinet operamos bajo principios de integridad, actuando con ética y transparencia en cada relación
+                                comercial; <br> aseguramos calidad mediante estándares técnicos estructurados; <br> mantenemos un firme compromiso con el cumplimiento y
+                                la atención oportuna; <br> gestionamos nuestros procesos con eficiencia y disciplina operativa; <br> promovemos la innovación como parte de
+                                nuestra evolución estratégica; <br> y asumimos la sostenibilidad como un eje responsable en la gestión y reutilización tecnológica.
+                                </p>
+                        </div>
+                    </ul>
+                </div>
+                <div class="card shadow-sm border-0 p-4 mt-5">
+                    <h1 class="mb-4 text-center" style="color: #a10000;"><strong>Productos y Servicios</strong></h1>
+                    <!-- Servicios Section -->
+                    <section class="team-section">
+                        <div class="container">
+                            <div class="row g-4">
+                                <!-- Servicios 1 -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="team-card">
+                                        <div class="team-image-wrapper">
+                                            <img src="/assets/img/team/imagen-1.png" alt="Servicios 1" class="team-image">
+                                        </div>
+                                        <span class="team-role">Comercialización de equipos de cómputo nuevos</span>
+                                    </div>
+                                </div>
+                                <!-- Servicios 2 -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="team-card">
+                                        <div class="team-image-wrapper">
+                                            <img src="/assets/img/team/imagen-2.png" alt="Servicios 2" class="team-image">
+                                        </div>
+                                        <span class="team-role">Distribución de equipos reacondicionados de grado empresarial</span>
+                                    </div>
+                                </div>
+                                <!-- Servicios 3 -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="team-card">
+                                        <div class="team-image-wrapper">
+                                            <img src="/assets/img/team/imagen-3.png" alt="Servicios 3" class="team-image">
+                                        </div>
+                                        <span class="team-role">Configuración personalizada (RAM, almacenamiento, optimización)</span>
+                                    </div>
+                                </div>
+                                <!-- Servicios 4 -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="team-card">
+                                        <div class="team-image-wrapper">
+                                            <img src="/assets/img/team/imagen-4.png" alt="Servicios 4" class="team-image">
+                                        </div>
+                                        <span class="team-role">Venta consultativa para proyectos corporativos</span>
+                                    </div>
+                                </div>
+                                <!-- Servicios 5 -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="team-card">
+                                        <div class="team-image-wrapper">
+                                            <img src="/assets/img/team/imagen-5.png" alt="Servicios 5" class="team-image">
+                                        </div>
+                                        <span class="team-role">Soporte técnico básico y garantía formal</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="card shadow-sm border-0 p-4 mt-5">
+                    <h1 class="mb-4 text-center" style="color: #a10000;"><strong>Propuesta de Valor</strong></h1>
+                    <!-- Propuestas Section -->
+                    <section class="team-section">
+                        <div class="container">
+                            <div class="row g-4">
+                                <!-- Propuesta 1 -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="prop-card">
+                                        <div class="team-image-wrapper">
+                                            <img src="/assets/img/team/imagen-6.png" alt="Propuesta 1" class="prop-image">
+                                        </div>
+                                        <h3 class="team-name">Accesibilidad Tecnológica</h3>
+                                        <p class="team-quote">
+                                            Equipos corporativos de alto rendimiento a precios optimizados.
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Propuesta 2 -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="prop-card">
+                                        <div class="team-image-wrapper">
+                                            <img src="/assets/img/team/imagen-7.png" alt="Propuesta 2" class="prop-image">
+                                        </div>
+                                        <h3 class="team-name">Eficiencia Financiera</h3>
+                                        <p class="team-quote">
+                                            Alternativas reacondicionadas certificadas que maximizan la inversión del cliente.
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Propuesta 3 -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="prop-card">
+                                        <div class="team-image-wrapper">
+                                            <img src="/assets/img/team/imagen-8.png" alt="Propuesta 3" class="prop-image">
+                                        </div>
+                                        <h3 class="team-name">Asesoría Especializada</h3>
+                                        <p class="team-quote">
+                                            Modelo de venta consultiva B2B y B2R con configuraciones adaptadas a necesidades operativas.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="card shadow-sm border-0 p-4 mt-5">
+                    <h1 class="mb-4 text-center" style="color: #a10000;"><strong>Ventaja Competitiva</strong></h1>
+                    <!-- Ventaja Section -->
+                    <section class="team-section">
+                        <div class="container">
+                            <div class="row g-4">
+                                <!-- Ventaja 1 -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="vent-card">
+                                        <div class="team-image-wrapper">
+                                            <img src="/assets/img/team/imagen-9.jpg" alt="Ventaja 1" class="vent-image">
+                                        </div>
+                                        <h3 class="team-name" style="color: #000000;">Equipos empresariales certificados</h3>
+                                    </div>
+                                </div>
+                                <!-- Ventaja 2 -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="vent-card">
+                                        <div class="team-image-wrapper">
+                                            <img src="/assets/img/team/imagen-10.png" alt="Ventaja 2" class="vent-image">
+                                        </div>
+                                        <h3 class="team-name" style="color: #000000;">Garantía por escrito</h3>
+                                    </div>
+                                </div>
+                                <!-- Ventaja 3 -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="vent-card">
+                                        <div class="team-image-wrapper">
+                                            <img src="/assets/img/team/imagen-11.png" alt="Ventaja 3" class="vent-image">
+                                        </div>
+                                        <h3 class="team-name" style="color: #000000;">Asesoría especializada</h3>
+                                    </div>
+                                </div>
+                                <!-- Ventaja 4 -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="vent-card">
+                                        <div class="team-image-wrapper">
+                                            <img src="/assets/img/team/imagen-12.png" alt="Ventaja 4" class="vent-image">
+                                        </div>
+                                        <h3 class="team-name" style="color: #000000;">Control de calidad estructurado</h3>
+                                    </div>
+                                </div>
+                                <!-- Ventaja 5 -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="vent-card">
+                                        <div class="team-image-wrapper">
+                                            <img src="/assets/img/team/imagen-13.png" alt="Ventaja 5" class="vent-image">
+                                        </div>
+                                        <h3 class="team-name" style="color: #000000;">Atención especializada</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="mt-5">
+                    <h1 class="mb-4 text-center" style="color: #a10000;"><strong>Nuestros Clientes</strong></h1>
+                    <div class="card-port">
+                        <div class="row g-3">
+                            <div class="port-image-card">
+                                <img src="/assets/img/team/imagen-14.png" alt="imagen-14" class="port-image">
+                            </div>
+                            <div class="port-image-card">
+                                <img src="/assets/img/team/imagen-15.png" alt="imagen-14" class="port-image">
+                            </div>
+                            <div class="port-image-card">
+                                <img src="/assets/img/team/imagen-16.png" alt="imagen-14" class="port-image">
+                            </div>
+                            <div class="port-image-card">
+                                <img src="/assets/img/team/imagen-17.png" alt="imagen-14" class="port-image">
+                            </div>
+                            <div class="port-image-card">
+                                <img src="/assets/img/team/imagen-18.png" alt="imagen-14" class="port-image">
+                            </div>
+                            <div class="port-image-card">
+                                <img src="/assets/img/team/imagen-19.png" alt="imagen-14" class="port-image">
+                            </div>
+                            <div class="port-image-card">
+                                <img src="/assets/img/team/imagen-20.png" alt="imagen-14" class="port-image">
+                            </div>
+                            <div class="port-image-card">
+                                <img src="/assets/img/team/imagen-21.png" alt="imagen-14" class="port-image">
+                            </div>
+                            <div class="port-image-card">
+                                <img src="/assets/img/team/imagen-22.png" alt="imagen-14" class="port-image">
+                            </div>
+                            <div class="port-image-card">
+                                <img src="/assets/img/team/imagen-23.png" alt="imagen-14" class="port-image">
+                            </div>
+                            <div class="port-image-card">
+                                <img src="/assets/img/team/imagen-24.png" alt="imagen-14" class="port-image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-5">
+                    <a href="/index.html" class="btn btn-primary btn-lg px-5" style="border:none;">
+                        Volver a la Tienda
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<script src="/js/carrito.js"></script>
+<script src="/js/serviceWorkerIdent.js"></script>
+
+    <!--Footer-->
+    <section id="fter" class="text-white p-2 fixed-bottom footer-menu" style="border-radius: 25px 25px 0px 0px;  box-shadow: 0px -2px 12px rgba(36, 36, 36, 0.20);">
+        <div class="menu-sets">
+            <!--Menu-->
+            <ul class="navbar-nav-ft">
+                <a class="nav-link-ft text-center" href="/index.html">
+                    <i class="fa-solid fa-house" style="font-size: 1.3rem;"></i><li class="nav-item"></li>
+                    Inicio</a>
+                <a class="nav-link-ft text-center" href="/pages/perfil.html">
+                    <i class="fa fa-user" style="font-size: 1.3rem;"></i><li class="nav-item"></li>
+                    Perfil</a>
+                <a class="nav-link-ft text-center align-items-center" href="/pages/carrito.html">
+                    <i class="fa-solid fa-cart-shopping" style="font-size: 1.3rem;" ><span class="contador-carrito badge-cart">0</span></i><li class="nav-item"></li>
+                    Carrito</a>
+                <a class="nav-link-ft text-center" href="/pages/menu.html" style="color: black;">
+                    <i class="fa-solid fa-bars" style="font-size: 1.3rem;"></i><li class="nav-item"></li>
+                    Menu</a>
+            </ul>
+        </div>
+    </section>
+    <footer id="fullFooter" class="text-white py-3">
+        <div class="container mt-2">
+            <p class="text-center mb-0">&copy; <strong>Proseinet México</strong> - Todos los derechos reservados - 2026</p>
+        </div>
+    </footer>
+    <!-- Firebase -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getFirestore, collection, getDocs, query, orderBy, setDoc, doc, addDoc, serverTimestamp, getDoc, where } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBg9o3wVZoA26Aob2RnbVPV8vGv4GE44gs",
+            authDomain: "primer-proyecto-7b2f4.firebaseapp.com",
+            projectId: "primer-proyecto-7b2f4",
+            storageBucket: "primer-proyecto-7b2f4.firebasestorage.app",
+            messagingSenderId: "627220736817",
+            appId: "1:627220736817:web:a2eb4f187322c609f11e10"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // FUNCIÓN PARA OBTENER ROL
+        async function obtenerRolUsuario(uid) {
+            try {
+                const docRef = doc(db, "usuarios", uid);
+                const docSnap = await getDoc(docRef);
+                
+                if (docSnap.exists()) {
+                    return docSnap.data().rol || "usuario";
+                } else {
+                    console.warn("Usuario no encontrado en Firestore");
+                    return "usuario";
+                }
+            } catch (error) {
+                console.error("Error obteniendo rol:", error);
+                return "usuario";
+            }
+        }
+
+        // AUTH STATE LISTENER
+        onAuthStateChanged(auth, async (user) => {
+            const btnLoginNav = document.getElementById('loginNavBtn');
+            const btnRegisterNav = document.getElementById('registerNavBtn');
+            const btnLogoutNav = document.getElementById('logoutBtn');
+            const navInventario = document.getElementById('navInventario');
+
+            if (user) {
+                console.log("Usuario autenticado:", user.email);
+                
+                const rol = await obtenerRolUsuario(user.uid);
+                console.log("Rol del usuario:", rol);
+                
+                localStorage.setItem('userRole', rol);
+                localStorage.setItem('userEmail', user.email);
+                localStorage.setItem('userId', user.uid);
+
+                if (btnLoginNav) btnLoginNav.style.display = 'none';
+                if (btnRegisterNav) btnRegisterNav.style.display = 'none';
+                if (btnLogoutNav) btnLogoutNav.style.display = 'block';
+
+                // VERIFICAR SI YA SE MOSTRÓ EL TOAST EN ESTA SESIÓN
+                const toastMostrado = sessionStorage.getItem('loginToastShown');
+                
+                if (navInventario) {
+                    if (rol === 'admin') {
+                        navInventario.style.display = 'block';
+                        
+                        // Solo mostrar si NO se ha mostrado antes
+                        if (!toastMostrado) {
+                            showToast(`Bienvenido Admin: ${user.email}`, 'success');
+                            sessionStorage.setItem('loginToastShown', 'true');
+                        }
+                    } else {
+                        navInventario.style.display = 'none';
+                        
+                        // Solo mostrar si NO se ha mostrado antes
+                        if (!toastMostrado) {
+                            showToast(`Bienvenido: ${user.email}`, 'success');
+                            sessionStorage.setItem('loginToastShown', 'true');
+                        }
+                    }
+                }
+            } else {
+                console.log("No hay usuario autenticado");
+                
+                // LIMPIAR LA BANDERA AL CERRAR SESIÓN
+                sessionStorage.removeItem('loginToastShown');
+                
+                localStorage.removeItem('userRole');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userId');
+
+                if (btnLoginNav) btnLoginNav.style.display = 'block';
+                if (btnRegisterNav) btnRegisterNav.style.display = 'block';
+                if (btnLogoutNav) btnLogoutNav.style.display = 'none';
+                if (navInventario) navInventario.style.display = 'none';
+            }
+        });
+
+        // Lee y COMPRIME múltiples imágenes
+        function readFilesAsDataURLs(fileList, maxSize = 512) {
+            const files = Array.from(fileList || []);
+
+            return Promise.all(files.map(file => compressImage(file, maxSize)));
+        }
+        // Funcion para comprimir imagenes de los productos
+        // Comprime una sola imagen
+        function compressImage(file, maxSize = 512) {
+            return new Promise((resolve, reject) => {
+
+                const reader = new FileReader();
+                reader.onload = e => {
+
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement("canvas");
+
+                        // Obtener tamaño original
+                        let width = img.width;
+                        let height = img.height;
+
+                        // Redimensionar si es necesario
+                        if (width > height) {
+                            if (width > maxSize) {
+                                height *= maxSize / width;
+                                width = maxSize;
+                            }
+                        } else {
+                            if (height > maxSize) {
+                                width *= maxSize / height;
+                                height = maxSize;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+
+                        const ctx = canvas.getContext("2d");
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        // Comprimir como JPG calidad 0.75
+                        const dataURL = canvas.toDataURL("image/jpeg", 0.75);
+
+                        resolve({
+                            name: file.name,
+                            type: "image/jpeg",
+                            dataURL: dataURL
+                        });
+                    };
+
+                    img.onerror = reject;
+                    img.src = e.target.result;
+                };
+
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+    </script>
+    
+    <!-- Boton para subir al Header -->
+    <button id="btnUp">
+        <a href="#" class="nav-link-btn"><i class="fa-solid fa-angle-up"></i></a>
+    </button>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+        // 1. Seleccionamos todos los videos con la clase 'lazy-video'
+        const videos = document.querySelectorAll(".lazy-video");
+
+        // 2. Configuración del Observador
+        const videoObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                const video = entry.target;
+
+                if (entry.isIntersecting) {
+                    // El video entró en pantalla: Cargar y Reproducir
+                    if (video.readyState === 0) {
+                        video.load(); // Fuerza la carga si estaba en preload="none"
+                    }
+                    
+                    video.play().catch(error => {
+                        console.log("Autoplay bloqueado hasta interacción:", error);
+                    });
+                    
+                    // Opcional: Si quieres que solo se cargue una vez y se quede ahí,
+                    // puedes usar observer.unobserve(video);
+                } else {
+                    // El video salió de pantalla: Pausar para ahorrar recursos
+                    video.pause();
+                }
+            });
+        }, {
+            // Umbral: El video debe estar al menos 25% visible para activarse
+            threshold: 0.25 
+        });
+
+        // 3. Iniciamos el rastreo
+        videos.forEach(video => videoObserver.observe(video));
+    });
+
+    // Mostrar/Ocultar botón "Subir" según scroll y proximidad al footer
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnUp = document.getElementById('btnUp');
+        const footer = document.querySelector('footer');
+        
+        if (!btnUp || !footer) return;
+        
+        // Inicialmente oculto
+        btnUp.style.opacity = '0';
+        btnUp.style.pointerEvents = 'none';
+        
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            const footerPosition = footer.offsetTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            // Mostrar botón si se ha hecho scroll hacia abajo (más de 300px)
+            if (scrollPosition > 300) {
+                // Verificar si el usuario está cerca del footer
+                const distanceToFooter = footerPosition - (scrollPosition + windowHeight);
+                
+                // Ocultar si está a menos de 100px del footer o si llegó al final
+                if (distanceToFooter < 100 || (scrollPosition + windowHeight) >= documentHeight - 50) {
+                    btnUp.style.opacity = '0';
+                    btnUp.style.pointerEvents = 'none';
+                } else {
+                    btnUp.style.opacity = '1';
+                    btnUp.style.pointerEvents = 'auto';
+                }
+            } else {
+                // Ocultar si está en la parte superior
+                btnUp.style.opacity = '0';
+                btnUp.style.pointerEvents = 'none';
+            }
+        });
+        
+        // Smooth scroll al hacer clic
+        btnUp.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    });
+    </script>
+</body>
+</html>
