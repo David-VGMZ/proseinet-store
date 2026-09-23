@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
+                localStorage.setItem('ultimoAcceso', Date.now().toString());
                 if (errorMsg) errorMsg.textContent = '';
                 const modalEl = document.getElementById('loginModal');
                 if (modalEl) {
@@ -180,6 +181,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     rol: "usuario",
                     fechaCreacion: new Date().toISOString()
                 });
+
+                localStorage.setItem('ultimoAcceso', Date.now().toString());
 
                 regError.textContent = "";
 
@@ -444,6 +447,7 @@ function obtenerNombreGpu(graficos) {
         'rtxA3000': 'RTX A3000',
         'rtx3000': 'RTX 3000',
         'rtx5000': 'RTX 5000',
+        'amd-wx1200': 'AMD Radeon Pro WX 2100',
     };
     return nombre[graficos] || graficos;
 }

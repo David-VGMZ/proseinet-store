@@ -12,7 +12,9 @@
     <link rel="apple-touch-icon" href="/assets/icons/Logo-proseinet-rojo.png" />
     <link rel="icon" href="/assets/icons/Logo-proseinet-rojo.png">
     <link rel="stylesheet" href="/css/styleProduct.css?=0.18">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-material-ui@5.0.27/material-ui.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -73,7 +75,19 @@
                 window.actualizarCarrito();
             }
 
-            showToast('<i class="fa-solid fa-cart-plus"></i> Agregado a tu carrito', "danger");
+            Swal.fire({
+                toast: true,
+                icon: "success",
+                title: "Producto agregado a tu carrito",
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener("mouseenter", Swal.stopTimer);
+                    toast.addEventListener("mouseleave", Swal.resumeTimer);
+                }
+            });
 
         }
 
@@ -82,10 +96,15 @@
             guardarCarrito();
             window.actualizarCarrito;
             const alert = document.createElement('div');
-            showToast('<i class="fa-solid fa-cart-plus me-2"></i> Producto eliminado del carrito', "danger");
-            alert.className = "alert alert-danger position-fixed top-0 end-0 m-3";
-            alert.textContent = "Producto eliminado del carrito";
-            document.body.appendChild(alert);
+            Swal.fire({
+                toast: true,
+                icon: "success",
+                title: 'Producto eliminado del carrito',
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
         }
 
 
@@ -529,7 +548,15 @@
                     if (parseInt(input.value) < stockDisponible) {
                         input.value = parseInt(input.value) + 1;
                     } else {
-                        showToast('Maximo stock alcanzado', 'warning');
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            theme: 'material-ui',
+                            icon: 'warning',
+                            title: 'Maximo stock alcanzado',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
                     }
                 };
 
@@ -556,12 +583,15 @@
                         </div>
                         <div class="col-md-6 col-lg-8 col-12 py-3">
                             <h2>${prod.nombre}</h2>
-                            <h4 class="text-danger mb-3" style="font-size: 2rem;">
-                                <strong>
-                                    ${aplicaPrecioMayorista ? `</strong><p style="font-size: 18px; color: black;">Descuento de Mayorista</p><strong><span class="text-muted text-decoration-line-through fs-5 me-2">$${Number(prod.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>` : ''}
-                                    $${precioFinal.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
-                                </strong>
-                            </h4>
+                            <div class="mb-3">
+                                <h4 class="text-danger" style="font-size: 2rem;">
+                                    <strong>
+                                        ${aplicaPrecioMayorista ? `</strong><p style="font-size: 18px; color: black;">Descuento de Mayorista</p><strong><span class="text-muted text-decoration-line-through fs-5 me-2">$${Number(prod.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>` : ''}
+                                        $${precioFinal.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+                                    </strong>
+                                </h4>
+                                <small class="d-flex text-muted fst-italic">IVA no incluido*</small>
+                            </div>
                             <p class="m-1"><span class="badge bg-black">${prod.clave}</span></p>
                             
                             <div class="mb-3">
@@ -591,12 +621,15 @@
                             </div>
                             <div class="col-md-6 col-lg-8 col-12 py-3">
                                 <h2>${prod.nombre}</h2>
-                                <h4 class="text-danger mb-3" style="font-size: 2rem;">
-                                    <strong>
-                                        ${aplicaPrecioMayorista ? `</strong><p style="font-size: 18px; color: black;">Descuento de Mayorista</p><strong><span class="text-muted text-decoration-line-through fs-5 me-2">$${Number(prod.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>` : ''}
-                                        $${precioFinal.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
-                                    </strong>
-                                </h4>
+                                <div class="mb-3">
+                                    <h4 class="text-danger" style="font-size: 2rem;">
+                                        <strong>
+                                            ${aplicaPrecioMayorista ? `</strong><p style="font-size: 18px; color: black;">Descuento de Mayorista</p><strong><span class="text-muted text-decoration-line-through fs-5 me-2">$${Number(prod.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>` : ''}
+                                            $${precioFinal.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+                                        </strong>
+                                    </h4>
+                                    <small class="d-flex text-muted fst-italic">IVA no incluido*</small>
+                                </div>
                                 <p class="m-1"><span class="badge bg-black">${prod.clave}</span></p>
                                 <div class="mb-3">
                                     <hr>
@@ -627,12 +660,15 @@
                             </div>
                             <div class="col-md-6 col-lg-7 col-12 py-3">
                                 <h2>${prod.nombre}</h2>
-                                <h4 class="text-danger mb-3" style="font-size: 2rem;">
-                                    <strong>
-                                        ${aplicaPrecioMayorista ? `</strong><p style="font-size: 18px; color: black;">Descuento de Mayorista</p><strong><span class="text-muted text-decoration-line-through fs-5 me-2">$${Number(prod.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>` : ''}
-                                        $${precioFinal.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
-                                    </strong>
-                                </h4>
+                                    <div class="mb-3">
+                                    <h4 class="text-danger" style="font-size: 2rem;">
+                                        <strong>
+                                            ${aplicaPrecioMayorista ? `</strong><p style="font-size: 18px; color: black;">Descuento de Mayorista</p><strong><span class="text-muted text-decoration-line-through fs-5 me-2">$${Number(prod.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>` : ''}
+                                            $${precioFinal.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+                                        </strong>
+                                    </h4>
+                                    <small class="d-flex text-muted fst-italic">IVA no incluido*</small>
+                                </div>
                                 <p class="m-1"><span class="badge bg-black">${prod.clave}</span></p>
                                 <div class="mb-3">
                                     <hr>
@@ -660,12 +696,15 @@
                         </div>
                         <div class="col-md-6 col-lg-7 col-12 py-3">
                             <h2>${prod.nombre}</h2>
-                            <h4 class="text-danger mb-3" style="font-size: 2rem;">
-                                <strong>
-                                    ${aplicaPrecioMayorista ? `</strong><p style="font-size: 18px; color: black;">Descuento de Mayorista</p><strong><span class="text-muted text-decoration-line-through fs-5 me-2">$${Number(prod.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>` : ''}
-                                    $${precioFinal.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
-                                </strong>
-                            </h4>
+                            <div class="mb-3">
+                                <h4 class="text-danger" style="font-size: 2rem;">
+                                    <strong>
+                                        ${aplicaPrecioMayorista ? `</strong><p style="font-size: 18px; color: black;">Descuento de Mayorista</p><strong><span class="text-muted text-decoration-line-through fs-5 me-2">$${Number(prod.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>` : ''}
+                                        $${precioFinal.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+                                    </strong>
+                                </h4>
+                                <small class="d-flex text-muted fst-italic">IVA no incluido*</small>
+                            </div>
                             <p class="m-1"><span class="badge bg-black">${prod.clave}</span></p>
                             <div class="mb-3">
                                 <hr>
@@ -868,6 +907,7 @@
                 'rtxA3000': 'Nvidia RTX A3000',
                 'rtx3000': 'Nvidia RTX 3000',
                 'rtx5000': 'Nvidia RTX 5000',
+                'amd-wx1200': 'AMD Radeon Pro WX 2100',
                 'arc-pro-140t': 'Intel Arc Pro 140T'
             };
             return nombre[graficos] || graficos;

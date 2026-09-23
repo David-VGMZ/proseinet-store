@@ -579,7 +579,7 @@ function finalizarProcesoPedido() {
 }
 
 // ABRIR CHECKOUT
-window.abrirCheckout = function () {
+window.abrirCheckout = async function () {
     const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
   if (carrito.length === 0) {
@@ -589,10 +589,21 @@ window.abrirCheckout = function () {
 
   const userEmail = localStorage.getItem("userEmail");
   if (!userEmail) {
-    showToast("Debes iniciar sesión para realizar una compra", "warning");
-    setTimeout(() => {
-      window.location.href = "/pages/login.html";
-    }, 1000);
+    const confirmResult = await Swal.fire({
+      icon: "warning",
+      title: "Debes iniciar sesión para realizar una compra",
+      confirmButtonText: "Ir a Login",
+      buttonsStyling: true,
+      customClass: {
+        confirmButton: "btn btn-danger",
+      },
+    });
+    if (confirmResult.isConfirmed || confirmResult.isDismissed) {
+      setTimeout(() => {
+        window.location.href = "/pages/login.html";
+      }, 1000);
+    }
+    return;
   }
 
     const resumen = document.getElementById("resumen-productos");

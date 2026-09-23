@@ -233,6 +233,12 @@
             color: black;
         }
 
+        .form-control-srch::-webkit-search-cancel-button,
+        .form-control-srch::-webkit-search-decoration {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
         @media (max-width: 576px) {
             .form-control-srch {
                 width: 180px;
@@ -299,8 +305,9 @@
             <!-- Barra de búsqueda y controles -->
             <div class="container col">
                 <div class="input-group col-lg-3 col-md-8 col-8">
-                    <input type="text" class="form-control-srch" id="inputBuscar"
-                        placeholder="Buscar por nombre, email o rol..." autocomplete="nope" style="font-size: 14px;">
+                    <input type="search" class="form-control-srch" id="inputBuscar"
+                        placeholder="Buscar por nombre, email o rol..." style="font-size: 14px;" autocomplete="off" spellcheck="false"
+                        readonly onfocus="this.removeAttribute('readonly')">
                     <button class="btn-srch" type="button" id="clearSearch">
                         <i style="color: white;" class="fas fa-times"></i>
                     </button>
@@ -576,6 +583,14 @@
 
         document.getElementById("inputBuscar").oninput = aplicarFiltros;
         document.getElementById("filtroRol").onchange = aplicarFiltros;
+
+        // Evitar que Chrome autocomplete el buscador con el correo del usuario
+        setTimeout(() => {
+            const inputBuscar = document.getElementById("inputBuscar");
+            if (inputBuscar && /[\w.+-]+@[\w-]+\.[\w.]+/.test(inputBuscar.value)) {
+                inputBuscar.value = "";
+            }
+        }, 500);
 
         //  EDITAR / ELIMINAR
 

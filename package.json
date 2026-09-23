@@ -21,6 +21,7 @@
     "cors": "^2.8.6",
     "mercadopago": "^0.5.0",
     "nodemailer": "^8.0.0",
-    "pdfkit": "^0.18.0"
+    "pdfkit": "^0.18.0",
+    "sweetalert2": "^11.26.25"
   }
 }

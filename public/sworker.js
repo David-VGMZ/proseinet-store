@@ -62,7 +62,7 @@ self.addEventListener("notificationclick", function (event) {
 });
 
 const OFFLINE_PEDIDOS = "pedidos-offline-v1.31";
-const CACHE_NAME = "proseinet-v1.544";
+const CACHE_NAME = "proseinet-v1.608";
 
 const CRITICAL_URLS = [
   "/index.html",

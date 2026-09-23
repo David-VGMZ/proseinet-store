@@ -21,11 +21,15 @@ function eliminarDelCarrito(id) {
     guardarCarrito();
     actualizarCarrito();
     const alert = document.createElement('div');
-    showToast('<i class="fa-solid fa-cart-plus me-2"></i> Producto eliminado del carrito', "danger");
-    alert.className = "alert alert-danger position-fixed top-0 end-0 m-3";
-    alert.textContent = "Producto eliminado del carrito";
-    document.body.appendChild(alert);
-    setTimeout(() => alert.remove(), 2000);
+    Swal.fire({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        icon: 'info',
+        title: 'Producto eliminado del carrito'
+    });
 }
 
 function vaciarCarrito() {
